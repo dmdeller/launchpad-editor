@@ -11,6 +11,7 @@
 @implementation HNAppDelegate
 
 @synthesize window = _window;
+@synthesize dataOutline;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {

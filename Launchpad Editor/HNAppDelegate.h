@@ -11,5 +11,6 @@
 @interface HNAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (retain) IBOutlet NSOutlineView *dataOutline;
 
 @end
