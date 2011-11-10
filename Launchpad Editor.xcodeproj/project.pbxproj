@@ -1,0 +1,450 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C30BFBAA146C32AD00395658 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30BFBA9146C32AD00395658 /* Cocoa.framework */; };
+		C30BFBB4146C32AD00395658 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30BFBB2146C32AD00395658 /* InfoPlist.strings */; };
+		C30BFBB6146C32AD00395658 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBB5146C32AD00395658 /* main.m */; };
+		C30BFBBA146C32AE00395658 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C30BFBB8146C32AE00395658 /* Credits.rtf */; };
+		C30BFBBD146C32AE00395658 /* HNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBBC146C32AE00395658 /* HNAppDelegate.m */; };
+		C30BFBC0146C32AE00395658 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30BFBBE146C32AE00395658 /* MainMenu.xib */; };
+		C30BFBC8146C32AE00395658 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30BFBC7146C32AE00395658 /* SenTestingKit.framework */; };
+		C30BFBC9146C32AE00395658 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30BFBA9146C32AD00395658 /* Cocoa.framework */; };
+		C30BFBD1146C32AE00395658 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30BFBCF146C32AE00395658 /* InfoPlist.strings */; };
+		C30BFBD4146C32AE00395658 /* Launchpad_EditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBD3146C32AE00395658 /* Launchpad_EditorTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C30BFBCA146C32AE00395658 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C30BFB9C146C32AD00395658 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C30BFBA4146C32AD00395658;
+			remoteInfo = "Launchpad Editor";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C30BFBA5146C32AD00395658 /* Launchpad Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Launchpad Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C30BFBA9146C32AD00395658 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		C30BFBAC146C32AD00395658 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		C30BFBAD146C32AD00395658 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C30BFBAE146C32AD00395658 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C30BFBB1146C32AD00395658 /* Launchpad Editor-Info.plist */ = {isa = PBXFileReference; path = "Launchpad Editor-Info.plist"; sourceTree = "<group>"; };
+		C30BFBB3146C32AD00395658 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C30BFBB5146C32AD00395658 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C30BFBB7146C32AD00395658 /* Launchpad Editor-Prefix.pch */ = {isa = PBXFileReference; path = "Launchpad Editor-Prefix.pch"; sourceTree = "<group>"; };
+		C30BFBB9146C32AE00395658 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		C30BFBBB146C32AE00395658 /* HNAppDelegate.h */ = {isa = PBXFileReference; path = HNAppDelegate.h; sourceTree = "<group>"; };
+		C30BFBBC146C32AE00395658 /* HNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HNAppDelegate.m; sourceTree = "<group>"; };
+		C30BFBBF146C32AE00395658 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		C30BFBC6146C32AE00395658 /* Launchpad EditorTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Launchpad EditorTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C30BFBC7146C32AE00395658 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		C30BFBCE146C32AE00395658 /* Launchpad EditorTests-Info.plist */ = {isa = PBXFileReference; path = "Launchpad EditorTests-Info.plist"; sourceTree = "<group>"; };
+		C30BFBD0146C32AE00395658 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C30BFBD2146C32AE00395658 /* Launchpad_EditorTests.h */ = {isa = PBXFileReference; path = Launchpad_EditorTests.h; sourceTree = "<group>"; };
+		C30BFBD3146C32AE00395658 /* Launchpad_EditorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Launchpad_EditorTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C30BFBA2146C32AD00395658 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C30BFBAA146C32AD00395658 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C30BFBC2146C32AE00395658 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C30BFBC8146C32AE00395658 /* SenTestingKit.framework in Frameworks */,
+				C30BFBC9146C32AE00395658 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C30BFB9A146C32AD00395658 = {
+			isa = PBXGroup;
+			children = (
+				C30BFBAF146C32AD00395658 /* Launchpad Editor */,
+				C30BFBCC146C32AE00395658 /* Launchpad EditorTests */,
+				C30BFBA8146C32AD00395658 /* Frameworks */,
+				C30BFBA6146C32AD00395658 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C30BFBA6146C32AD00395658 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C30BFBA5146C32AD00395658 /* Launchpad Editor.app */,
+				C30BFBC6146C32AE00395658 /* Launchpad EditorTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C30BFBA8146C32AD00395658 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C30BFBA9146C32AD00395658 /* Cocoa.framework */,
+				C30BFBC7146C32AE00395658 /* SenTestingKit.framework */,
+				C30BFBAB146C32AD00395658 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C30BFBAB146C32AD00395658 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C30BFBAC146C32AD00395658 /* AppKit.framework */,
+				C30BFBAD146C32AD00395658 /* CoreData.framework */,
+				C30BFBAE146C32AD00395658 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		C30BFBAF146C32AD00395658 /* Launchpad Editor */ = {
+			isa = PBXGroup;
+			children = (
+				C30BFBBB146C32AE00395658 /* HNAppDelegate.h */,
+				C30BFBBC146C32AE00395658 /* HNAppDelegate.m */,
+				C30BFBBE146C32AE00395658 /* MainMenu.xib */,
+				C30BFBB0146C32AD00395658 /* Supporting Files */,
+			);
+			path = "Launchpad Editor";
+			sourceTree = "<group>";
+		};
+		C30BFBB0146C32AD00395658 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C30BFBB1146C32AD00395658 /* Launchpad Editor-Info.plist */,
+				C30BFBB2146C32AD00395658 /* InfoPlist.strings */,
+				C30BFBB5146C32AD00395658 /* main.m */,
+				C30BFBB7146C32AD00395658 /* Launchpad Editor-Prefix.pch */,
+				C30BFBB8146C32AE00395658 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C30BFBCC146C32AE00395658 /* Launchpad EditorTests */ = {
+			isa = PBXGroup;
+			children = (
+				C30BFBD2146C32AE00395658 /* Launchpad_EditorTests.h */,
+				C30BFBD3146C32AE00395658 /* Launchpad_EditorTests.m */,
+				C30BFBCD146C32AE00395658 /* Supporting Files */,
+			);
+			path = "Launchpad EditorTests";
+			sourceTree = "<group>";
+		};
+		C30BFBCD146C32AE00395658 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C30BFBCE146C32AE00395658 /* Launchpad EditorTests-Info.plist */,
+				C30BFBCF146C32AE00395658 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C30BFBA4146C32AD00395658 /* Launchpad Editor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C30BFBD7146C32AE00395658 /* Build configuration list for PBXNativeTarget "Launchpad Editor" */;
+			buildPhases = (
+				C30BFBA1146C32AD00395658 /* Sources */,
+				C30BFBA2146C32AD00395658 /* Frameworks */,
+				C30BFBA3146C32AD00395658 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Launchpad Editor";
+			productName = "Launchpad Editor";
+			productReference = C30BFBA5146C32AD00395658 /* Launchpad Editor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C30BFBC5146C32AE00395658 /* Launchpad EditorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C30BFBDA146C32AE00395658 /* Build configuration list for PBXNativeTarget "Launchpad EditorTests" */;
+			buildPhases = (
+				C30BFBC1146C32AE00395658 /* Sources */,
+				C30BFBC2146C32AE00395658 /* Frameworks */,
+				C30BFBC3146C32AE00395658 /* Resources */,
+				C30BFBC4146C32AE00395658 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C30BFBCB146C32AE00395658 /* PBXTargetDependency */,
+			);
+			name = "Launchpad EditorTests";
+			productName = "Launchpad EditorTests";
+			productReference = C30BFBC6146C32AE00395658 /* Launchpad EditorTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C30BFB9C146C32AD00395658 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = C30BFB9F146C32AD00395658 /* Build configuration list for PBXProject "Launchpad Editor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C30BFB9A146C32AD00395658;
+			productRefGroup = C30BFBA6146C32AD00395658 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C30BFBA4146C32AD00395658 /* Launchpad Editor */,
+				C30BFBC5146C32AE00395658 /* Launchpad EditorTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C30BFBA3146C32AD00395658 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C30BFBB4146C32AD00395658 /* InfoPlist.strings in Resources */,
+				C30BFBBA146C32AE00395658 /* Credits.rtf in Resources */,
+				C30BFBC0146C32AE00395658 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C30BFBC3146C32AE00395658 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C30BFBD1146C32AE00395658 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C30BFBC4146C32AE00395658 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C30BFBA1146C32AD00395658 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C30BFBB6146C32AD00395658 /* main.m in Sources */,
+				C30BFBBD146C32AE00395658 /* HNAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C30BFBC1146C32AE00395658 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C30BFBD4146C32AE00395658 /* Launchpad_EditorTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C30BFBCB146C32AE00395658 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C30BFBA4146C32AD00395658 /* Launchpad Editor */;
+			targetProxy = C30BFBCA146C32AE00395658 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C30BFBB2146C32AD00395658 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C30BFBB3146C32AD00395658 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C30BFBB8146C32AE00395658 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C30BFBB9146C32AE00395658 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		C30BFBBE146C32AE00395658 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C30BFBBF146C32AE00395658 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		C30BFBCF146C32AE00395658 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C30BFBD0146C32AE00395658 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C30BFBD5146C32AE00395658 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C30BFBD6146C32AE00395658 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C30BFBD8146C32AE00395658 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Launchpad Editor/Launchpad Editor-Prefix.pch";
+				INFOPLIST_FILE = "Launchpad Editor/Launchpad Editor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C30BFBD9146C32AE00395658 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Launchpad Editor/Launchpad Editor-Prefix.pch";
+				INFOPLIST_FILE = "Launchpad Editor/Launchpad Editor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C30BFBDB146C32AE00395658 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Launchpad Editor.app/Contents/MacOS/Launchpad Editor";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Launchpad Editor/Launchpad Editor-Prefix.pch";
+				INFOPLIST_FILE = "Launchpad EditorTests/Launchpad EditorTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		C30BFBDC146C32AE00395658 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Launchpad Editor.app/Contents/MacOS/Launchpad Editor";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Launchpad Editor/Launchpad Editor-Prefix.pch";
+				INFOPLIST_FILE = "Launchpad EditorTests/Launchpad EditorTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C30BFB9F146C32AD00395658 /* Build configuration list for PBXProject "Launchpad Editor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C30BFBD5146C32AE00395658 /* Debug */,
+				C30BFBD6146C32AE00395658 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C30BFBD7146C32AE00395658 /* Build configuration list for PBXNativeTarget "Launchpad Editor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C30BFBD8146C32AE00395658 /* Debug */,
+				C30BFBD9146C32AE00395658 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		C30BFBDA146C32AE00395658 /* Build configuration list for PBXNativeTarget "Launchpad EditorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C30BFBDB146C32AE00395658 /* Debug */,
+				C30BFBDC146C32AE00395658 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C30BFB9C146C32AD00395658 /* Project object */;
+}

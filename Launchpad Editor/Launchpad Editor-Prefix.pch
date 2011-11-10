@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Launchpad Editor' target in the 'Launchpad Editor' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
