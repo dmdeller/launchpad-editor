@@ -7,6 +7,7 @@
 //
 
 #import "HNAppDelegate.h"
+#import "HNLaunchpadDataSet.h"
 
 @implementation HNAppDelegate
 
@@ -16,6 +17,9 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
+    HNLaunchpadDataSet *dataSet = [[HNLaunchpadDataSet alloc] init];
+    
+    [dataSet load];
 }
 
 @end
