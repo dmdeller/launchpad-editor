@@ -17,9 +17,9 @@
 		C30BFBC9146C32AE00395658 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30BFBA9146C32AD00395658 /* Cocoa.framework */; };
 		C30BFBD1146C32AE00395658 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30BFBCF146C32AE00395658 /* InfoPlist.strings */; };
 		C30BFBD4146C32AE00395658 /* Launchpad_EditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBD3146C32AE00395658 /* Launchpad_EditorTests.m */; };
-		C30BFBE3146C36D100395658 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBDE146C36D100395658 /* FMDatabase.m */; };
-		C30BFBE4146C36D100395658 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */; };
-		C30BFBE5146C36D100395658 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE2146C36D100395658 /* FMResultSet.m */; };
+		C30BFBE3146C36D100395658 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBDE146C36D100395658 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C30BFBE4146C36D100395658 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C30BFBE5146C36D100395658 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE2146C36D100395658 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -461,6 +461,7 @@
 				C30BFBD9146C32AE00395658 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C30BFBDA146C32AE00395658 /* Build configuration list for PBXNativeTarget "Launchpad EditorTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +470,7 @@
 				C30BFBDC146C32AE00395658 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
