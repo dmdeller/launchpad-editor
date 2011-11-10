@@ -17,6 +17,9 @@
 		C30BFBC9146C32AE00395658 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30BFBA9146C32AD00395658 /* Cocoa.framework */; };
 		C30BFBD1146C32AE00395658 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30BFBCF146C32AE00395658 /* InfoPlist.strings */; };
 		C30BFBD4146C32AE00395658 /* Launchpad_EditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBD3146C32AE00395658 /* Launchpad_EditorTests.m */; };
+		C30BFBE3146C36D100395658 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBDE146C36D100395658 /* FMDatabase.m */; };
+		C30BFBE4146C36D100395658 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */; };
+		C30BFBE5146C36D100395658 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE2146C36D100395658 /* FMResultSet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,12 @@
 		C30BFBD0146C32AE00395658 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C30BFBD2146C32AE00395658 /* Launchpad_EditorTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Launchpad_EditorTests.h; sourceTree = "<group>"; };
 		C30BFBD3146C32AE00395658 /* Launchpad_EditorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Launchpad_EditorTests.m; sourceTree = "<group>"; };
+		C30BFBDD146C36D100395658 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		C30BFBDE146C36D100395658 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		C30BFBDF146C36D100395658 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		C30BFBE1146C36D100395658 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		C30BFBE2146C36D100395658 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +126,7 @@
 				C30BFBBB146C32AE00395658 /* HNAppDelegate.h */,
 				C30BFBBC146C32AE00395658 /* HNAppDelegate.m */,
 				C30BFBBE146C32AE00395658 /* MainMenu.xib */,
+				C30BFBE6146C36D600395658 /* FMDB */,
 				C30BFBB0146C32AD00395658 /* Supporting Files */,
 			);
 			path = "Launchpad Editor";
@@ -151,6 +161,19 @@
 				C30BFBCF146C32AE00395658 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C30BFBE6146C36D600395658 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				C30BFBDD146C36D100395658 /* FMDatabase.h */,
+				C30BFBDE146C36D100395658 /* FMDatabase.m */,
+				C30BFBDF146C36D100395658 /* FMDatabaseAdditions.h */,
+				C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */,
+				C30BFBE1146C36D100395658 /* FMResultSet.h */,
+				C30BFBE2146C36D100395658 /* FMResultSet.m */,
+			);
+			name = FMDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +285,9 @@
 			files = (
 				C30BFBB6146C32AD00395658 /* main.m in Sources */,
 				C30BFBBD146C32AE00395658 /* HNAppDelegate.m in Sources */,
+				C30BFBE3146C36D100395658 /* FMDatabase.m in Sources */,
+				C30BFBE4146C36D100395658 /* FMDatabaseAdditions.m in Sources */,
+				C30BFBE5146C36D100395658 /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
