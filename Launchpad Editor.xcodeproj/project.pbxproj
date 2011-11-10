@@ -35,19 +35,19 @@
 		C30BFBAC146C32AD00395658 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		C30BFBAD146C32AD00395658 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C30BFBAE146C32AD00395658 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		C30BFBB1146C32AD00395658 /* Launchpad Editor-Info.plist */ = {isa = PBXFileReference; path = "Launchpad Editor-Info.plist"; sourceTree = "<group>"; };
+		C30BFBB1146C32AD00395658 /* Launchpad Editor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Launchpad Editor-Info.plist"; sourceTree = "<group>"; };
 		C30BFBB3146C32AD00395658 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C30BFBB5146C32AD00395658 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C30BFBB7146C32AD00395658 /* Launchpad Editor-Prefix.pch */ = {isa = PBXFileReference; path = "Launchpad Editor-Prefix.pch"; sourceTree = "<group>"; };
+		C30BFBB7146C32AD00395658 /* Launchpad Editor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Launchpad Editor-Prefix.pch"; sourceTree = "<group>"; };
 		C30BFBB9146C32AE00395658 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		C30BFBBB146C32AE00395658 /* HNAppDelegate.h */ = {isa = PBXFileReference; path = HNAppDelegate.h; sourceTree = "<group>"; };
+		C30BFBBB146C32AE00395658 /* HNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HNAppDelegate.h; sourceTree = "<group>"; };
 		C30BFBBC146C32AE00395658 /* HNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HNAppDelegate.m; sourceTree = "<group>"; };
 		C30BFBBF146C32AE00395658 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		C30BFBC6146C32AE00395658 /* Launchpad EditorTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Launchpad EditorTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30BFBC7146C32AE00395658 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		C30BFBCE146C32AE00395658 /* Launchpad EditorTests-Info.plist */ = {isa = PBXFileReference; path = "Launchpad EditorTests-Info.plist"; sourceTree = "<group>"; };
+		C30BFBCE146C32AE00395658 /* Launchpad EditorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Launchpad EditorTests-Info.plist"; sourceTree = "<group>"; };
 		C30BFBD0146C32AE00395658 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C30BFBD2146C32AE00395658 /* Launchpad_EditorTests.h */ = {isa = PBXFileReference; path = Launchpad_EditorTests.h; sourceTree = "<group>"; };
+		C30BFBD2146C32AE00395658 /* Launchpad_EditorTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Launchpad_EditorTests.h; sourceTree = "<group>"; };
 		C30BFBD3146C32AE00395658 /* Launchpad_EditorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Launchpad_EditorTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
