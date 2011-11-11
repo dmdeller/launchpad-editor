@@ -1,5 +1,5 @@
 //
-//  HNLaunchpadGroup.h
+//  HNLaunchpadContainer.h
 //  Launchpad Editor
 //
 //  Created by David Deller on 11/10/11.
@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "HNLaunchpadContainer.h"
-#import "HNLaunchpadItem.h"
+#import "MGOrderedDictionary.h"
 
-@interface HNLaunchpadGroup : NSObject <HNLaunchpadItem, HNLaunchpadContainer>
+@protocol HNLaunchpadContainer <NSObject>
+
+@property (retain) MGOrderedDictionary *items;
 
 @end

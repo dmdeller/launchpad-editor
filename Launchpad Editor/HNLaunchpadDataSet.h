@@ -15,10 +15,12 @@
 @interface HNLaunchpadDataSet : NSObject
 
 @property (retain) MGOrderedDictionary *pages;
+@property (retain) NSMutableDictionary *containers;
 
 - (void)load;
 - (void)loadFromFile:(NSString *)filename;
 - (void)loadPagesWithDb:(FMDatabase *)db;
 - (void)loadGroupsWithDb:(FMDatabase *)db;
+- (void)loadAppsWithDb:(FMDatabase *)db;
 
 @end

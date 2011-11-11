@@ -8,6 +8,7 @@
 
 #import "HNLaunchpadDataSet.h"
 
+#import "HNLaunchpadContainer.h"
 #import "HNLaunchpadPage.h"
 #import "HNLaunchpadGroup.h"
 #import "HNLaunchpadApp.h"
@@ -17,7 +18,11 @@
 
 @implementation HNLaunchpadDataSet
 
+static int const TYPE_PAGE = 3;
+static int const TYPE_GROUP = 2;
+
 @synthesize pages;
+@synthesize containers;
 
 - (void)load
 {
@@ -42,19 +47,21 @@
     
     [self loadPagesWithDb:db];
     [self loadGroupsWithDb:db];
+    [self loadAppsWithDb:db];
 }
 
 - (void)loadPagesWithDb:(FMDatabase *)db
 {
     self.pages = [MGOrderedDictionary dictionaryWithCapacity:10];
+    self.containers = [NSMutableDictionary dictionaryWithCapacity:200];
     
     NSString *sql = @"SELECT *"
                         " FROM items i"
                             " JOIN groups g ON i.rowid = g.item_id"
-                        " WHERE i.type = 3" // 3 means 'page'
+                        " WHERE i.type = ?"
                         " ORDER BY i.ordering";
     
-    FMResultSet *results = [db executeQuery:sql];
+    FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:TYPE_PAGE]];
     
     while ([results next])
     {
@@ -71,6 +78,7 @@
         page.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
         [self.pages setObject:page forKey:page.pageId];
+        [self.containers setObject:page forKey:page.pageId];
     }
 }
 
@@ -79,10 +87,10 @@
     NSString *sql = @"SELECT *"
                     " FROM items i"
                         " JOIN groups g ON i.rowid = g.item_id"
-                    " WHERE i.type = 2" // 3 means 'group'
+                    " WHERE i.type = ?"
                     " ORDER BY i.ordering";
     
-    FMResultSet *results = [db executeQuery:sql];
+    FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:TYPE_GROUP]];
     
     while ([results next])
     {
@@ -101,9 +109,56 @@
         group.title = [results stringForColumn:@"title"];
         group.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
-        NSLog(@"%@", group);
-        
         [page.items setObject:group forKey:group.itemId];
+        
+        [self.containers setObject:group forKey:group.itemId];
+    }
+}
+
+- (void)loadAppsWithDb:(FMDatabase *)db
+{
+    NSString *sql = @"SELECT *"
+                    " FROM items i"
+                        " JOIN apps a ON i.rowid = a.item_id"
+                    " ORDER BY i.ordering";
+    
+    FMResultSet *results = [db executeQuery:sql];
+    
+    while ([results next])
+    {
+        // should properly be HNLaunchpadContainer... but you can't do that in Objective-C
+        NSObject *container = [self.containers objectForKey:[NSNumber numberWithInt:[results intForColumn:@"parent_id"]]];
+        if (container == nil)
+        {
+            [NSException raise:@"Page or group not found error" format:@"Could not find page or group: %d for app: %d", [results intForColumn:@"parent_id"], [results intForColumn:@"item_id"]];
+            continue;
+        }
+        
+        HNLaunchpadApp *app = [[HNLaunchpadApp alloc] init];
+        
+        app.uuid = [results stringForColumn:@"uuid"];
+        app.itemId = [NSNumber numberWithInt:[results intForColumn:@"item_id"]];
+        app.parentId = [NSNumber numberWithInt:[results intForColumn:@"parent_id"]];
+        app.title = [results stringForColumn:@"title"];
+        
+        NSLog(@"%@", app);
+        
+        if ([container isKindOfClass:[HNLaunchpadGroup class]])
+        {
+            HNLaunchpadGroup *group = (HNLaunchpadGroup *)container;
+            
+            [group.items setObject:app forKey:app.itemId];
+        }
+        else if ([container isKindOfClass:[HNLaunchpadPage class]])
+        {
+            HNLaunchpadPage *page = (HNLaunchpadPage *)container;
+            
+            [page.items setObject:app forKey:app.itemId];
+        }
+        else
+        {
+            [NSException raise:@"Bad type" format:@"Unknown kind of container class: %@", [container class]];
+        }
     }
 }
 

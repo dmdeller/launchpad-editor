@@ -64,6 +64,7 @@
 		C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		C30BFBE1146C36D100395658 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		C30BFBE2146C36D100395658 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		C34FB528146CC77B00516C18 /* HNLaunchpadContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadContainer.h; sourceTree = "<group>"; };
 		C39EA2D4146CB281001356F5 /* HNLaunchpadPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadPage.h; sourceTree = "<group>"; };
 		C39EA2D5146CB281001356F5 /* HNLaunchpadPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNLaunchpadPage.m; sourceTree = "<group>"; };
 		C39EA2D8146CB28D001356F5 /* HNLaunchpadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadGroup.h; sourceTree = "<group>"; };
@@ -147,9 +148,10 @@
 				C30BFBBC146C32AE00395658 /* HNAppDelegate.m */,
 				C3E896C9146C48690060AB93 /* HNLaunchpadDataSet.h */,
 				C3E896CA146C48690060AB93 /* HNLaunchpadDataSet.m */,
+				C39EA2DE146CB4FC001356F5 /* HNLaunchpadItem.h */,
+				C34FB528146CC77B00516C18 /* HNLaunchpadContainer.h */,
 				C39EA2D4146CB281001356F5 /* HNLaunchpadPage.h */,
 				C39EA2D5146CB281001356F5 /* HNLaunchpadPage.m */,
-				C39EA2DE146CB4FC001356F5 /* HNLaunchpadItem.h */,
 				C39EA2D8146CB28D001356F5 /* HNLaunchpadGroup.h */,
 				C39EA2D9146CB28D001356F5 /* HNLaunchpadGroup.m */,
 				C39EA2DB146CB29A001356F5 /* HNLaunchpadApp.h */,
