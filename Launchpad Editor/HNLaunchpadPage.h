@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import "MGOrderedDictionary.h"
+
 @interface HNLaunchpadPage : NSObject
 
 @property (retain) NSString *uuid;
-@property (retain) NSNumber *rowid;
-@property (retain) NSMutableArray *items;
+@property (retain) NSNumber *pageId;
+@property (retain) MGOrderedDictionary *items;
 
 @end

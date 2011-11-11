@@ -41,6 +41,7 @@
     }
     
     [self loadPagesWithDb:db];
+    [self loadGroupsWithDb:db];
 }
 
 - (void)loadPagesWithDb:(FMDatabase *)db
@@ -66,10 +67,43 @@
         HNLaunchpadPage *page = [[HNLaunchpadPage alloc] init];
         
         page.uuid = [results stringForColumn:@"uuid"];
-        page.rowid = [NSNumber numberWithInt:[results intForColumn:@"rowid"]];
+        page.pageId = [NSNumber numberWithInt:[results intForColumn:@"rowid"]];
         page.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
-        [self.pages setObject:page forKey:page.rowid];
+        [self.pages setObject:page forKey:page.pageId];
+    }
+}
+
+- (void)loadGroupsWithDb:(FMDatabase *)db
+{
+    NSString *sql = @"SELECT *"
+                    " FROM items i"
+                        " JOIN groups g ON i.rowid = g.item_id"
+                    " WHERE i.type = 2" // 3 means 'group'
+                    " ORDER BY i.ordering";
+    
+    FMResultSet *results = [db executeQuery:sql];
+    
+    while ([results next])
+    {
+        HNLaunchpadPage *page = [self.pages objectForKey:[NSNumber numberWithInt:[results intForColumn:@"parent_id"]]];
+        if (page == nil)
+        {
+            [NSException raise:@"Page not found error" format:@"Could not find page: %d for group: %d", [results intForColumn:@"parent_id"], [results intForColumn:@"item_id"]];
+            continue;
+        }
+        
+        HNLaunchpadGroup *group = [[HNLaunchpadGroup alloc] init];
+        
+        group.uuid = [results stringForColumn:@"uuid"];
+        group.itemId = [NSNumber numberWithInt:[results intForColumn:@"item_id"]];
+        group.parentId = [NSNumber numberWithInt:[results intForColumn:@"parent_id"]];
+        group.title = [results stringForColumn:@"title"];
+        group.items = [MGOrderedDictionary dictionaryWithCapacity:40];
+        
+        NSLog(@"%@", group);
+        
+        [page.items setObject:group forKey:group.itemId];
     }
 }
 

@@ -11,8 +11,8 @@
 @protocol HNLaunchpadItem <NSObject>
 
 @property (retain) NSString *uuid;
-@property (assign) int item_id;
-@property (assign) int parent_id;
+@property (retain) NSNumber *itemId;
+@property (retain) NSNumber *parentId;
 @property (retain) NSString *title;
 
 @end

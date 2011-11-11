@@ -11,7 +11,7 @@
 @implementation HNLaunchpadPage
 
 @synthesize uuid;
-@synthesize rowid;
+@synthesize pageId;
 @synthesize items;
 
 @end
