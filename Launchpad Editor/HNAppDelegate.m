@@ -13,13 +13,11 @@
 
 @synthesize window = _window;
 @synthesize dataOutline;
+@synthesize dataSet;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
-    HNLaunchpadDataSet *dataSet = [[HNLaunchpadDataSet alloc] init];
-    
-    [dataSet load];
+    [self.dataSet load];
 }
 
 @end

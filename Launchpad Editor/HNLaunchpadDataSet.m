@@ -24,6 +24,9 @@ static int const TYPE_GROUP = 2;
 @synthesize pages;
 @synthesize containers;
 
+#pragma mark -
+#pragma mark Loading data
+
 - (void)load
 {
     [self loadFromFile:[NSString stringWithFormat:@"%@/Desktop/launchpad.db", NSHomeDirectory()]];
@@ -141,8 +144,6 @@ static int const TYPE_GROUP = 2;
         app.parentId = [NSNumber numberWithInt:[results intForColumn:@"parent_id"]];
         app.title = [results stringForColumn:@"title"];
         
-        NSLog(@"%@", app);
-        
         if ([container isKindOfClass:[HNLaunchpadGroup class]])
         {
             HNLaunchpadGroup *group = (HNLaunchpadGroup *)container;
@@ -160,6 +161,60 @@ static int const TYPE_GROUP = 2;
             [NSException raise:@"Bad type" format:@"Unknown kind of container class: %@", [container class]];
         }
     }
+}
+
+#pragma mark -
+#pragma mark NSOutlineViewDataSource
+
+- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
+{
+    if (item == nil)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+{
+    return NO;
+}
+
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
+{
+    
+    if (item == nil)
+    {
+        return [self.pages objectForKey:[self.pages keyAtIndex:index]];
+    }
+    else if ([item isKindOfClass:[HNLaunchpadPage class]])
+    {
+        HNLaunchpadPage *page = (HNLaunchpadPage *)item;
+        
+        return [page.items objectForKey:[page.items keyAtIndex:index]];
+    }
+    else if ([item isKindOfClass:[HNLaunchpadGroup class]])
+    {
+        HNLaunchpadGroup *group = (HNLaunchpadGroup *)item;
+        
+        return [group.items objectForKey:[group.items keyAtIndex:index]];
+    }
+    else
+    {
+        [NSException raise:@"Unknown NSOutlineViewDataSource child" format:@"Item has no children"];
+        return nil;
+    }
+}
+
+
+- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+{
+    return @"Test";
 }
 
 @end

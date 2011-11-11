@@ -12,7 +12,7 @@
 
 @class FMDatabase;
 
-@interface HNLaunchpadDataSet : NSObject
+@interface HNLaunchpadDataSet : NSObject <NSOutlineViewDataSource>
 
 @property (retain) MGOrderedDictionary *pages;
 @property (retain) NSMutableDictionary *containers;
