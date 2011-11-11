@@ -20,6 +20,7 @@
 		C30BFBE3146C36D100395658 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBDE146C36D100395658 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C30BFBE4146C36D100395658 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C30BFBE5146C36D100395658 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE2146C36D100395658 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C39EA2E1146CB5DD001356F5 /* MGOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C3E896C8146C472F0060AB93 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3E896C7146C472F0060AB93 /* libsqlite3.dylib */; };
 		C3E896CB146C48690060AB93 /* HNLaunchpadDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E896CA146C48690060AB93 /* HNLaunchpadDataSet.m */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,8 @@
 		C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		C30BFBE1146C36D100395658 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		C30BFBE2146C36D100395658 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		C39EA2DF146CB5DD001356F5 /* MGOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGOrderedDictionary.h; sourceTree = "<group>"; };
+		C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGOrderedDictionary.m; sourceTree = "<group>"; };
 		C3E896C7146C472F0060AB93 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		C3E896C9146C48690060AB93 /* HNLaunchpadDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadDataSet.h; sourceTree = "<group>"; };
 		C3E896CA146C48690060AB93 /* HNLaunchpadDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNLaunchpadDataSet.m; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				C3E896C9146C48690060AB93 /* HNLaunchpadDataSet.h */,
 				C3E896CA146C48690060AB93 /* HNLaunchpadDataSet.m */,
 				C30BFBBE146C32AE00395658 /* MainMenu.xib */,
+				C39EA2DF146CB5DD001356F5 /* MGOrderedDictionary.h */,
+				C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */,
 				C30BFBE6146C36D600395658 /* FMDB */,
 				C30BFBB0146C32AD00395658 /* Supporting Files */,
 			);
@@ -298,6 +303,7 @@
 				C30BFBE4146C36D100395658 /* FMDatabaseAdditions.m in Sources */,
 				C30BFBE5146C36D100395658 /* FMResultSet.m in Sources */,
 				C3E896CB146C48690060AB93 /* HNLaunchpadDataSet.m in Sources */,
+				C39EA2E1146CB5DD001356F5 /* MGOrderedDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
