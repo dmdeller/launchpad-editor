@@ -45,12 +45,12 @@ static int const TYPE_GROUP = 2;
         return;
     }
     
-    [self loadPagesWithDb:db];
-    [self loadGroupsWithDb:db];
-    [self loadAppsWithDb:db];
+    [self loadPagesFromDb:db];
+    [self loadGroupsFromDb:db];
+    [self loadAppsFromDb:db];
 }
 
-- (void)loadPagesWithDb:(FMDatabase *)db
+- (void)loadPagesFromDb:(FMDatabase *)db
 {
     self.pages = [MGOrderedDictionary dictionaryWithCapacity:10];
     self.containers = [NSMutableDictionary dictionaryWithCapacity:200];
@@ -82,7 +82,7 @@ static int const TYPE_GROUP = 2;
     }
 }
 
-- (void)loadGroupsWithDb:(FMDatabase *)db
+- (void)loadGroupsFromDb:(FMDatabase *)db
 {
     NSString *sql = @"SELECT *"
                     " FROM items i"
@@ -115,7 +115,7 @@ static int const TYPE_GROUP = 2;
     }
 }
 
-- (void)loadAppsWithDb:(FMDatabase *)db
+- (void)loadAppsFromDb:(FMDatabase *)db
 {
     NSString *sql = @"SELECT *"
                     " FROM items i"

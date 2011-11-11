@@ -19,8 +19,8 @@
 
 - (void)load;
 - (void)loadFromFile:(NSString *)filename;
-- (void)loadPagesWithDb:(FMDatabase *)db;
-- (void)loadGroupsWithDb:(FMDatabase *)db;
-- (void)loadAppsWithDb:(FMDatabase *)db;
+- (void)loadPagesFromDb:(FMDatabase *)db;
+- (void)loadGroupsFromDb:(FMDatabase *)db;
+- (void)loadAppsFromDb:(FMDatabase *)db;
 
 @end
