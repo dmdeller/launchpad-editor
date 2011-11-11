@@ -8,9 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#import "MGOrderedDictionary.h"
+
+@class FMDatabase;
+
 @interface HNLaunchpadDataSet : NSObject
+
+@property (retain) MGOrderedDictionary *pages;
 
 - (void)load;
 - (void)loadFromFile:(NSString *)filename;
+- (void)loadPagesWithDb:(FMDatabase *)db;
 
 @end

@@ -8,10 +8,16 @@
 
 #import "HNLaunchpadDataSet.h"
 
+#import "HNLaunchpadPage.h"
+#import "HNLaunchpadGroup.h"
+#import "HNLaunchpadApp.h"
+
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 
 @implementation HNLaunchpadDataSet
+
+@synthesize pages;
 
 - (void)load
 {
@@ -34,11 +40,36 @@
         return;
     }
     
-    FMResultSet *results = [db executeQuery:@"SELECT * FROM items"];
+    [self loadPagesWithDb:db];
+}
+
+- (void)loadPagesWithDb:(FMDatabase *)db
+{
+    self.pages = [MGOrderedDictionary dictionaryWithCapacity:10];
+    
+    NSString *sql = @"SELECT *"
+                        " FROM items i"
+                            " JOIN groups g ON i.rowid = g.item_id"
+                        " WHERE i.type = 3" // 3 means 'page'
+                        " ORDER BY i.ordering";
+    
+    FMResultSet *results = [db executeQuery:sql];
     
     while ([results next])
     {
-        NSLog(@"%@", [results stringForColumn:@"uuid"]);
+        // FIXME: hacky
+        if ([[results stringForColumn:@"uuid"] isEqualToString:@"HOLDINGPAGE"])
+        {
+            continue;
+        }
+        
+        HNLaunchpadPage *page = [[HNLaunchpadPage alloc] init];
+        
+        page.uuid = [results stringForColumn:@"uuid"];
+        page.rowid = [NSNumber numberWithInt:[results intForColumn:@"rowid"]];
+        page.items = [MGOrderedDictionary dictionaryWithCapacity:40];
+        
+        [self.pages setObject:page forKey:page.rowid];
     }
 }
 
