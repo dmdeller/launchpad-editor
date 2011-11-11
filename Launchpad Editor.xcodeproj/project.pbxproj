@@ -105,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				C30BFBAF146C32AD00395658 /* Launchpad Editor */,
+				C3C41C1D146D71170021FC51 /* Libraries */,
 				C30BFBCC146C32AE00395658 /* Launchpad EditorTests */,
 				C30BFBA8146C32AD00395658 /* Frameworks */,
 				C30BFBA6146C32AD00395658 /* Products */,
@@ -157,9 +158,6 @@
 				C39EA2DB146CB29A001356F5 /* HNLaunchpadApp.h */,
 				C39EA2DC146CB29A001356F5 /* HNLaunchpadApp.m */,
 				C30BFBBE146C32AE00395658 /* MainMenu.xib */,
-				C39EA2DF146CB5DD001356F5 /* MGOrderedDictionary.h */,
-				C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */,
-				C30BFBE6146C36D600395658 /* FMDB */,
 				C30BFBB0146C32AD00395658 /* Supporting Files */,
 			);
 			path = "Launchpad Editor";
@@ -207,6 +205,17 @@
 				C30BFBE2146C36D100395658 /* FMResultSet.m */,
 			);
 			name = FMDB;
+			sourceTree = "<group>";
+		};
+		C3C41C1D146D71170021FC51 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				C39EA2DF146CB5DD001356F5 /* MGOrderedDictionary.h */,
+				C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */,
+				C30BFBE6146C36D600395658 /* FMDB */,
+			);
+			name = Libraries;
+			path = "Launchpad Editor";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
