@@ -27,6 +27,13 @@ static int const TYPE_GROUP = 2;
 #pragma mark -
 #pragma mark Loading data
 
+- (id)init
+{
+    [self load];
+    
+    return [super init];
+}
+
 - (void)load
 {
     [self loadFromFile:[NSString stringWithFormat:@"%@/Desktop/launchpad.db", NSHomeDirectory()]];
@@ -170,10 +177,27 @@ static int const TYPE_GROUP = 2;
 {
     if (item == nil)
     {
-        return 1;
+        return [self.pages count];
+    }
+    else if ([item isKindOfClass:[HNLaunchpadPage class]])
+    {
+        HNLaunchpadPage *page = (HNLaunchpadPage *)item;
+        
+        return [page.items count];
+    }
+    else if ([item isKindOfClass:[HNLaunchpadGroup class]])
+    {
+        HNLaunchpadGroup *group = (HNLaunchpadGroup *)item;
+        
+        return [group.items count];
+    }
+    else if ([item isKindOfClass:[HNLaunchpadApp class]])
+    {
+        return 0;
     }
     else
     {
+        [NSException raise:@"Unknown NSOutlineViewDatasource item" format:@"Unknown kind of item"];
         return 0;
     }
 }
@@ -181,7 +205,14 @@ static int const TYPE_GROUP = 2;
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
-    return NO;
+    if ([self outlineView:outlineView numberOfChildrenOfItem:item] > 0)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 
@@ -214,7 +245,29 @@ static int const TYPE_GROUP = 2;
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-    return @"Test";
+    if ([item isKindOfClass:[HNLaunchpadPage class]])
+    {
+        HNLaunchpadPage *page = (HNLaunchpadPage *)item;
+        
+        return @"Page";
+    }
+    else if ([item isKindOfClass:[HNLaunchpadGroup class]])
+    {
+        HNLaunchpadGroup *group = (HNLaunchpadGroup *)item;
+        
+        return group.title;
+    }
+    else if ([item isKindOfClass:[HNLaunchpadApp class]])
+    {
+        HNLaunchpadApp *app = (HNLaunchpadApp *)item;
+        
+        return app.title;
+    }
+    else
+    {
+        [NSException raise:@"Unknown NSOutlineViewDatasource item" format:@"Unknown kind of item"];
+        return @"Unknown";
+    }
 }
 
 @end
