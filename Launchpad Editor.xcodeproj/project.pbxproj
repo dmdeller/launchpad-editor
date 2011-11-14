@@ -149,14 +149,7 @@
 				C30BFBBC146C32AE00395658 /* HNAppDelegate.m */,
 				C3E896C9146C48690060AB93 /* HNLaunchpadDataSet.h */,
 				C3E896CA146C48690060AB93 /* HNLaunchpadDataSet.m */,
-				C39EA2DE146CB4FC001356F5 /* HNLaunchpadItem.h */,
-				C34FB528146CC77B00516C18 /* HNLaunchpadContainer.h */,
-				C39EA2D4146CB281001356F5 /* HNLaunchpadPage.h */,
-				C39EA2D5146CB281001356F5 /* HNLaunchpadPage.m */,
-				C39EA2D8146CB28D001356F5 /* HNLaunchpadGroup.h */,
-				C39EA2D9146CB28D001356F5 /* HNLaunchpadGroup.m */,
-				C39EA2DB146CB29A001356F5 /* HNLaunchpadApp.h */,
-				C39EA2DC146CB29A001356F5 /* HNLaunchpadApp.m */,
+				C3D41E2714719083000D9039 /* Data objects */,
 				C30BFBBE146C32AE00395658 /* MainMenu.xib */,
 				C30BFBB0146C32AD00395658 /* Supporting Files */,
 			);
@@ -216,6 +209,21 @@
 			);
 			name = Libraries;
 			path = "Launchpad Editor";
+			sourceTree = "<group>";
+		};
+		C3D41E2714719083000D9039 /* Data objects */ = {
+			isa = PBXGroup;
+			children = (
+				C39EA2DE146CB4FC001356F5 /* HNLaunchpadItem.h */,
+				C34FB528146CC77B00516C18 /* HNLaunchpadContainer.h */,
+				C39EA2D4146CB281001356F5 /* HNLaunchpadPage.h */,
+				C39EA2D5146CB281001356F5 /* HNLaunchpadPage.m */,
+				C39EA2D8146CB28D001356F5 /* HNLaunchpadGroup.h */,
+				C39EA2D9146CB28D001356F5 /* HNLaunchpadGroup.m */,
+				C39EA2DB146CB29A001356F5 /* HNLaunchpadApp.h */,
+				C39EA2DC146CB29A001356F5 /* HNLaunchpadApp.m */,
+			);
+			name = "Data objects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
