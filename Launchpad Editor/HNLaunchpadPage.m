@@ -12,6 +12,7 @@
 
 @synthesize uuid;
 @synthesize pageId;
+@synthesize pageNumber;
 @synthesize items;
 
 @end

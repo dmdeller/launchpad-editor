@@ -16,5 +16,6 @@
 
 @property (retain) NSString *uuid;
 @property (retain) NSNumber *pageId;
+@property (assign) int pageNumber;
 
 @end

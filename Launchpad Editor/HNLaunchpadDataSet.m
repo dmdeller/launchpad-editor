@@ -73,6 +73,8 @@ static int const TYPE_GROUP = 2;
     
     FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:TYPE_PAGE]];
     
+    int pageNumber = 0;
+    
     while ([results next])
     {
         // FIXME: hacky
@@ -83,8 +85,11 @@ static int const TYPE_GROUP = 2;
         
         HNLaunchpadPage *page = [[HNLaunchpadPage alloc] init];
         
+        pageNumber++;
+        
         page.uuid = [results stringForColumn:@"uuid"];
         page.pageId = [NSNumber numberWithInt:[results intForColumn:@"rowid"]];
+        page.pageNumber = pageNumber;
         page.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
         [self.pages setObject:page forKey:page.pageId];
@@ -249,7 +254,7 @@ static int const TYPE_GROUP = 2;
     {
         HNLaunchpadPage *page = (HNLaunchpadPage *)item;
         
-        return @"Page";
+        return [NSString stringWithFormat:@"Page %i", page.pageNumber];
     }
     else if ([item isKindOfClass:[HNLaunchpadGroup class]])
     {
