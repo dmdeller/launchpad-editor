@@ -14,13 +14,13 @@
 
 @interface HNLaunchpadDataSet : NSObject <NSOutlineViewDataSource>
 
-@property (retain) MGOrderedDictionary *pages;
-@property (retain) NSMutableDictionary *containers;
+@property (retain) MGOrderedDictionary *itemTree;
 
 - (void)load;
 - (void)loadFromFile:(NSString *)filename;
-- (void)loadPagesFromDb:(FMDatabase *)db;
-- (void)loadGroupsFromDb:(FMDatabase *)db;
-- (void)loadAppsFromDb:(FMDatabase *)db;
+- (MGOrderedDictionary *)loadPagesFromDb:(FMDatabase *)db;
+- (NSDictionary *)loadGroupsFromDb:(FMDatabase *)db;
+- (NSDictionary *)loadAppsFromDb:(FMDatabase *)db;
+- (void)collateApps:(NSDictionary *)apps andGroups:(NSDictionary *)groups intoPages:(MGOrderedDictionary *)pages fromDb:(FMDatabase *)db;
 
 @end

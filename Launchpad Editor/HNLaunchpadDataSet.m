@@ -20,9 +20,9 @@
 
 static int const TYPE_PAGE = 3;
 static int const TYPE_GROUP = 2;
+static int const TYPE_APP = 4;
 
-@synthesize pages;
-@synthesize containers;
+@synthesize itemTree;
 
 #pragma mark -
 #pragma mark Loading data
@@ -55,15 +55,18 @@ static int const TYPE_GROUP = 2;
         return;
     }
     
-    [self loadPagesFromDb:db];
-    [self loadGroupsFromDb:db];
-    [self loadAppsFromDb:db];
+    MGOrderedDictionary *pages = [self loadPagesFromDb:db];
+    NSDictionary *groups = [self loadGroupsFromDb:db];
+    NSDictionary *apps = [self loadAppsFromDb:db];
+    
+    [self collateApps:apps andGroups:groups intoPages:pages fromDb:db];
+    
+    self.itemTree = pages;
 }
 
-- (void)loadPagesFromDb:(FMDatabase *)db
+- (MGOrderedDictionary *)loadPagesFromDb:(FMDatabase *)db
 {
-    self.pages = [MGOrderedDictionary dictionaryWithCapacity:10];
-    self.containers = [NSMutableDictionary dictionaryWithCapacity:200];
+    MGOrderedDictionary *pages = [MGOrderedDictionary dictionaryWithCapacity:10];
     
     NSString *sql = @"SELECT *"
                         " FROM items i"
@@ -92,13 +95,16 @@ static int const TYPE_GROUP = 2;
         page.pageNumber = pageNumber;
         page.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
-        [self.pages setObject:page forKey:page.pageId];
-        [self.containers setObject:page forKey:page.pageId];
+        [pages setObject:page forKey:page.pageId];
     }
+    
+    return pages;
 }
 
-- (void)loadGroupsFromDb:(FMDatabase *)db
+- (NSDictionary *)loadGroupsFromDb:(FMDatabase *)db
 {
+    NSMutableDictionary *groups = [NSMutableDictionary dictionaryWithCapacity:100];
+    
     NSString *sql = @"SELECT *"
                     " FROM items i"
                         " JOIN groups g ON i.rowid = g.item_id"
@@ -109,13 +115,6 @@ static int const TYPE_GROUP = 2;
     
     while ([results next])
     {
-        HNLaunchpadPage *page = [self.pages objectForKey:[NSNumber numberWithInt:[results intForColumn:@"parent_id"]]];
-        if (page == nil)
-        {
-            [NSException raise:@"Page not found error" format:@"Could not find page: %d for group: %d", [results intForColumn:@"parent_id"], [results intForColumn:@"item_id"]];
-            continue;
-        }
-        
         HNLaunchpadGroup *group = [[HNLaunchpadGroup alloc] init];
         
         group.uuid = [results stringForColumn:@"uuid"];
@@ -124,14 +123,16 @@ static int const TYPE_GROUP = 2;
         group.title = [results stringForColumn:@"title"];
         group.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
-        [page.items setObject:group forKey:group.itemId];
-        
-        [self.containers setObject:group forKey:group.itemId];
+        [groups setObject:group forKey:group.itemId];
     }
+    
+    return [NSDictionary dictionaryWithDictionary:groups];
 }
 
-- (void)loadAppsFromDb:(FMDatabase *)db
+- (NSDictionary *)loadAppsFromDb:(FMDatabase *)db
 {
+    NSMutableDictionary *apps = [NSMutableDictionary dictionaryWithCapacity:1000];
+    
     NSString *sql = @"SELECT *"
                     " FROM items i"
                         " JOIN apps a ON i.rowid = a.item_id"
@@ -141,14 +142,6 @@ static int const TYPE_GROUP = 2;
     
     while ([results next])
     {
-        // should properly be HNLaunchpadContainer... but you can't do that in Objective-C
-        NSObject *container = [self.containers objectForKey:[NSNumber numberWithInt:[results intForColumn:@"parent_id"]]];
-        if (container == nil)
-        {
-            [NSException raise:@"Page or group not found error" format:@"Could not find page or group: %d for app: %d", [results intForColumn:@"parent_id"], [results intForColumn:@"item_id"]];
-            continue;
-        }
-        
         HNLaunchpadApp *app = [[HNLaunchpadApp alloc] init];
         
         app.uuid = [results stringForColumn:@"uuid"];
@@ -156,21 +149,76 @@ static int const TYPE_GROUP = 2;
         app.parentId = [NSNumber numberWithInt:[results intForColumn:@"parent_id"]];
         app.title = [results stringForColumn:@"title"];
         
-        if ([container isKindOfClass:[HNLaunchpadGroup class]])
+        [apps setObject:app forKey:app.itemId];
+    }
+    
+    return [NSDictionary dictionaryWithDictionary:apps];
+}
+
+/**
+ * This takes the apps and groups that have already been loaded, and puts them into the proper hierarchical order.
+ * I couldn't find a way to do this during the first pass, because it might have been necessary to insert apps into parent objects that had not appeared yet based on the ordering.
+ * From my observation, pages seem to appear before groups based on this ordering, but none of this behaviour is documented so I'm being extra careful.
+ */
+- (void)collateApps:(NSDictionary *)apps andGroups:(NSDictionary *)groups intoPages:(MGOrderedDictionary *)pages fromDb:(FMDatabase *)db
+{
+    NSString *sql = @"SELECT i.rowid AS item_id, i.parent_id, i.type"
+                        " FROM items i"
+                            " JOIN items parent ON i.parent_id = parent.rowid"
+                            " LEFT JOIN groups g ON i.rowid = g.item_id"
+                            " LEFT JOIN apps a ON i.rowid = a.item_id"
+                        " WHERE i.type = ? OR i.type = ?"
+                        " ORDER BY parent.ordering, i.ordering";
+    
+    FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:TYPE_APP], [NSNumber numberWithInt:TYPE_GROUP]];
+    
+    while ([results next])
+    {
+        if ([results intForColumn:@"type"] == TYPE_APP)
         {
-            HNLaunchpadGroup *group = (HNLaunchpadGroup *)container;
+            HNLaunchpadApp *app = [apps objectForKey:[NSNumber numberWithInt:[results intForColumn:@"item_id"]]];
             
-            [group.items setObject:app forKey:app.itemId];
+            // is this app in a page?
+            HNLaunchpadPage *containerPage = [pages objectForKey:[NSNumber numberWithInt:[results intForColumn:@"parent_id"]]];
+            if (containerPage != nil)
+            {
+                [containerPage.items setObject:app forKey:app.itemId];
+            }
+            else
+            {
+                // is this app in a group?
+                HNLaunchpadGroup *containerGroup = [groups objectForKey:[NSNumber numberWithInt:[results intForColumn:@"parent_id"]]];
+                if (containerGroup != nil)
+                {
+                    [containerGroup.items setObject:app forKey:app.itemId];
+                }
+                else
+                {
+                    // exception
+                    [NSException raise:@"Container not found" format:@"Could not find container object for app: %@", app];
+                    continue;
+                }
+            }
         }
-        else if ([container isKindOfClass:[HNLaunchpadPage class]])
+        else if ([results intForColumn:@"type"] == TYPE_GROUP)
         {
-            HNLaunchpadPage *page = (HNLaunchpadPage *)container;
+            HNLaunchpadGroup *group = [groups objectForKey:[NSNumber numberWithInt:[results intForColumn:@"item_id"]]];
             
-            [page.items setObject:app forKey:app.itemId];
+            HNLaunchpadPage *containerPage = [pages objectForKey:[NSNumber numberWithInt:[results intForColumn:@"parent_id"]]];
+            if (containerPage != nil)
+            {
+                [containerPage.items setObject:group forKey:group.itemId];
+            }
+            else
+            {
+                // exception
+                [NSException raise:@"Container not found" format:@"Could not find container object for group: %@", group];
+                continue;
+            }
         }
         else
         {
-            [NSException raise:@"Bad type" format:@"Unknown kind of container class: %@", [container class]];
+            
         }
     }
 }
@@ -182,7 +230,7 @@ static int const TYPE_GROUP = 2;
 {
     if (item == nil)
     {
-        return [self.pages count];
+        return [self.itemTree count];
     }
     else if ([item isKindOfClass:[HNLaunchpadPage class]])
     {
@@ -226,7 +274,7 @@ static int const TYPE_GROUP = 2;
     
     if (item == nil)
     {
-        return [self.pages objectForKey:[self.pages keyAtIndex:index]];
+        return [self.itemTree objectForKey:[self.itemTree keyAtIndex:index]];
     }
     else if ([item isKindOfClass:[HNLaunchpadPage class]])
     {
