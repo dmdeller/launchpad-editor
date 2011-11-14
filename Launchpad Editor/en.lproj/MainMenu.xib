@@ -1493,7 +1493,7 @@
 											<string key="NSFrameSize">{599, 420}</string>
 											<reference key="NSSuperview" ref="823136338"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="534584339"/>
+											<reference key="NSNextKeyView" ref="1005794530"/>
 											<string key="NSReuseIdentifierKey">_NS:1703</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTableHeaderView" key="NSHeaderView" id="272430727">
@@ -1576,10 +1576,20 @@
 												</object>
 											</array>
 											<double key="NSIntercellSpacingWidth">3</double>
-											<double key="NSIntercellSpacingHeight">2</double>
+											<double key="NSIntercellSpacingHeight">0.0</double>
 											<object class="NSColor" key="NSBackgroundColor">
-												<int key="NSColorSpace">3</int>
-												<bytes key="NSWhite">MQA</bytes>
+												<int key="NSColorSpace">6</int>
+												<string key="NSCatalogName">System</string>
+												<string key="NSColorName">_sourceListBackgroundColor</string>
+												<object class="NSColor" key="NSColor">
+													<int key="NSColorSpace">6</int>
+													<string key="NSCatalogName">System</string>
+													<string key="NSColorName">alternateSelectedControlColor</string>
+													<object class="NSColor" key="NSColor">
+														<int key="NSColorSpace">1</int>
+														<bytes key="NSRGB">MCAwIDEAA</bytes>
+													</object>
+												</object>
 											</object>
 											<object class="NSColor" key="NSGridColor">
 												<int key="NSColorSpace">6</int>
@@ -1590,16 +1600,18 @@
 													<bytes key="NSWhite">MC41AA</bytes>
 												</object>
 											</object>
-											<double key="NSRowHeight">17</double>
-											<int key="NSTvFlags">-767557632</int>
+											<double key="NSRowHeight">20</double>
+											<int key="NSTvFlags">-759169024</int>
 											<reference key="NSDelegate"/>
 											<reference key="NSDataSource"/>
 											<int key="NSColumnAutoresizingStyle">4</int>
 											<int key="NSDraggingSourceMaskForLocal">15</int>
 											<int key="NSDraggingSourceMaskForNonLocal">0</int>
 											<bool key="NSAllowsTypeSelect">YES</bool>
-											<int key="NSTableViewDraggingDestinationStyle">0</int>
+											<int key="NSTableViewDraggingDestinationStyle">1</int>
 											<int key="NSTableViewGroupRowStyle">1</int>
+											<bool key="NSOutlineViewAutoresizesOutlineColumnKey">NO</bool>
+											<float key="NSOutlineViewIndentationPerLevelKey">14</float>
 										</object>
 									</array>
 									<string key="NSFrame">{{1, 17}, {599, 420}}</string>
@@ -1629,7 +1641,6 @@
 									<string key="NSFrame">{{1, 422}, {599, 15}}</string>
 									<reference key="NSSuperview" ref="688458249"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:1728</string>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="688458249"/>
@@ -1656,7 +1667,7 @@
 							<string key="NSFrame">{{-1, -1}, {601, 438}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="1005794530"/>
+							<reference key="NSNextKeyView" ref="823136338"/>
 							<string key="NSReuseIdentifierKey">_NS:1699</string>
 							<int key="NSsFlags">133682</int>
 							<reference key="NSVScroller" ref="534584339"/>
@@ -1664,7 +1675,7 @@
 							<reference key="NSContentView" ref="823136338"/>
 							<reference key="NSHeaderClipView" ref="1005794530"/>
 							<reference key="NSCornerView" ref="1061304127"/>
-							<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
+							<bytes key="NSScrollAmts">QSAAAEEgAABBoAAAQaAAAA</bytes>
 						</object>
 					</array>
 					<string key="NSFrameSize">{599, 436}</string>
