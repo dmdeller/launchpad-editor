@@ -12,7 +12,7 @@
 
 @class FMDatabase;
 
-@interface HNLaunchpadDataSet : NSObject <NSOutlineViewDataSource>
+@interface HNLaunchpadDataSet : NSObject <NSOutlineViewDataSource, NSOutlineViewDelegate>
 
 @property (retain) MGOrderedDictionary *itemTree;
 
