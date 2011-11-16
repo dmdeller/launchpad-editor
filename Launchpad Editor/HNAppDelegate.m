@@ -14,6 +14,7 @@
 @synthesize window = _window;
 @synthesize dataOutline;
 @synthesize dataSet;
+@synthesize dataDelegate;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {

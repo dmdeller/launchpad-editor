@@ -9,11 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 @class HNLaunchpadDataSet;
+@class HNLaunchpadDataDelegate;
 
 @interface HNAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (retain) IBOutlet NSOutlineView *dataOutline;
 @property (retain) IBOutlet HNLaunchpadDataSet *dataSet;
+@property (strong) IBOutlet HNLaunchpadDataDelegate *dataDelegate;
 
 @end
