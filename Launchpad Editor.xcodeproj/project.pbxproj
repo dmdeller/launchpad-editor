@@ -24,7 +24,6 @@
 		C39EA2DA146CB28D001356F5 /* HNLaunchpadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2D9146CB28D001356F5 /* HNLaunchpadGroup.m */; };
 		C39EA2DD146CB29A001356F5 /* HNLaunchpadApp.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2DC146CB29A001356F5 /* HNLaunchpadApp.m */; };
 		C39EA2E1146CB5DD001356F5 /* MGOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C3D41E2B147443AE000D9039 /* HNLaunchpadDataDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D41E2A147443AE000D9039 /* HNLaunchpadDataDelegate.m */; };
 		C3E896C8146C472F0060AB93 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3E896C7146C472F0060AB93 /* libsqlite3.dylib */; };
 		C3E896CB146C48690060AB93 /* HNLaunchpadDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E896CA146C48690060AB93 /* HNLaunchpadDataSet.m */; };
 /* End PBXBuildFile section */
@@ -75,8 +74,6 @@
 		C39EA2DE146CB4FC001356F5 /* HNLaunchpadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadItem.h; sourceTree = "<group>"; };
 		C39EA2DF146CB5DD001356F5 /* MGOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGOrderedDictionary.h; sourceTree = "<group>"; };
 		C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGOrderedDictionary.m; sourceTree = "<group>"; };
-		C3D41E29147443AE000D9039 /* HNLaunchpadDataDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadDataDelegate.h; sourceTree = "<group>"; };
-		C3D41E2A147443AE000D9039 /* HNLaunchpadDataDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNLaunchpadDataDelegate.m; sourceTree = "<group>"; };
 		C3E896C7146C472F0060AB93 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		C3E896C9146C48690060AB93 /* HNLaunchpadDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadDataSet.h; sourceTree = "<group>"; };
 		C3E896CA146C48690060AB93 /* HNLaunchpadDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNLaunchpadDataSet.m; sourceTree = "<group>"; };
@@ -152,8 +149,6 @@
 				C30BFBBC146C32AE00395658 /* HNAppDelegate.m */,
 				C3E896C9146C48690060AB93 /* HNLaunchpadDataSet.h */,
 				C3E896CA146C48690060AB93 /* HNLaunchpadDataSet.m */,
-				C3D41E29147443AE000D9039 /* HNLaunchpadDataDelegate.h */,
-				C3D41E2A147443AE000D9039 /* HNLaunchpadDataDelegate.m */,
 				C3D41E2714719083000D9039 /* Data objects */,
 				C30BFBBE146C32AE00395658 /* MainMenu.xib */,
 				C30BFBB0146C32AD00395658 /* Supporting Files */,
@@ -348,7 +343,6 @@
 				C39EA2DA146CB28D001356F5 /* HNLaunchpadGroup.m in Sources */,
 				C39EA2DD146CB29A001356F5 /* HNLaunchpadApp.m in Sources */,
 				C39EA2E1146CB5DD001356F5 /* MGOrderedDictionary.m in Sources */,
-				C3D41E2B147443AE000D9039 /* HNLaunchpadDataDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

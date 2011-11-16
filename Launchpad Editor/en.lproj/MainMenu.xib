@@ -1493,7 +1493,7 @@
 											<string key="NSFrameSize">{599, 420}</string>
 											<reference key="NSSuperview" ref="823136338"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="534584339"/>
+											<reference key="NSNextKeyView" ref="1005794530"/>
 											<string key="NSReuseIdentifierKey">_NS:1703</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTableHeaderView" key="NSHeaderView" id="272430727">
@@ -1641,7 +1641,6 @@
 									<string key="NSFrame">{{1, 422}, {599, 15}}</string>
 									<reference key="NSSuperview" ref="688458249"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:1728</string>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="688458249"/>
@@ -1668,7 +1667,7 @@
 							<string key="NSFrame">{{-1, -1}, {601, 438}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="1005794530"/>
+							<reference key="NSNextKeyView" ref="823136338"/>
 							<string key="NSReuseIdentifierKey">_NS:1699</string>
 							<int key="NSsFlags">133682</int>
 							<reference key="NSVScroller" ref="534584339"/>
@@ -1696,9 +1695,6 @@
 			</object>
 			<object class="NSCustomObject" id="431399122">
 				<string key="NSClassName">HNLaunchpadDataSet</string>
-			</object>
-			<object class="NSCustomObject" id="491829144">
-				<string key="NSClassName">HNLaunchpadDataDelegate</string>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -2401,27 +2397,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">dataDelegate</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="491829144"/>
-					</object>
-					<int key="connectionID">570</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">dataSource</string>
 						<reference key="source" ref="300249465"/>
 						<reference key="destination" ref="431399122"/>
 					</object>
 					<int key="connectionID">563</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="300249465"/>
-						<reference key="destination" ref="491829144"/>
-					</object>
-					<int key="connectionID">569</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3521,11 +3501,6 @@
 						<reference key="object" ref="431399122"/>
 						<reference key="parent" ref="0"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">568</int>
-						<reference key="object" ref="491829144"/>
-						<reference key="parent" ref="0"/>
-					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -3687,7 +3662,6 @@
 				<string key="554.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="561.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="568.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3706,7 +3680,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">570</int>
+			<int key="maxID">567</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3714,16 +3688,11 @@
 					<string key="className">HNAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="dataDelegate">HNLaunchpadDataDelegate</string>
 						<string key="dataOutline">NSOutlineView</string>
 						<string key="dataSet">HNLaunchpadDataSet</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="dataDelegate">
-							<string key="name">dataDelegate</string>
-							<string key="candidateClassName">HNLaunchpadDataDelegate</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="dataOutline">
 							<string key="name">dataOutline</string>
 							<string key="candidateClassName">NSOutlineView</string>
@@ -3740,14 +3709,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/HNAppDelegate.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">HNLaunchpadDataDelegate</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/HNLaunchpadDataDelegate.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
