@@ -318,8 +318,35 @@ static int const TYPE_APP = 4;
     }
     else
     {
-        [NSException raise:@"Unknown NSOutlineViewDatasource item" format:@"Unknown kind of item"];
+        [NSException raise:@"Unknown NSOutlineViewDataSource item" format:@"Unknown kind of item"];
         return @"Unknown";
+    }
+}
+
+#pragma mark -
+#pragma mark NSOutlineViewDelegate
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
+{
+    if ([item isKindOfClass:[HNLaunchpadPage class]])
+    {
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+    if ([item isKindOfClass:[HNLaunchpadGroup class]])
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
     }
 }
 
