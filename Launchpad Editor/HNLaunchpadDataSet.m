@@ -23,6 +23,7 @@ static int const TYPE_GROUP = 2;
 static int const TYPE_APP = 4;
 
 @synthesize itemTree;
+@synthesize itemList;
 
 #pragma mark -
 #pragma mark Loading data
@@ -34,17 +35,25 @@ static int const TYPE_APP = 4;
     return [super init];
 }
 
-- (void)load
+/**
+ * Determines the filename of the Launchpad database.
+ */
+- (NSString *)dbFilename
 {
-    [self loadFromFile:[NSString stringWithFormat:@"%@/Desktop/launchpad.db", NSHomeDirectory()]];
+    return [NSString stringWithFormat:@"%@/Desktop/launchpad.db", NSHomeDirectory()];
 }
 
-- (void)loadFromFile:(NSString *)filename
+/**
+ * Returns an opened database connection. Don't forget to close it when you're done.
+ */
+- (FMDatabase *)db
 {
+    NSString *filename = [self dbFilename];
+    
     if (![[NSFileManager defaultManager] fileExistsAtPath:filename])
     {
         [NSException raise:@"Database read error" format:@"Database at path: %@ does not exist", filename];
-        return;
+        return nil;
     }
     
     FMDatabase *db = [FMDatabase databaseWithPath:filename];
@@ -52,8 +61,15 @@ static int const TYPE_APP = 4;
     if (![db open])
     {
         [NSException raise:@"Database open error" format:@"Could not open database: %@", filename];
-        return;
+        return nil;
     }
+    
+    return db;
+}
+
+- (void)load
+{
+    FMDatabase *db = [self db];
     
     MGOrderedDictionary *pages = [self loadPagesFromDb:db];
     NSDictionary *groups = [self loadGroupsFromDb:db];
@@ -62,6 +78,8 @@ static int const TYPE_APP = 4;
     [self collateApps:apps andGroups:groups intoPages:pages fromDb:db];
     
     self.itemTree = pages;
+    
+    [db close];
 }
 
 - (MGOrderedDictionary *)loadPagesFromDb:(FMDatabase *)db
@@ -224,6 +242,36 @@ static int const TYPE_APP = 4;
 }
 
 #pragma mark -
+#pragma mark Saving data
+
+- (void)saveItem:(id)item
+{
+    if ([item isKindOfClass:[HNLaunchpadApp class]])
+    {
+        
+    }
+    else if ([item isKindOfClass:[HNLaunchpadGroup class]])
+    {
+        HNLaunchpadGroup *group = (HNLaunchpadGroup *)item;
+        
+        FMDatabase *db = [self db];
+        
+        NSString *sql = @"UPDATE groups"
+                            " SET title = ?"
+                            " WHERE item_id = ?";
+        
+        [db executeUpdate:sql, group.title, group.itemId];
+        
+        [db close];
+    }
+    else
+    {
+        [NSException raise:@"Invalid class" format:@"Can only save objects of class HNLaunchpadApp, HNLaunchpadGroup"];
+        return;
+    }
+}
+
+#pragma mark -
 #pragma mark NSOutlineViewDataSource
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
@@ -320,6 +368,26 @@ static int const TYPE_APP = 4;
     {
         [NSException raise:@"Unknown NSOutlineViewDataSource item" format:@"Unknown kind of item"];
         return @"Unknown";
+    }
+}
+
+- (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+{
+    NSLog(@"new value: %@ item: %@", object, item);
+    
+    if ([item isKindOfClass:[HNLaunchpadGroup class]])
+    {
+        HNLaunchpadGroup *group = (HNLaunchpadGroup *)item;
+        NSString *newTitle = (NSString *)object;
+        
+        group.title = newTitle;
+        
+        [self saveItem:group];
+    }
+    else
+    {
+        [NSException raise:@"Cannot rename object" format:@"Only HNLaunchpadGroup objects can be renamed"];
+        return;
     }
 }
 
