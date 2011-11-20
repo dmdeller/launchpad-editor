@@ -94,6 +94,12 @@ static int const TYPE_APP = 4;
     
     FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:TYPE_PAGE]];
     
+    if (results == nil)
+    {
+        [NSException raise:@"Database error" format:[db lastErrorMessage]];
+        return nil;
+    }
+    
     int pageNumber = 0;
     
     while ([results next])
@@ -131,6 +137,12 @@ static int const TYPE_APP = 4;
     
     FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:TYPE_GROUP]];
     
+    if (results == nil)
+    {
+        [NSException raise:@"Database error" format:[db lastErrorMessage]];
+        return nil;
+    }
+    
     while ([results next])
     {
         HNLaunchpadGroup *group = [[HNLaunchpadGroup alloc] init];
@@ -157,6 +169,12 @@ static int const TYPE_APP = 4;
                     " ORDER BY i.ordering";
     
     FMResultSet *results = [db executeQuery:sql];
+    
+    if (results == nil)
+    {
+        [NSException raise:@"Database error" format:[db lastErrorMessage]];
+        return nil;
+    }
     
     while ([results next])
     {
@@ -260,7 +278,12 @@ static int const TYPE_APP = 4;
                             " SET title = ?"
                             " WHERE item_id = ?";
         
-        [db executeUpdate:sql, group.title, group.itemId];
+        if (![db executeUpdate:sql, group.title, group.itemId])
+        {
+            [NSException raise:@"Database error" format:[db lastErrorMessage]];
+            [db close];
+            return;
+        }
         
         [db close];
     }
