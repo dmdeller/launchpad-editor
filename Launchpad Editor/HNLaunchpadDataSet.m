@@ -396,8 +396,6 @@ static int const TYPE_APP = 4;
 
 - (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-    NSLog(@"new value: %@ item: %@", object, item);
-    
     if ([item isKindOfClass:[HNLaunchpadGroup class]])
     {
         HNLaunchpadGroup *group = (HNLaunchpadGroup *)item;
