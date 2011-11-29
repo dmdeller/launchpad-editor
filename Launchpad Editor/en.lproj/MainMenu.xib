@@ -2381,19 +2381,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">dataOutline</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="300249465"/>
-					</object>
-					<int key="connectionID">555</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">dataSet</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="431399122"/>
 					</object>
 					<int key="connectionID">562</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">outlineView</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="300249465"/>
+					</object>
+					<int key="connectionID">569</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3688,7 +3688,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">568</int>
+			<int key="maxID">569</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3696,18 +3696,18 @@
 					<string key="className">HNAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="dataOutline">NSOutlineView</string>
 						<string key="dataSet">HNLaunchpadDataSet</string>
+						<string key="outlineView">NSOutlineView</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="dataOutline">
-							<string key="name">dataOutline</string>
-							<string key="candidateClassName">NSOutlineView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="dataSet">
 							<string key="name">dataSet</string>
 							<string key="candidateClassName">HNLaunchpadDataSet</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="outlineView">
+							<string key="name">outlineView</string>
+							<string key="candidateClassName">NSOutlineView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="window">
 							<string key="name">window</string>
