@@ -113,11 +113,11 @@ static int const TYPE_APP = 4;
         pageNumber++;
         
         page.uuid = [results stringForColumn:@"uuid"];
-        page.pageId = [NSNumber numberWithInt:[results intForColumn:@"rowid"]];
+        page.id = [NSNumber numberWithInt:[results intForColumn:@"rowid"]];
         page.pageNumber = pageNumber;
         page.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
-        [pages setObject:page forKey:page.pageId];
+        [pages setObject:page forKey:page.id];
     }
     
     return pages;
@@ -146,12 +146,12 @@ static int const TYPE_APP = 4;
         HNLaunchpadGroup *group = [[HNLaunchpadGroup alloc] init];
         
         group.uuid = [results stringForColumn:@"uuid"];
-        group.itemId = [NSNumber numberWithInt:[results intForColumn:@"item_id"]];
+        group.id = [NSNumber numberWithInt:[results intForColumn:@"item_id"]];
         group.parentId = [NSNumber numberWithInt:[results intForColumn:@"parent_id"]];
         group.title = [results stringForColumn:@"title"];
         group.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
-        [groups setObject:group forKey:group.itemId];
+        [groups setObject:group forKey:group.id];
     }
     
     return [NSDictionary dictionaryWithDictionary:groups];
@@ -179,11 +179,11 @@ static int const TYPE_APP = 4;
         HNLaunchpadApp *app = [[HNLaunchpadApp alloc] init];
         
         app.uuid = [results stringForColumn:@"uuid"];
-        app.itemId = [NSNumber numberWithInt:[results intForColumn:@"item_id"]];
+        app.id = [NSNumber numberWithInt:[results intForColumn:@"item_id"]];
         app.parentId = [NSNumber numberWithInt:[results intForColumn:@"parent_id"]];
         app.title = [results stringForColumn:@"title"];
         
-        [apps setObject:app forKey:app.itemId];
+        [apps setObject:app forKey:app.id];
     }
     
     return [NSDictionary dictionaryWithDictionary:apps];
@@ -216,7 +216,7 @@ static int const TYPE_APP = 4;
             HNLaunchpadPage *containerPage = [pages objectForKey:[NSNumber numberWithInt:[results intForColumn:@"parent_id"]]];
             if (containerPage != nil)
             {
-                [containerPage.items setObject:app forKey:app.itemId];
+                [containerPage.items setObject:app forKey:app.id];
             }
             else
             {
@@ -224,7 +224,7 @@ static int const TYPE_APP = 4;
                 HNLaunchpadGroup *containerGroup = [groups objectForKey:[NSNumber numberWithInt:[results intForColumn:@"parent_id"]]];
                 if (containerGroup != nil)
                 {
-                    [containerGroup.items setObject:app forKey:app.itemId];
+                    [containerGroup.items setObject:app forKey:app.id];
                 }
                 else
                 {
@@ -241,7 +241,7 @@ static int const TYPE_APP = 4;
             HNLaunchpadPage *containerPage = [pages objectForKey:[NSNumber numberWithInt:[results intForColumn:@"parent_id"]]];
             if (containerPage != nil)
             {
-                [containerPage.items setObject:group forKey:group.itemId];
+                [containerPage.items setObject:group forKey:group.id];
             }
             else
             {
@@ -276,7 +276,7 @@ static int const TYPE_APP = 4;
                             " SET title = ?"
                             " WHERE item_id = ?";
         
-        if (![db executeUpdate:sql, group.title, group.itemId])
+        if (![db executeUpdate:sql, group.title, group.id])
         {
             [NSException raise:@"Database error" format:[db lastErrorMessage]];
             [db close];

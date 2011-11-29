@@ -65,6 +65,7 @@
 		C30BFBE1146C36D100395658 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		C30BFBE2146C36D100395658 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		C34FB528146CC77B00516C18 /* HNLaunchpadContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadContainer.h; sourceTree = "<group>"; };
+		C360686214854E8900B0FD54 /* HNLaunchpadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadEntity.h; sourceTree = "<group>"; };
 		C39EA2D4146CB281001356F5 /* HNLaunchpadPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadPage.h; sourceTree = "<group>"; };
 		C39EA2D5146CB281001356F5 /* HNLaunchpadPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNLaunchpadPage.m; sourceTree = "<group>"; };
 		C39EA2D8146CB28D001356F5 /* HNLaunchpadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadGroup.h; sourceTree = "<group>"; };
@@ -214,6 +215,7 @@
 		C3D41E2714719083000D9039 /* Data objects */ = {
 			isa = PBXGroup;
 			children = (
+				C360686214854E8900B0FD54 /* HNLaunchpadEntity.h */,
 				C39EA2DE146CB4FC001356F5 /* HNLaunchpadItem.h */,
 				C34FB528146CC77B00516C18 /* HNLaunchpadContainer.h */,
 				C39EA2D4146CB281001356F5 /* HNLaunchpadPage.h */,

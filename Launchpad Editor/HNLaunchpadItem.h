@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol HNLaunchpadItem <NSObject>
+#import "HNLaunchpadEntity.h"
 
-@property (retain) NSString *uuid;
-@property (retain) NSNumber *itemId;
+/**
+ * An Item is an Entity that the user directly interacts with.
+ */
+@protocol HNLaunchpadItem <HNLaunchpadEntity>
+
 @property (retain) NSNumber *parentId;
 @property (retain) NSString *title;
 

@@ -11,7 +11,7 @@
 @implementation HNLaunchpadApp
 
 @synthesize uuid;
-@synthesize itemId;
+@synthesize id;
 @synthesize parentId;
 @synthesize title;
 

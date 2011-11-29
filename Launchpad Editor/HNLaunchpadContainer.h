@@ -8,9 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#import "HNLaunchpadEntity.h"
+
 #import "MGOrderedDictionary.h"
 
-@protocol HNLaunchpadContainer <NSObject>
+/**
+ * A Container is an Entity that contains Items.
+ */
+@protocol HNLaunchpadContainer <HNLaunchpadEntity>
 
 @property (retain) MGOrderedDictionary *items;
 
