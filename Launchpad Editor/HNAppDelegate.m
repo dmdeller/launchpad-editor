@@ -8,6 +8,7 @@
 
 #import "HNAppDelegate.h"
 #import "HNLaunchpadDataSet.h"
+#import "HNLaunchpadPasteboardType.h"
 
 @implementation HNAppDelegate
 
@@ -17,7 +18,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    
+    [self.outlineView registerForDraggedTypes:[NSArray arrayWithObject:HNLaunchpadPasteboardType]];
 }
 
 @end

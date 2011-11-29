@@ -12,6 +12,7 @@
 #import "HNLaunchpadPage.h"
 #import "HNLaunchpadGroup.h"
 #import "HNLaunchpadApp.h"
+#import "HNLaunchpadPasteboardType.h"
 
 #import "FMDatabase.h"
 #import "FMResultSet.h"
@@ -76,6 +77,11 @@ static int const TYPE_APP = 4;
     [self collateApps:apps andGroups:groups intoPages:pages fromDb:db];
     
     self.itemTree = pages;
+    
+    self.itemList = [NSMutableDictionary dictionaryWithCapacity:2000];
+    [self.itemList addEntriesFromDictionary:pages];
+    [self.itemList addEntriesFromDictionary:groups];
+    [self.itemList addEntriesFromDictionary:apps];
     
     [db close];
 }
@@ -407,6 +413,124 @@ static int const TYPE_APP = 4;
     {
         [NSException raise:@"Cannot rename object" format:@"Only HNLaunchpadGroup objects can be renamed"];
         return;
+    }
+}
+
+#pragma mark -
+#pragma mark Drag & drop
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pboard
+{
+    if ([items count] > 1)
+    {
+        return NO;
+    }
+    
+    [pboard declareTypes:[NSArray arrayWithObject:HNLaunchpadPasteboardType] owner:nil];
+    
+    id <HNLaunchpadEntity> item = [items objectAtIndex:0];
+    NSString *id = [item.id stringValue];
+    
+    [pboard setString:id forType:HNLaunchpadPasteboardType];
+    
+    return YES;
+}
+
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)index
+{
+    NSNumber *sourceItemId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
+    id <HNLaunchpadEntity> sourceItem = [self.itemList objectForKey:sourceItemId];
+    
+    NSLog(@"want to drop sourceItemId: %@, sourceItem: %@, item: %@, index: %ld", sourceItemId, sourceItem, item, index);
+    
+    // pages can only be reordered at the top level
+    if ([sourceItem isKindOfClass:[HNLaunchpadPage class]])
+    {
+        // nil means top level
+        if (item == nil)
+        {
+            return NSDragOperationEvery;
+        }
+        else
+        {
+            return NSDragOperationNone;
+        }
+    }
+    // groups can only be reordered within pages (not within groups)
+    else if ([sourceItem isKindOfClass:[HNLaunchpadGroup class]])
+    {
+        if ([item isKindOfClass:[HNLaunchpadPage class]])
+        {
+            return NSDragOperationEvery;
+        }
+        else
+        {
+            return NSDragOperationNone;
+        }
+    }
+    // apps can be reordered within pages or groups, not within apps 
+    else if ([sourceItem isKindOfClass:[HNLaunchpadApp class]])
+    {
+        if ([item isKindOfClass:[HNLaunchpadPage class]])
+        {
+            return NSDragOperationEvery;
+        }
+        else if ([item isKindOfClass:[HNLaunchpadGroup class]])
+        {
+            return NSDragOperationEvery;
+        }
+        else
+        {
+            return NSDragOperationNone;
+        }
+    }
+    // what.
+    else
+    {
+        return NSDragOperationNone;
+    }
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)index
+{
+    NSNumber *sourceItemId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
+    id <HNLaunchpadEntity> sourceItem = [self.itemList objectForKey:sourceItemId];
+    
+    NSLog(@"dropped item: %@, index: %ld", item, index);
+    
+    if ([sourceItem isKindOfClass:[HNLaunchpadPage class]])
+    {
+        return NO;
+    }
+    else if ([sourceItem isKindOfClass:[HNLaunchpadGroup class]])
+    {
+        return NO;
+    }
+    else if ([sourceItem isKindOfClass:[HNLaunchpadApp class]])
+    {
+        if (![item isKindOfClass:[HNLaunchpadPage class]] && ![item isKindOfClass:[HNLaunchpadGroup class]])
+        {
+            return NO;
+        }
+        
+        id <HNLaunchpadItem> child = (id)sourceItem;
+        id <HNLaunchpadContainer> oldParent = [self.itemList objectForKey:child.parentId];
+        id <HNLaunchpadContainer> newParent = item;
+        
+        if (oldParent == newParent)
+        {
+            
+        }
+        else
+        {
+            
+        }
+        
+        return YES;
+    }
+    else
+    {
+        return NO;
     }
 }
 
