@@ -28,11 +28,9 @@ static int const TYPE_APP = 4;
 #pragma mark -
 #pragma mark Loading data
 
-- (id)init
+- (void)awakeFromNib
 {
     [self load];
-    
-    return [super init];
 }
 
 /**
