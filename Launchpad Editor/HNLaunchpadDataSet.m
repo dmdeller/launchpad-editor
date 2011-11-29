@@ -24,6 +24,7 @@ static int const TYPE_APP = 4;
 
 @synthesize itemTree;
 @synthesize itemList;
+@synthesize outlineView;
 
 #pragma mark -
 #pragma mark Loading data

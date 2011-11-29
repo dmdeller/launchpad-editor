@@ -16,6 +16,7 @@
 
 @property (retain) MGOrderedDictionary *itemTree;
 @property (strong) NSMutableDictionary *itemList;
+@property (strong) IBOutlet NSOutlineView *outlineView;
 
 - (void)load;
 - (NSString *)dbFilename;
