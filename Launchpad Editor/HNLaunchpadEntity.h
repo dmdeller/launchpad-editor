@@ -15,5 +15,6 @@
 
 @property (strong) NSNumber *id;
 @property (strong) NSString *uuid;
+@property (assign) int ordering;
 
 @end

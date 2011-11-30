@@ -120,6 +120,7 @@ static int const TYPE_APP = 4;
         
         page.uuid = [results stringForColumn:@"uuid"];
         page.id = [NSNumber numberWithInt:[results intForColumn:@"rowid"]];
+        page.ordering = [results intForColumn:@"ordering"];
         page.pageNumber = pageNumber;
         page.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
@@ -153,6 +154,7 @@ static int const TYPE_APP = 4;
         
         group.uuid = [results stringForColumn:@"uuid"];
         group.id = [NSNumber numberWithInt:[results intForColumn:@"item_id"]];
+        group.ordering = [results intForColumn:@"ordering"];
         group.parentId = [NSNumber numberWithInt:[results intForColumn:@"parent_id"]];
         group.title = [results stringForColumn:@"title"];
         group.items = [MGOrderedDictionary dictionaryWithCapacity:40];
@@ -186,6 +188,7 @@ static int const TYPE_APP = 4;
         
         app.uuid = [results stringForColumn:@"uuid"];
         app.id = [NSNumber numberWithInt:[results intForColumn:@"item_id"]];
+        app.ordering = [results intForColumn:@"ordering"];
         app.parentId = [NSNumber numberWithInt:[results intForColumn:@"parent_id"]];
         app.title = [results stringForColumn:@"title"];
         
@@ -266,7 +269,7 @@ static int const TYPE_APP = 4;
 #pragma mark -
 #pragma mark Saving data
 
-- (void)saveItem:(id)item
+- (void)saveItem:(id <HNLaunchpadEntity>)item inDb:(FMDatabase *)db
 {
     if ([item isKindOfClass:[HNLaunchpadApp class]])
     {
@@ -275,8 +278,6 @@ static int const TYPE_APP = 4;
     else if ([item isKindOfClass:[HNLaunchpadGroup class]])
     {
         HNLaunchpadGroup *group = (HNLaunchpadGroup *)item;
-        
-        FMDatabase *db = [self db];
         
         NSString *sql = @"UPDATE groups"
                             " SET title = ?"
@@ -288,12 +289,54 @@ static int const TYPE_APP = 4;
             [db close];
             return;
         }
-        
-        [db close];
     }
     else
     {
         [NSException raise:@"Invalid class" format:@"Can only save objects of class HNLaunchpadApp, HNLaunchpadGroup"];
+        return;
+    }
+}
+
+- (void)saveContainerOrdering:(id <HNLaunchpadContainer>)container inDb:(FMDatabase *)db
+{
+    [self setTriggerDisabled:YES inDb:db];
+    
+    int i = 0;
+    
+    for (id <HNLaunchpadItem> item in [container.items allValues])
+    {
+        item.ordering = i;
+        
+        NSString *sql = @"UPDATE items"
+                            " SET ordering = ?"
+                            " WHERE rowid = ?";
+        
+        if (![db executeUpdate:sql, [NSNumber numberWithInt:item.ordering], item.id])
+        {
+            [NSException raise:@"Database error" format:[db lastErrorMessage]];
+            [self setTriggerDisabled:NO inDb:db];
+            [db close];
+            return;
+        }
+        
+        i++;
+    }
+    
+    [self setTriggerDisabled:NO inDb:db];
+}
+
+/**
+ * The database has a trigger called update_items_order - it's not clear what it's supposed to do, but it interferes with our adjustment of the ordering, so we need a way to temporarily disable it.
+ */
+- (void)setTriggerDisabled:(BOOL)isDisabled inDb:(FMDatabase *)db
+{
+    NSString *sql = @"UPDATE dbinfo"
+                        " SET value = ?"
+                        " WHERE key = 'ignore_items_update_triggers'";
+    
+    if (![db executeUpdate:sql, [NSNumber numberWithBool:isDisabled]])
+    {
+        [NSException raise:@"Database error" format:[db lastErrorMessage]];
         return;
     }
 }
@@ -407,7 +450,9 @@ static int const TYPE_APP = 4;
         
         group.title = newTitle;
         
-        [self saveItem:group];
+        FMDatabase *db = [self db];
+        [self saveItem:group inDb:db];
+        [db close];
     }
     else
     {
@@ -440,8 +485,6 @@ static int const TYPE_APP = 4;
 {
     NSNumber *sourceItemId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
     id <HNLaunchpadEntity> sourceItem = [self.itemList objectForKey:sourceItemId];
-    
-    NSLog(@"want to drop sourceItemId: %@, sourceItem: %@, item: %@, index: %ld", sourceItemId, sourceItem, item, index);
     
     // pages can only be reordered at the top level
     if ([sourceItem isKindOfClass:[HNLaunchpadPage class]])
@@ -496,8 +539,6 @@ static int const TYPE_APP = 4;
     NSNumber *sourceItemId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
     id <HNLaunchpadEntity> sourceItem = [self.itemList objectForKey:sourceItemId];
     
-    NSLog(@"dropped item: %@, index: %ld", item, index);
-    
     if ([sourceItem isKindOfClass:[HNLaunchpadPage class]])
     {
         return NO;
@@ -517,14 +558,43 @@ static int const TYPE_APP = 4;
         id <HNLaunchpadContainer> oldParent = [self.itemList objectForKey:child.parentId];
         id <HNLaunchpadContainer> newParent = item;
         
+        FMDatabase *db = [self db];
+        
+        // remove child from old placement
         if (oldParent == newParent)
         {
-            
+            [newParent.items removeObjectForKey:child.id];
         }
         else
         {
+            [oldParent.items removeObjectForKey:child.id];
             
+            child.parentId = newParent.id;
+            //[self saveApp:child];
         }
+        
+        // add child in new placement
+        // if item dropped on container with no specific position, then place at end
+        if (index == -1)
+        {
+            [newParent.items setObject:child forKey:child.id];
+        }
+        // otherwise, insert in proper place
+        else
+        {
+            [newParent.items insertObject:child forKey:child.id atIndex:index];
+        }
+        
+        [self saveContainerOrdering:newParent inDb:db];
+        
+        // reload view data 
+        if (oldParent != newParent)
+        {
+            [outlineView reloadItem:oldParent reloadChildren:YES];
+        }
+        [outlineView reloadItem:newParent reloadChildren:YES];
+        
+        [db close];
         
         return YES;
     }

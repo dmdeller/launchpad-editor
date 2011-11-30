@@ -12,6 +12,7 @@
 
 @synthesize uuid;
 @synthesize id;
+@synthesize ordering;
 @synthesize parentId;
 @synthesize title;
 @synthesize items;

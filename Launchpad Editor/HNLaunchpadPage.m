@@ -12,6 +12,7 @@
 
 @synthesize uuid;
 @synthesize id;
+@synthesize ordering;
 @synthesize pageNumber;
 @synthesize items;
 
