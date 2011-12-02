@@ -23,6 +23,7 @@
 
 @property (retain) MGOrderedDictionary *itemTree;
 @property (strong) NSMutableDictionary *itemList;
+@property (assign) IBOutlet NSWindow *window;
 
 - (void)load;
 - (NSString *)dbFilename;

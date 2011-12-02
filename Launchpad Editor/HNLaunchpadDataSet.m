@@ -30,6 +30,7 @@ static int const HNLaunchpadGroupMaxItems = 32;
 
 @synthesize itemTree;
 @synthesize itemList;
+@synthesize window;
 
 #pragma mark -
 #pragma mark Loading data
@@ -609,6 +610,23 @@ static int const HNLaunchpadGroupMaxItems = 32;
           [self entity:child canBeDroppedIntoContainer:item]
     ))
     {
+        return NO;
+    }
+    
+    // Make sure the new parent container is not going to exceed its maximum number of items
+    if (([newParent isKindOfClass:[HNLaunchpadGroup class]] && [newParent.items count] >= HNLaunchpadGroupMaxItems) ||
+        ([newParent isKindOfClass:[HNLaunchpadPage class]] && [newParent.items count] >= HNLaunchpadPageMaxItems))
+    {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:@"Too many items"];
+        [alert setInformativeText:[NSString stringWithFormat:@"The %@ you tried to drag to already contains the maximum number of items (%i).",
+                                   ([newParent isKindOfClass:[HNLaunchpadGroup class]] ? @"group" : @"page"),
+                                   ([newParent isKindOfClass:[HNLaunchpadGroup class]] ? HNLaunchpadGroupMaxItems : HNLaunchpadPageMaxItems)]];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        
+        [alert beginSheetModalForWindow:self.window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+        
         return NO;
     }
     
