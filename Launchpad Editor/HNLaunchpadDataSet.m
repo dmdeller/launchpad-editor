@@ -269,34 +269,37 @@ static int const TYPE_APP = 4;
 #pragma mark -
 #pragma mark Saving data
 
-- (void)saveItem:(id <HNLaunchpadEntity>)item inDb:(FMDatabase *)db
+- (void)saveGroup:(HNLaunchpadGroup *)group inDb:(FMDatabase *)db
 {
-    if ([item isKindOfClass:[HNLaunchpadApp class]])
+    NSString *sql = @"UPDATE groups"
+                        " SET title = ?"
+                        " WHERE item_id = ?";
+    
+    if (![db executeUpdate:sql, group.title, group.id])
     {
-        
-    }
-    else if ([item isKindOfClass:[HNLaunchpadGroup class]])
-    {
-        HNLaunchpadGroup *group = (HNLaunchpadGroup *)item;
-        
-        NSString *sql = @"UPDATE groups"
-                            " SET title = ?"
-                            " WHERE item_id = ?";
-        
-        if (![db executeUpdate:sql, group.title, group.id])
-        {
-            [NSException raise:@"Database error" format:[db lastErrorMessage]];
-            [db close];
-            return;
-        }
-    }
-    else
-    {
-        [NSException raise:@"Invalid class" format:@"Can only save objects of class HNLaunchpadApp, HNLaunchpadGroup"];
+        [NSException raise:@"Database error" format:[db lastErrorMessage]];
+        [db close];
         return;
     }
 }
 
+- (void)saveItem:(id <HNLaunchpadItem>)item inDb:(FMDatabase *)db
+{
+    NSString *sql = @"UPDATE items"
+                        " SET parent_id = ?"
+                        " WHERE rowid = ?";
+    
+    if (![db executeUpdate:sql, item.parentId, item.id])
+    {
+        [NSException raise:@"Database error" format:[db lastErrorMessage]];
+        [db close];
+        return;
+    }
+}
+
+/**
+ * Loops through all of the items in a container, and makes the database ordering match the current MGOrderedDictionary ordering.
+ */
 - (void)saveContainerOrdering:(id <HNLaunchpadContainer>)container inDb:(FMDatabase *)db
 {
     [self setTriggerDisabled:YES inDb:db];
@@ -451,7 +454,7 @@ static int const TYPE_APP = 4;
         group.title = newTitle;
         
         FMDatabase *db = [self db];
-        [self saveItem:group inDb:db];
+        [self saveGroup:group inDb:db];
         [db close];
     }
     else
@@ -587,7 +590,7 @@ static int const TYPE_APP = 4;
             [oldParent.items removeObjectForKey:child.id];
             
             child.parentId = newParent.id;
-            //[self saveApp:child];
+            [self saveItem:child inDb:db];
         }
         
         // add child in new placement
