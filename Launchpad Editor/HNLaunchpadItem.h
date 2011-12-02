@@ -15,7 +15,6 @@
  */
 @protocol HNLaunchpadItem <HNLaunchpadEntity>
 
-@property (retain) NSNumber *parentId;
 @property (retain) NSString *title;
 
 @end

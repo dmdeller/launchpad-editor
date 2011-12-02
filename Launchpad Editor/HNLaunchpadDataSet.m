@@ -283,13 +283,13 @@ static int const TYPE_APP = 4;
     }
 }
 
-- (void)saveItem:(id <HNLaunchpadItem>)item inDb:(FMDatabase *)db
+- (void)saveEntity:(id <HNLaunchpadEntity>)entity inDb:(FMDatabase *)db
 {
     NSString *sql = @"UPDATE items"
                         " SET parent_id = ?"
                         " WHERE rowid = ?";
     
-    if (![db executeUpdate:sql, item.parentId, item.id])
+    if (![db executeUpdate:sql, entity.parentId, entity.id])
     {
         [NSException raise:@"Database error" format:[db lastErrorMessage]];
         [db close];
@@ -489,6 +489,59 @@ static int const TYPE_APP = 4;
     return YES;
 }
 
+/**
+ * Some types of items can be drag-and-dropped into some types of containers. Given an item and a container, this method tells you if it's possible.
+ */
+- (BOOL)entity:(id <HNLaunchpadEntity>)entity canBeDroppedIntoContainer:(id <HNLaunchpadContainer>)container
+{
+    // pages can only be reordered at the top level
+    if ([entity isKindOfClass:[HNLaunchpadPage class]])
+    {
+        // nil means top level
+        if (container == nil)
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    // groups can only be reordered within pages (not within groups)
+    else if ([entity isKindOfClass:[HNLaunchpadGroup class]])
+    {
+        if ([container isKindOfClass:[HNLaunchpadPage class]])
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    // apps can be reordered within pages or groups, not within apps 
+    else if ([entity isKindOfClass:[HNLaunchpadApp class]])
+    {
+        if ([container isKindOfClass:[HNLaunchpadPage class]])
+        {
+            return YES;
+        }
+        else if ([container isKindOfClass:[HNLaunchpadGroup class]])
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    // what.
+    else
+    {
+        return NO;
+    }
+}
+
 - (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)index
 {
     NSNumber *sourceItemId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
@@ -500,48 +553,10 @@ static int const TYPE_APP = 4;
     NSLog(@"validate drop item title: %@, id: %@, ordering: %d -- onto item id: %@, ordering: %d", debugSourceItem.title, debugSourceItem.id, debugSourceItem.ordering, debugItem.id, debugItem.ordering);
 #endif
     
-    // pages can only be reordered at the top level
-    if ([sourceItem isKindOfClass:[HNLaunchpadPage class]])
+    if ([sourceItem conformsToProtocol:@protocol(HNLaunchpadItem)] && [item conformsToProtocol:@protocol(HNLaunchpadContainer)] && [self entity:sourceItem canBeDroppedIntoContainer:item])
     {
-        // nil means top level
-        if (item == nil)
-        {
-            return NSDragOperationEvery;
-        }
-        else
-        {
-            return NSDragOperationNone;
-        }
+        return NSDragOperationEvery;
     }
-    // groups can only be reordered within pages (not within groups)
-    else if ([sourceItem isKindOfClass:[HNLaunchpadGroup class]])
-    {
-        if ([item isKindOfClass:[HNLaunchpadPage class]])
-        {
-            return NSDragOperationEvery;
-        }
-        else
-        {
-            return NSDragOperationNone;
-        }
-    }
-    // apps can be reordered within pages or groups, not within apps 
-    else if ([sourceItem isKindOfClass:[HNLaunchpadApp class]])
-    {
-        if ([item isKindOfClass:[HNLaunchpadPage class]])
-        {
-            return NSDragOperationEvery;
-        }
-        else if ([item isKindOfClass:[HNLaunchpadGroup class]])
-        {
-            return NSDragOperationEvery;
-        }
-        else
-        {
-            return NSDragOperationNone;
-        }
-    }
-    // what.
     else
     {
         return NSDragOperationNone;
@@ -550,78 +565,62 @@ static int const TYPE_APP = 4;
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)index
 {
-    NSNumber *sourceItemId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
-    id <HNLaunchpadEntity> sourceItem = [self.itemList objectForKey:sourceItemId];
+    NSNumber *childId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
+    
+    id <HNLaunchpadEntity> child = [self.itemList objectForKey:childId];
+    id <HNLaunchpadContainer> oldParent = [self.itemList objectForKey:child.parentId];
+    id <HNLaunchpadContainer> newParent = item;
     
 #ifdef DEBUG
     id <HNLaunchpadEntity> debugItem = (id)item;
-    id <HNLaunchpadItem> debugSourceItem = (id)sourceItem;
+    id <HNLaunchpadItem> debugSourceItem = (id)child;
     NSLog(@"accept drop item title: %@, id: %@, ordering: %d -- onto item id: %@, ordering: %d", debugSourceItem.title, debugSourceItem.id, debugSourceItem.ordering, debugItem.id, debugItem.ordering);
 #endif
     
-    if ([sourceItem isKindOfClass:[HNLaunchpadPage class]])
+    if (!([child conformsToProtocol:@protocol(HNLaunchpadItem)] && [newParent conformsToProtocol:@protocol(HNLaunchpadContainer)] && [self entity:child canBeDroppedIntoContainer:newParent]))
     {
         return NO;
     }
-    else if ([sourceItem isKindOfClass:[HNLaunchpadGroup class]])
+    
+    FMDatabase *db = [self db];
+    
+    // remove child from old placement
+    if (oldParent == newParent)
     {
-        return NO;
-    }
-    else if ([sourceItem isKindOfClass:[HNLaunchpadApp class]])
-    {
-        if (![item isKindOfClass:[HNLaunchpadPage class]] && ![item isKindOfClass:[HNLaunchpadGroup class]])
-        {
-            return NO;
-        }
-        
-        id <HNLaunchpadItem> child = (id)sourceItem;
-        id <HNLaunchpadContainer> oldParent = [self.itemList objectForKey:child.parentId];
-        id <HNLaunchpadContainer> newParent = item;
-        
-        FMDatabase *db = [self db];
-        
-        // remove child from old placement
-        if (oldParent == newParent)
-        {
-            [newParent.items removeObjectForKey:child.id];
-        }
-        else
-        {
-            [oldParent.items removeObjectForKey:child.id];
-            
-            child.parentId = newParent.id;
-            [self saveItem:child inDb:db];
-        }
-        
-        // add child in new placement
-        // if item dropped on container with no specific position, then place at end
-        if (index == -1)
-        {
-            [newParent.items setObject:child forKey:child.id];
-        }
-        // otherwise, insert in proper place
-        else
-        {
-            [newParent.items insertObject:child forKey:child.id atIndex:index];
-        }
-        
-        [self saveContainerOrdering:newParent inDb:db];
-        
-        // reload view data 
-        if (oldParent != newParent)
-        {
-            [outlineView reloadItem:oldParent reloadChildren:YES];
-        }
-        [outlineView reloadItem:newParent reloadChildren:YES];
-        
-        [db close];
-        
-        return YES;
+        [newParent.items removeObjectForKey:child.id];
     }
     else
     {
-        return NO;
+        [oldParent.items removeObjectForKey:child.id];
+        
+        child.parentId = newParent.id;
+        [self saveEntity:child inDb:db];
     }
+    
+    // add child in new placement
+    // if item dropped on container with no specific position, then place at end
+    if (index == -1)
+    {
+        [newParent.items setObject:child forKey:child.id];
+    }
+    // otherwise, insert in proper place
+    else
+    {
+        [newParent.items insertObject:child forKey:child.id atIndex:index];
+    }
+    
+    [self saveContainerOrdering:newParent inDb:db];
+    
+    // reload view data 
+    if (oldParent != newParent)
+    {
+        [outlineView reloadItem:oldParent reloadChildren:YES];
+    }
+    [outlineView reloadItem:newParent reloadChildren:YES];
+    
+    [db close];
+    
+    return YES;
 }
 
 #pragma mark -

@@ -34,7 +34,7 @@
 - (void)collateApps:(NSDictionary *)apps andGroups:(NSDictionary *)groups intoPages:(MGOrderedDictionary *)pages fromDb:(FMDatabase *)db;
 
 - (void)saveGroup:(HNLaunchpadGroup *)group inDb:(FMDatabase *)db;
-- (void)saveApp:(HNLaunchpadApp *)app inDb:(FMDatabase *)db;
+- (void)saveEntity:(id <HNLaunchpadEntity>)entity inDb:(FMDatabase *)db;
 - (void)saveContainerOrdering:(id <HNLaunchpadContainer>)container inDb:(FMDatabase *)db;
 - (void)setTriggerDisabled:(BOOL)isDisabled inDb:(FMDatabase *)db;
 
