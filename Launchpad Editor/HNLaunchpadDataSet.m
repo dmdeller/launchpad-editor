@@ -19,9 +19,12 @@
 
 @implementation HNLaunchpadDataSet
 
-static int const TYPE_PAGE = 3;
-static int const TYPE_GROUP = 2;
-static int const TYPE_APP = 4;
+static int const HNLaunchpadTypePage = 3;
+static int const HNLaunchpadTypeGroup = 2;
+static int const HNLaunchpadTypeApp = 4;
+
+static int const HNLaunchpadPageMaxItems = 40;
+static int const HNLaunchpadGroupMaxItems = 32;
 
 @synthesize itemTree;
 @synthesize itemList;
@@ -96,7 +99,7 @@ static int const TYPE_APP = 4;
                         " WHERE i.type = ?"
                         " ORDER BY i.ordering";
     
-    FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:TYPE_PAGE]];
+    FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:HNLaunchpadTypePage]];
     
     if (results == nil)
     {
@@ -140,7 +143,7 @@ static int const TYPE_APP = 4;
                     " WHERE i.type = ?"
                     " ORDER BY i.ordering";
     
-    FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:TYPE_GROUP]];
+    FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:HNLaunchpadTypeGroup]];
     
     if (results == nil)
     {
@@ -213,11 +216,11 @@ static int const TYPE_APP = 4;
                         " WHERE i.type = ? OR i.type = ?"
                         " ORDER BY parent.ordering, i.ordering";
     
-    FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:TYPE_APP], [NSNumber numberWithInt:TYPE_GROUP]];
+    FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:HNLaunchpadTypeApp], [NSNumber numberWithInt:HNLaunchpadTypeGroup]];
     
     while ([results next])
     {
-        if ([results intForColumn:@"type"] == TYPE_APP)
+        if ([results intForColumn:@"type"] == HNLaunchpadTypeApp)
         {
             HNLaunchpadApp *app = [apps objectForKey:[NSNumber numberWithInt:[results intForColumn:@"item_id"]]];
             
@@ -243,7 +246,7 @@ static int const TYPE_APP = 4;
                 }
             }
         }
-        else if ([results intForColumn:@"type"] == TYPE_GROUP)
+        else if ([results intForColumn:@"type"] == HNLaunchpadTypeGroup)
         {
             HNLaunchpadGroup *group = [groups objectForKey:[NSNumber numberWithInt:[results intForColumn:@"item_id"]]];
             
