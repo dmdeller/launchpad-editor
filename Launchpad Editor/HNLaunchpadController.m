@@ -291,8 +291,9 @@
     }
     
     // Make sure the new parent container is not going to exceed its maximum number of items
-    if (([newParent isKindOfClass:[HNLaunchpadGroup class]] && [newParent.items count] >= HNLaunchpadGroupMaxItems) ||
-        ([newParent isKindOfClass:[HNLaunchpadPage class]] && [newParent.items count] >= HNLaunchpadPageMaxItems))
+    if (oldParent != newParent &&
+        (([newParent isKindOfClass:[HNLaunchpadGroup class]] && [newParent.items count] >= HNLaunchpadGroupMaxItems) ||
+        ([newParent isKindOfClass:[HNLaunchpadPage class]] && [newParent.items count] >= HNLaunchpadPageMaxItems)))
     {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"OK"];
