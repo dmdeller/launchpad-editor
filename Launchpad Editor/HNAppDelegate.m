@@ -8,17 +8,51 @@
 
 #import "HNAppDelegate.h"
 #import "HNLaunchpadDataSet.h"
-#import "HNLaunchpadPasteboardType.h"
+#import "Constants.h"
+
+#import "FMDatabase.h"
 
 @implementation HNAppDelegate
 
 @synthesize window = _window;
 @synthesize outlineView;
-@synthesize dataSet;
+@synthesize controller;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self.outlineView registerForDraggedTypes:[NSArray arrayWithObject:HNLaunchpadPasteboardType]];
+    
+}
+
+/**
+ * Determines the filename of the Launchpad database.
+ */
+- (NSString *)dbFilename
+{
+    return [NSString stringWithFormat:@"%@/Desktop/launchpad.db", NSHomeDirectory()];
+}
+
+/**
+ * Opens a database connection and returns it. Don't forget to close it when you're done.
+ */
+- (FMDatabase *)openDb
+{
+    NSString *filename = [self dbFilename];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filename])
+    {
+        [NSException raise:@"Database read error" format:@"Database at path: %@ does not exist", filename];
+        return nil;
+    }
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:filename];
+    
+    if (![db open])
+    {
+        [NSException raise:@"Database open error" format:@"Could not open database: %@", filename];
+        return nil;
+    }
+    
+    return db;
 }
 
 @end

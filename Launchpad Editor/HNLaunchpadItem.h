@@ -15,6 +15,6 @@
  */
 @protocol HNLaunchpadItem <HNLaunchpadEntity>
 
-@property (retain) NSString *title;
+@property (strong) NSString *title;
 
 @end

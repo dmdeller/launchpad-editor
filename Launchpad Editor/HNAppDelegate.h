@@ -8,12 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class HNLaunchpadDataSet;
+@class HNLaunchpadController;
+
+@class FMDatabase;
 
 @interface HNAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
-@property (retain) IBOutlet NSOutlineView *outlineView;
-@property (retain) IBOutlet HNLaunchpadDataSet *dataSet;
+@property (strong) IBOutlet NSOutlineView *outlineView;
+@property (strong) IBOutlet HNLaunchpadController *controller;
+
+- (FMDatabase *)openDb;
 
 @end

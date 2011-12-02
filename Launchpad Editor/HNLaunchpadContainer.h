@@ -17,6 +17,6 @@
  */
 @protocol HNLaunchpadContainer <HNLaunchpadEntity>
 
-@property (retain) MGOrderedDictionary *items;
+@property (strong) MGOrderedDictionary *items;
 
 @end

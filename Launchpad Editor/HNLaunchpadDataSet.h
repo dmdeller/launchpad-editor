@@ -19,15 +19,12 @@
 @class HNLaunchpadGroup;
 @class HNLaunchpadApp;
 
-@interface HNLaunchpadDataSet : NSObject <NSOutlineViewDataSource, NSOutlineViewDelegate>
+@interface HNLaunchpadDataSet : NSObject
 
-@property (retain) MGOrderedDictionary *itemTree;
+@property (strong) MGOrderedDictionary *itemTree;
 @property (strong) NSMutableDictionary *itemList;
-@property (assign) IBOutlet NSWindow *window;
 
-- (void)load;
-- (NSString *)dbFilename;
-- (FMDatabase *)db;
+- (void)loadFromDb:(FMDatabase *)db;
 
 - (MGOrderedDictionary *)loadPagesFromDb:(FMDatabase *)db;
 - (NSDictionary *)loadGroupsFromDb:(FMDatabase *)db;
