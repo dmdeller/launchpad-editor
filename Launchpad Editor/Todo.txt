@@ -1,0 +1,9 @@
+TODO
+- Create/delete groups
+- Use real launchpad database
+- Automatic backup
+- Manual backup
+- Rearrange pages
+- Default window size
+- Icon
+- Need to kill Dock process?
