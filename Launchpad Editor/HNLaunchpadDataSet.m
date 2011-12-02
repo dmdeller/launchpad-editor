@@ -23,6 +23,8 @@ static int const HNLaunchpadTypePage = 3;
 static int const HNLaunchpadTypeGroup = 2;
 static int const HNLaunchpadTypeApp = 4;
 
+static int const HNLaunchpadHoldingPageId = 2;
+
 static int const HNLaunchpadPageMaxItems = 40;
 static int const HNLaunchpadGroupMaxItems = 32;
 
@@ -238,6 +240,11 @@ static int const HNLaunchpadGroupMaxItems = 32;
                 {
                     [containerGroup.items setObject:app forKey:app.id];
                 }
+                else if ([results intForColumn:@"parent_id"] == HNLaunchpadHoldingPageId)
+                {
+                    NSLog(@"App only exists in temporary holding page, unable to display app: %@, title: %@", app, app.title);
+                    continue;
+                }
                 else
                 {
                     // exception
@@ -264,7 +271,9 @@ static int const HNLaunchpadGroupMaxItems = 32;
         }
         else
         {
-            
+            //exception
+            [NSException raise:@"Unknown entity type" format:@"Unknown entity type: %i", [results intForColumn:@"type"]];
+            continue;
         }
     }
 }
