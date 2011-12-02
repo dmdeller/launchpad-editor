@@ -480,8 +480,8 @@ static int const TYPE_APP = 4;
     NSString *itemId = [item.id stringValue];
     
 #ifdef DEBUG
-    id <HNLaunchpadItem> debugItem = (id)item;
-    NSLog(@"drag item title: %@, id: %@, ordering: %d", debugItem.title, debugItem.id, debugItem.ordering);
+    //id <HNLaunchpadItem> debugItem = (id)item;
+    //NSLog(@"drag item title: %@, id: %@, ordering: %d", debugItem.title, debugItem.id, debugItem.ordering);
 #endif
     
     [pboard setString:itemId forType:HNLaunchpadPasteboardType];
@@ -542,18 +542,27 @@ static int const TYPE_APP = 4;
     }
 }
 
+/**
+ * TODO: Allow reordering of Pages
+ */
 - (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)index
 {
     NSNumber *sourceItemId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
     id <HNLaunchpadEntity> sourceItem = [self.itemList objectForKey:sourceItemId];
     
 #ifdef DEBUG
-    id <HNLaunchpadEntity> debugItem = (id)item;
-    id <HNLaunchpadItem> debugSourceItem = (id)sourceItem;
-    NSLog(@"validate drop item title: %@, id: %@, ordering: %d -- onto item id: %@, ordering: %d", debugSourceItem.title, debugSourceItem.id, debugSourceItem.ordering, debugItem.id, debugItem.ordering);
+    //id <HNLaunchpadEntity> debugItem = (id)item;
+    //id <HNLaunchpadItem> debugSourceItem = (id)sourceItem;
+    //NSLog(@"validate drop item title: %@, id: %@, ordering: %d -- onto item id: %@, ordering: %d", debugSourceItem.title, debugSourceItem.id, debugSourceItem.ordering, debugItem.id, debugItem.ordering);
 #endif
     
-    if ([sourceItem conformsToProtocol:@protocol(HNLaunchpadItem)] && [item conformsToProtocol:@protocol(HNLaunchpadContainer)] && [self entity:sourceItem canBeDroppedIntoContainer:item])
+    if (
+        // Item being dropped onto must be a container
+        [item conformsToProtocol:@protocol(HNLaunchpadContainer)] &&
+        
+        // Check to see if this is a valid drop
+        [self entity:sourceItem canBeDroppedIntoContainer:item]
+    )
     {
         return NSDragOperationEvery;
     }
@@ -563,6 +572,9 @@ static int const TYPE_APP = 4;
     }
 }
 
+/**
+ * TODO: Allow reordering of Pages
+ */
 - (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)index
 {
     NSNumber *childId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
@@ -572,12 +584,18 @@ static int const TYPE_APP = 4;
     id <HNLaunchpadContainer> newParent = item;
     
 #ifdef DEBUG
-    id <HNLaunchpadEntity> debugItem = (id)item;
-    id <HNLaunchpadItem> debugSourceItem = (id)child;
-    NSLog(@"accept drop item title: %@, id: %@, ordering: %d -- onto item id: %@, ordering: %d", debugSourceItem.title, debugSourceItem.id, debugSourceItem.ordering, debugItem.id, debugItem.ordering);
+    //id <HNLaunchpadEntity> debugItem = (id)item;
+    //id <HNLaunchpadItem> debugSourceItem = (id)child;
+    //NSLog(@"accept drop item title: %@, id: %@, ordering: %d -- onto item id: %@, ordering: %d", debugSourceItem.title, debugSourceItem.id, debugSourceItem.ordering, debugItem.id, debugItem.ordering);
 #endif
     
-    if (!([child conformsToProtocol:@protocol(HNLaunchpadItem)] && [newParent conformsToProtocol:@protocol(HNLaunchpadContainer)] && [self entity:child canBeDroppedIntoContainer:newParent]))
+    if (!(
+          // Item being dropped onto must be a container
+          [newParent conformsToProtocol:@protocol(HNLaunchpadContainer)] &&
+          
+          // Check to see if this is a valid drop
+          [self entity:child canBeDroppedIntoContainer:item]
+    ))
     {
         return NO;
     }
