@@ -474,9 +474,14 @@ static int const TYPE_APP = 4;
     [pboard declareTypes:[NSArray arrayWithObject:HNLaunchpadPasteboardType] owner:nil];
     
     id <HNLaunchpadEntity> item = [items objectAtIndex:0];
-    NSString *id = [item.id stringValue];
+    NSString *itemId = [item.id stringValue];
     
-    [pboard setString:id forType:HNLaunchpadPasteboardType];
+#ifdef DEBUG
+    id <HNLaunchpadItem> debugItem = (id)item;
+    NSLog(@"drag item title: %@, id: %@, ordering: %d", debugItem.title, debugItem.id, debugItem.ordering);
+#endif
+    
+    [pboard setString:itemId forType:HNLaunchpadPasteboardType];
     
     return YES;
 }
@@ -485,6 +490,12 @@ static int const TYPE_APP = 4;
 {
     NSNumber *sourceItemId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
     id <HNLaunchpadEntity> sourceItem = [self.itemList objectForKey:sourceItemId];
+    
+#ifdef DEBUG
+    id <HNLaunchpadEntity> debugItem = (id)item;
+    id <HNLaunchpadItem> debugSourceItem = (id)sourceItem;
+    NSLog(@"validate drop item title: %@, id: %@, ordering: %d -- onto item id: %@, ordering: %d", debugSourceItem.title, debugSourceItem.id, debugSourceItem.ordering, debugItem.id, debugItem.ordering);
+#endif
     
     // pages can only be reordered at the top level
     if ([sourceItem isKindOfClass:[HNLaunchpadPage class]])
@@ -538,6 +549,12 @@ static int const TYPE_APP = 4;
 {
     NSNumber *sourceItemId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
     id <HNLaunchpadEntity> sourceItem = [self.itemList objectForKey:sourceItemId];
+    
+#ifdef DEBUG
+    id <HNLaunchpadEntity> debugItem = (id)item;
+    id <HNLaunchpadItem> debugSourceItem = (id)sourceItem;
+    NSLog(@"accept drop item title: %@, id: %@, ordering: %d -- onto item id: %@, ordering: %d", debugSourceItem.title, debugSourceItem.id, debugSourceItem.ordering, debugItem.id, debugItem.ordering);
+#endif
     
     if ([sourceItem isKindOfClass:[HNLaunchpadPage class]])
     {
