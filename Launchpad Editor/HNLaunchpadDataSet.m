@@ -241,7 +241,7 @@ static int const HNLaunchpadGroupMaxItems = 32;
                 else
                 {
                     // exception
-                    [NSException raise:@"Container not found" format:@"Could not find container object for app: %@", app];
+                    [NSException raise:@"Container not found" format:@"Could not find container object for app: %@, title: %@", app, app.title];
                     continue;
                 }
             }
@@ -258,7 +258,7 @@ static int const HNLaunchpadGroupMaxItems = 32;
             else
             {
                 // exception
-                [NSException raise:@"Container not found" format:@"Could not find container object for group: %@", group];
+                [NSException raise:@"Container not found" format:@"Could not find container object for group: %@, title: %@", group, group.title];
                 continue;
             }
         }
