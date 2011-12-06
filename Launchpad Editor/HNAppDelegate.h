@@ -17,6 +17,7 @@
 @property (assign) IBOutlet NSWindow *window;
 @property (strong) IBOutlet NSOutlineView *outlineView;
 @property (strong) IBOutlet HNLaunchpadController *controller;
+@property (strong, nonatomic, readonly) NSString *dbFilename;
 
 - (FMDatabase *)openDb;
 
