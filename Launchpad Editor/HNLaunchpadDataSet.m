@@ -13,6 +13,7 @@
 #import "HNLaunchpadGroup.h"
 #import "HNLaunchpadApp.h"
 #import "Constants.h"
+#import "HNException.h"
 
 #import "FMDatabase.h"
 #import "FMResultSet.h"
@@ -55,7 +56,7 @@
     
     if (results == nil)
     {
-        [NSException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
         return nil;
     }
     
@@ -99,7 +100,7 @@
     
     if (results == nil)
     {
-        [NSException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
         return nil;
     }
     
@@ -133,7 +134,7 @@
     
     if (results == nil)
     {
-        [NSException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
         return nil;
     }
     
@@ -198,7 +199,7 @@
                 else
                 {
                     // exception
-                    [NSException raise:@"Container not found" format:@"Could not find container object for app: %@, title: %@", app, app.title];
+                    [HNException raise:@"Container not found" format:@"Could not find container object for app: %@, title: %@", app, app.title];
                     continue;
                 }
             }
@@ -215,14 +216,14 @@
             else
             {
                 // exception
-                [NSException raise:@"Container not found" format:@"Could not find container object for group: %@, title: %@", group, group.title];
+                [HNException raise:@"Container not found" format:@"Could not find container object for group: %@, title: %@", group, group.title];
                 continue;
             }
         }
         else
         {
             //exception
-            [NSException raise:@"Unknown entity type" format:@"Unknown entity type: %i", [results intForColumn:@"type"]];
+            [HNException raise:@"Unknown entity type" format:@"Unknown entity type: %i", [results intForColumn:@"type"]];
             continue;
         }
     }
@@ -239,7 +240,7 @@
     
     if (![db executeUpdate:sql, group.title, group.id])
     {
-        [NSException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
         [db close];
         return;
     }
@@ -253,7 +254,7 @@
     
     if (![db executeUpdate:sql, entity.parentId, entity.id])
     {
-        [NSException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
         [db close];
         return;
     }
@@ -278,7 +279,7 @@
         
         if (![db executeUpdate:sql, [NSNumber numberWithInt:item.ordering], item.id])
         {
-            [NSException raise:@"Database error" format:[db lastErrorMessage]];
+            [HNException raise:@"Database error" format:[db lastErrorMessage]];
             [self setTriggerDisabled:NO inDb:db];
             [db close];
             return;
@@ -301,7 +302,7 @@
     
     if (![db executeUpdate:sql, [NSNumber numberWithBool:isDisabled]])
     {
-        [NSException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
         return;
     }
 }

@@ -9,6 +9,7 @@
 #import "HNLaunchpadController.h"
 
 #import "Constants.h"
+#import "HNException.h"
 #import "HNAppDelegate.h"
 #import "HNLaunchpadDataSet.h"
 #import "HNLaunchpadPage.h"
@@ -28,10 +29,23 @@
 {
     [self.appDelegate.outlineView registerForDraggedTypes:[NSArray arrayWithObject:HNLaunchpadPasteboardType]];
     
-    FMDatabase *db = [self.appDelegate openDb];
-    self.dataSet = [[HNLaunchpadDataSet alloc] init];
-    [self.dataSet loadFromDb:db];
-    [db close];
+    @try
+    {
+        FMDatabase *db = [self.appDelegate openDb];
+        self.dataSet = [[HNLaunchpadDataSet alloc] init];
+        [self.dataSet loadFromDb:db];
+        [db close];
+    }
+    @catch (HNException *e)
+    {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:@"Error loading Launchpad database"];
+        [alert setInformativeText:[e reason]];
+        [alert setAlertStyle:NSCriticalAlertStyle];
+        
+        [alert beginSheetModalForWindow:self.appDelegate.window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+    }
 }
 
 #pragma mark -
@@ -61,7 +75,7 @@
     }
     else
     {
-        [NSException raise:@"Unknown NSOutlineViewDatasource item" format:@"Unknown kind of item"];
+        [HNException raise:@"Unknown NSOutlineViewDatasource item" format:@"Unknown kind of item"];
         return 0;
     }
 }
@@ -101,7 +115,7 @@
     }
     else
     {
-        [NSException raise:@"Unknown NSOutlineViewDataSource child" format:@"Item has no children"];
+        [HNException raise:@"Unknown NSOutlineViewDataSource child" format:@"Item has no children"];
         return nil;
     }
 }
@@ -129,7 +143,7 @@
     }
     else
     {
-        [NSException raise:@"Unknown NSOutlineViewDataSource item" format:@"Unknown kind of item"];
+        [HNException raise:@"Unknown NSOutlineViewDataSource item" format:@"Unknown kind of item"];
         return @"Unknown";
     }
 }
@@ -149,7 +163,7 @@
     }
     else
     {
-        [NSException raise:@"Cannot rename object" format:@"Only HNLaunchpadGroup objects can be renamed"];
+        [HNException raise:@"Cannot rename object" format:@"Only HNLaunchpadGroup objects can be renamed"];
         return;
     }
 }

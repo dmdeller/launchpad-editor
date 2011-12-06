@@ -9,6 +9,7 @@
 #import "HNAppDelegate.h"
 #import "HNLaunchpadDataSet.h"
 #import "Constants.h"
+#import "HNException.h"
 
 #import "FMDatabase.h"
 
@@ -43,7 +44,7 @@
     
     if (error)
     {
-        [NSException raise:@"Directory read error" format:@"Unable to read directory: %@, error: %@", dir, error];
+        [HNException raise:@"Directory read error" format:@"Unable to open location: %@\n\n%@", dir, [error localizedFailureReason]];
     }
     
     NSString *matchFile;
@@ -58,7 +59,7 @@
     
     if (matchFile == nil)
     {
-        [NSException raise:@"File not found" format:@"No Launchpad database file could be found in directory: %@", dir];
+        [HNException raise:@"File not found" format:@"No Launchpad database file could be found in directory: %@", dir];
     }
     
     dbFilename = [NSString stringWithFormat:@"%@/%@", dir, matchFile];
@@ -75,7 +76,7 @@
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:filename])
     {
-        [NSException raise:@"Database read error" format:@"Database at path: %@ does not exist", filename];
+        [HNException raise:@"Database read error" format:@"Database at path: %@ does not exist", filename];
         return nil;
     }
     
@@ -83,7 +84,7 @@
     
     if (![db open])
     {
-        [NSException raise:@"Database open error" format:@"Could not open database: %@", filename];
+        [HNException raise:@"Database open error" format:@"Could not open database: %@", filename];
         return nil;
     }
     

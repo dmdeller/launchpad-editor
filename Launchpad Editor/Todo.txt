@@ -1,5 +1,4 @@
 TODO
-- Use real launchpad database
 - Automatic backup
 - Manual backup
 - Need to kill Dock process?
