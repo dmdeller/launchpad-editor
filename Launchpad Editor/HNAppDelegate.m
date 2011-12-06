@@ -22,7 +22,10 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    
+    if ([self shouldMakeDailyBackup])
+    {
+        [self makeBackup];
+    }
 }
 
 /**
@@ -65,6 +68,99 @@
     dbFilename = [NSString stringWithFormat:@"%@/%@", dir, matchFile];
     
     return dbFilename;
+}
+
+- (NSString *)backupsPath
+{
+    return [NSString stringWithFormat:@"%@/Library/Application Support/Dock/Launchpad Editor Backups", NSHomeDirectory()];
+}
+
+- (BOOL)shouldMakeDailyBackup
+{
+    NSString *dir = [self backupsPath];
+    NSError *error;
+    
+    // no backups folder, even? better make one.
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dir])
+    {
+        return YES;
+    }
+    
+    error = nil;
+    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dir error:&error];
+    
+    if (error)
+    {
+        [HNException raise:@"Directory read error" format:@"Unable to open location: %@\n\n%@", dir, [error localizedFailureReason]];
+    }
+    
+    // loop through all existing backups and see if there is one from today.
+    // this is pretty inefficient and could probably be refactored.
+    for (NSString *file in files)
+    {
+        if (![[[file componentsSeparatedByString:@"."] lastObject] isEqualToString:@"backup"])
+        {
+            continue;
+        }
+        
+        error = nil;
+        NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@", dir, file] error:&error];
+        
+        if (error)
+        {
+            [HNException raise:@"File read error" format:@"Unable to read file attributes: %@/%@\n\n%@", dir, file, [error localizedFailureReason]];
+            continue;
+        }
+        
+        NSDate *modDate = [attributes objectForKey:NSFileModificationDate];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        
+        NSString *nowDateString = [dateFormatter stringFromDate:[NSDate date]];
+        NSString *modDateString = [dateFormatter stringFromDate:modDate];
+        
+        // if the backup is from today, no need to make another one.
+        if ([nowDateString isEqualToString:modDateString])
+        {
+            return NO;
+        }
+    }
+    
+    // no backup from today found? better make one.
+    return YES;
+}
+
+- (void)makeBackup
+{
+    NSString *dir = [self backupsPath];
+    NSError *error;
+    
+    // create folder if it doesn't exist
+    BOOL isDirectory;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dir isDirectory:&isDirectory] || !isDirectory)
+    {
+        error = nil;
+        [[NSFileManager defaultManager] createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:&error];
+        
+        if (error)
+        {
+            [HNException raise:@"Directory creation error" format:@"Unable to create folder: %@\n\n", dir, [error localizedFailureReason]];
+        }
+    }
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm-ssZ"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+
+    NSString *newDbFilename = [NSString stringWithFormat:@"%@/%@.%@.auto.backup", dir, [[[self dbFilename] componentsSeparatedByString:@"/"] lastObject], dateString];
+    error = nil;
+    [[NSFileManager defaultManager] copyItemAtPath:[self dbFilename] toPath:newDbFilename error:&error];
+    
+    if (error)
+    {
+        [HNException raise:@"File creation error" format:@"Unable to copy file: %@ to location: %@\n\n%@", [self dbFilename], newDbFilename, [error localizedFailureReason]];
+    }
 }
 
 /**

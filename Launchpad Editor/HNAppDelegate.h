@@ -19,6 +19,10 @@
 @property (strong) IBOutlet HNLaunchpadController *controller;
 @property (strong, nonatomic, readonly) NSString *dbFilename;
 
+- (NSString *)backupsPath;
+- (BOOL)shouldMakeDailyBackup;
+- (void)makeBackup;
 - (FMDatabase *)openDb;
+
 
 @end

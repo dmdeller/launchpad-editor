@@ -1,8 +1,9 @@
 TODO
-- Automatic backup
-- Manual backup
 - Need to kill Dock process?
 - Create/delete groups
 - Default window size
 - Icon
+- Manual backup
+- Restore from backup
+- Reset Launchpad (drop database)
 - Rearrange pages
