@@ -11,8 +11,14 @@
           <sparkle:releaseNotesLink>
             http://dmdeller.github.com/launchpad-editor/release-notes/0.1.html
           </sparkle:releaseNotesLink>
-         <pubDate>Wed, 7 Dec 2011 14:47:00 -0500</pubDate>
-         <enclosure url="http://you.com/app/Your Great App 1.4.zip" sparkle:version="2" sparkle:shortVersionString="0.1" sparkle:dsaSignature="MC0CFBfeCa1JyW30nbkBwainOzrN6EQuAh=" length="1472349" type="application/octet-stream" />
+         <pubDate>Wed, 7 Dec 2011 15:16:00 -0500</pubDate>
+         <enclosure
+          url="https://github.com/downloads/dmdeller/launchpad-editor/Launchpad%20Editor%200.1.zip"
+          sparkle:version="2"
+          sparkle:shortVersionString="0.1"
+          sparkle:dsaSignature="MEUCIQCLXx19Der7CFkuweWYg5V69Sg4TXg0Qa8O+niklWYiAQIgXqBL4YHj5XGgjlyZh+jakjZDvs0oK9uCmOdUZ3Yf120="
+          length="470381"
+          type="application/octet-stream" />
       </item>
         
    </channel>
