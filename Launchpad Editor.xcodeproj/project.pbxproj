@@ -21,6 +21,9 @@
 		C30BFBE4146C36D100395658 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C30BFBE5146C36D100395658 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE2146C36D100395658 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C36B099F148FC0D2004B6998 /* HNToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C36B099E148FC0D2004B6998 /* HNToolbarController.m */; };
+		C36B09A2148FCA50004B6998 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C36B09A1148FCA50004B6998 /* Sparkle.framework */; };
+		C36B09A4148FCAC4004B6998 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C36B09A1148FCA50004B6998 /* Sparkle.framework */; };
+		C36B09A6148FD178004B6998 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = C36B09A5148FD178004B6998 /* dsa_pub.pem */; };
 		C371777D14897FEB00358BFA /* HNOutlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C371777C14897FEB00358BFA /* HNOutlineViewController.m */; };
 		C3717783148E975700358BFA /* HNException.m in Sources */ = {isa = PBXBuildFile; fileRef = C3717782148E975600358BFA /* HNException.m */; };
 		C39EA2D6146CB281001356F5 /* HNLaunchpadPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2D5146CB281001356F5 /* HNLaunchpadPage.m */; };
@@ -40,6 +43,19 @@
 			remoteInfo = "Launchpad Editor";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C36B09A3148FCAAC004B6998 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C36B09A4148FCAC4004B6998 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C30BFBA5146C32AD00395658 /* Launchpad Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Launchpad Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,7 +88,9 @@
 		C360687414856DC100B0FD54 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		C36B099D148FC0D2004B6998 /* HNToolbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNToolbarController.h; sourceTree = "<group>"; };
 		C36B099E148FC0D2004B6998 /* HNToolbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNToolbarController.m; sourceTree = "<group>"; };
-		C371777B14897FEB00358BFA /* HNOutlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HNOutlineViewController.h; sourceTree = "<group>"; };
+		C36B09A1148FCA50004B6998 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		C36B09A5148FD178004B6998 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		C371777B14897FEB00358BFA /* HNOutlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNOutlineViewController.h; sourceTree = "<group>"; };
 		C371777C14897FEB00358BFA /* HNOutlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HNOutlineViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C371777F1489940800358BFA /* Todo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Todo.txt; path = "Launchpad Editor/Todo.txt"; sourceTree = "<group>"; };
 		C3717781148E975600358BFA /* HNException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNException.h; sourceTree = "<group>"; };
@@ -98,6 +116,7 @@
 			files = (
 				C3E896C8146C472F0060AB93 /* libsqlite3.dylib in Frameworks */,
 				C30BFBAA146C32AD00395658 /* Cocoa.framework in Frameworks */,
+				C36B09A2148FCA50004B6998 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +156,7 @@
 		C30BFBA8146C32AD00395658 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C36B09A1148FCA50004B6998 /* Sparkle.framework */,
 				C3E896C7146C472F0060AB93 /* libsqlite3.dylib */,
 				C30BFBA9146C32AD00395658 /* Cocoa.framework */,
 				C30BFBC7146C32AE00395658 /* SenTestingKit.framework */,
@@ -184,6 +204,7 @@
 				C30BFBB5146C32AD00395658 /* main.m */,
 				C30BFBB7146C32AD00395658 /* Launchpad Editor-Prefix.pch */,
 				C30BFBB8146C32AE00395658 /* Credits.rtf */,
+				C36B09A5148FD178004B6998 /* dsa_pub.pem */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -257,6 +278,7 @@
 				C30BFBA1146C32AD00395658 /* Sources */,
 				C30BFBA2146C32AD00395658 /* Frameworks */,
 				C30BFBA3146C32AD00395658 /* Resources */,
+				C36B09A3148FCAAC004B6998 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -320,6 +342,7 @@
 				C30BFBB4146C32AD00395658 /* InfoPlist.strings in Resources */,
 				C30BFBBA146C32AE00395658 /* Credits.rtf in Resources */,
 				C30BFBC0146C32AE00395658 /* MainMenu.xib in Resources */,
+				C36B09A6148FD178004B6998 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +497,10 @@
 		C30BFBD8146C32AE00395658 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Launchpad Editor/Launchpad Editor-Prefix.pch";
 				INFOPLIST_FILE = "Launchpad Editor/Launchpad Editor-Info.plist";
@@ -485,6 +512,10 @@
 		C30BFBD9146C32AE00395658 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Launchpad Editor/Launchpad Editor-Prefix.pch";
 				INFOPLIST_FILE = "Launchpad Editor/Launchpad Editor-Info.plist";
