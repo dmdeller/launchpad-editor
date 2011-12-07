@@ -84,7 +84,12 @@
 
 - (void)restartDock
 {
+    int returnCode = system("killall Dock");
     
+    if (returnCode != 0)
+    {
+        [HNException raise:@"Unable to kill process" format:@"Error killing Dock process. system() returned code: %i", returnCode];
+    }
 }
 
 #pragma mark -

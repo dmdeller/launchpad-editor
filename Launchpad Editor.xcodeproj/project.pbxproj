@@ -20,6 +20,7 @@
 		C30BFBE3146C36D100395658 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBDE146C36D100395658 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C30BFBE4146C36D100395658 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C30BFBE5146C36D100395658 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE2146C36D100395658 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C36B099F148FC0D2004B6998 /* HNToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C36B099E148FC0D2004B6998 /* HNToolbarController.m */; };
 		C371777D14897FEB00358BFA /* HNLaunchpadController.m in Sources */ = {isa = PBXBuildFile; fileRef = C371777C14897FEB00358BFA /* HNLaunchpadController.m */; };
 		C3717783148E975700358BFA /* HNException.m in Sources */ = {isa = PBXBuildFile; fileRef = C3717782148E975600358BFA /* HNException.m */; };
 		C39EA2D6146CB281001356F5 /* HNLaunchpadPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2D5146CB281001356F5 /* HNLaunchpadPage.m */; };
@@ -69,6 +70,8 @@
 		C34FB528146CC77B00516C18 /* HNLaunchpadContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadContainer.h; sourceTree = "<group>"; };
 		C360686214854E8900B0FD54 /* HNLaunchpadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadEntity.h; sourceTree = "<group>"; };
 		C360687414856DC100B0FD54 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		C36B099D148FC0D2004B6998 /* HNToolbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNToolbarController.h; sourceTree = "<group>"; };
+		C36B099E148FC0D2004B6998 /* HNToolbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNToolbarController.m; sourceTree = "<group>"; };
 		C371777B14897FEB00358BFA /* HNLaunchpadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadController.h; sourceTree = "<group>"; };
 		C371777C14897FEB00358BFA /* HNLaunchpadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HNLaunchpadController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C371777F1489940800358BFA /* Todo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Todo.txt; path = "Launchpad Editor/Todo.txt"; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 				C3717782148E975600358BFA /* HNException.m */,
 				C30BFBBB146C32AE00395658 /* HNAppDelegate.h */,
 				C30BFBBC146C32AE00395658 /* HNAppDelegate.m */,
+				C36B099D148FC0D2004B6998 /* HNToolbarController.h */,
+				C36B099E148FC0D2004B6998 /* HNToolbarController.m */,
 				C371777B14897FEB00358BFA /* HNLaunchpadController.h */,
 				C371777C14897FEB00358BFA /* HNLaunchpadController.m */,
 				C3E896C9146C48690060AB93 /* HNLaunchpadDataSet.h */,
@@ -361,6 +366,7 @@
 				C39EA2E1146CB5DD001356F5 /* MGOrderedDictionary.m in Sources */,
 				C371777D14897FEB00358BFA /* HNLaunchpadController.m in Sources */,
 				C3717783148E975700358BFA /* HNException.m in Sources */,
+				C36B099F148FC0D2004B6998 /* HNToolbarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
