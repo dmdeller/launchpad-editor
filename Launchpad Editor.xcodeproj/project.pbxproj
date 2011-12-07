@@ -83,6 +83,7 @@
 		C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		C30BFBE1146C36D100395658 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		C30BFBE2146C36D100395658 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		C32BD1831490041500700E3C /* Todo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo.txt; sourceTree = "<group>"; };
 		C34FB528146CC77B00516C18 /* HNLaunchpadContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadContainer.h; sourceTree = "<group>"; };
 		C360686214854E8900B0FD54 /* HNLaunchpadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadEntity.h; sourceTree = "<group>"; };
 		C360687414856DC100B0FD54 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -92,7 +93,6 @@
 		C36B09A5148FD178004B6998 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		C371777B14897FEB00358BFA /* HNOutlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNOutlineViewController.h; sourceTree = "<group>"; };
 		C371777C14897FEB00358BFA /* HNOutlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HNOutlineViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		C371777F1489940800358BFA /* Todo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Todo.txt; path = "Launchpad Editor/Todo.txt"; sourceTree = "<group>"; };
 		C3717781148E975600358BFA /* HNException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNException.h; sourceTree = "<group>"; };
 		C3717782148E975600358BFA /* HNException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNException.m; sourceTree = "<group>"; };
 		C39EA2D4146CB281001356F5 /* HNLaunchpadPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadPage.h; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 				C30BFBCC146C32AE00395658 /* Launchpad EditorTests */,
 				C30BFBA8146C32AD00395658 /* Frameworks */,
 				C30BFBA6146C32AD00395658 /* Products */,
-				C371777F1489940800358BFA /* Todo.txt */,
+				C32BD1831490041500700E3C /* Todo.txt */,
 			);
 			sourceTree = "<group>";
 		};
