@@ -32,6 +32,8 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
 	<key>SUFeedURL</key>
 	<string>http://dmdeller.github.com/launchpad-editor/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
