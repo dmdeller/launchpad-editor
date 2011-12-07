@@ -20,6 +20,9 @@
 @synthesize controller;
 @synthesize dbFilename;
 
+#pragma mark -
+#pragma mark Application delegate
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     if ([self shouldMakeDailyBackup])
@@ -27,6 +30,65 @@
         [self makeBackup];
     }
 }
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
+{
+    return YES;
+}
+
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"Quit & Relaunch Dock"];
+    [alert addButtonWithTitle:@"Quit"];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert setMessageText:@"Dock needs to be relaunched"];
+    [alert setInformativeText:@"The changes you made won't show up in Launchpad until you relaunch the Dock."];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    
+    [alert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(restartDockAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    
+    return NSTerminateLater;
+}
+
+#pragma mark -
+#pragma mark Window delegate
+
+
+- (BOOL)windowShouldClose:(id)sender
+{
+    [[NSApplication sharedApplication] terminate:sender];
+    
+    return NO;
+}
+
+#pragma mark -
+#pragma mark Dock
+
+- (void)restartDockAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    if (returnCode == NSAlertFirstButtonReturn)
+    {
+        [self restartDock];
+    }
+    
+    if (returnCode == NSAlertFirstButtonReturn || returnCode == NSAlertSecondButtonReturn)
+    {
+        [[NSApplication sharedApplication] replyToApplicationShouldTerminate:YES];
+    }
+    else
+    {
+        [[NSApplication sharedApplication] replyToApplicationShouldTerminate:NO];
+    }
+}
+
+- (void)restartDock
+{
+    
+}
+
+#pragma mark -
+#pragma mark Database file management
 
 /**
  * Determines the filename of the Launchpad database.

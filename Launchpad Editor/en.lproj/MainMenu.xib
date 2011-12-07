@@ -1493,7 +1493,7 @@
 											<string key="NSFrameSize">{599, 420}</string>
 											<reference key="NSSuperview" ref="823136338"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="534584339"/>
+											<reference key="NSNextKeyView" ref="1005794530"/>
 											<string key="NSReuseIdentifierKey">_NS:1703</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTableHeaderView" key="NSHeaderView" id="272430727">
@@ -1641,7 +1641,6 @@
 									<string key="NSFrame">{{1, 422}, {599, 15}}</string>
 									<reference key="NSSuperview" ref="688458249"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:1728</string>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="688458249"/>
@@ -1668,7 +1667,7 @@
 							<string key="NSFrame">{{-1, -1}, {601, 438}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="1005794530"/>
+							<reference key="NSNextKeyView" ref="823136338"/>
 							<string key="NSReuseIdentifierKey">_NS:1699</string>
 							<int key="NSsFlags">133682</int>
 							<reference key="NSVScroller" ref="534584339"/>
@@ -2331,6 +2330,14 @@
 						<reference key="destination" ref="738670835"/>
 					</object>
 					<int key="connectionID">535</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="972006081"/>
+						<reference key="destination" ref="976324537"/>
+					</object>
+					<int key="connectionID">576</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -3697,7 +3704,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">575</int>
+			<int key="maxID">576</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
