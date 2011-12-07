@@ -13,14 +13,27 @@
 @implementation HNToolbarController
 
 @synthesize appDelegate;
+@synthesize addGroupButton;
 @synthesize syncButton;
 
 #pragma mark -
 
 - (void)awakeFromNib
 {
+    [self.addGroupButton setTarget:self];
+    [self.addGroupButton setAction:@selector(addGroup)];
+    [self.addGroupButton setEnabled:NO];
+    
     [self.syncButton setTarget:self];
     [self.syncButton setAction:@selector(confirmSync)];
+}
+
+#pragma mark -
+#pragma mark Add Group button
+
+- (void)addGroup
+{
+    
 }
 
 #pragma mark -

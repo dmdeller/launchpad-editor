@@ -1,5 +1,4 @@
 TODO
-- Need to kill Dock process?
 - Create/delete groups
 - Default window size
 - Icon

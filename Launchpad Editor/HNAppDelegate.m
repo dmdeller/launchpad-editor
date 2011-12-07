@@ -16,6 +16,7 @@
 @implementation HNAppDelegate
 
 @synthesize window = _window;
+@synthesize toolbarController;
 @synthesize outlineView;
 @synthesize outlineViewController;
 @synthesize dbFilename;

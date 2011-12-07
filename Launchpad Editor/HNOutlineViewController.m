@@ -15,6 +15,7 @@
 #import "HNLaunchpadPage.h"
 #import "HNLaunchpadGroup.h"
 #import "HNLaunchpadApp.h"
+#import "HNToolbarController.h"
 
 #import "FMDatabase.h"
 
@@ -387,6 +388,22 @@
     else
     {
         return NO;
+    }
+}
+
+- (void)outlineViewSelectionDidChange:(NSNotification *)aNotification
+{
+    id <HNLaunchpadEntity> item = [self.appDelegate.outlineView itemAtRow:self.appDelegate.outlineView.selectedRow];
+    
+    NSLog(@"selected: %@", item);
+    
+    if ([item isKindOfClass:[HNLaunchpadApp class]])
+    {
+        [self.appDelegate.toolbarController.addGroupButton setEnabled:YES];
+    }
+    else
+    {
+        [self.appDelegate.toolbarController.addGroupButton setEnabled:NO];
     }
 }
 

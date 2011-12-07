@@ -13,8 +13,10 @@
 @interface HNToolbarController : NSObject
 
 @property (weak) IBOutlet HNAppDelegate *appDelegate;
+@property (strong) IBOutlet NSToolbarItem *addGroupButton;
 @property (strong) IBOutlet NSToolbarItem *syncButton;
 
+- (void)addGroup;
 - (void)confirmSync;
 
 @end

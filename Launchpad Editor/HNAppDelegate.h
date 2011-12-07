@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class HNToolbarController;
 @class HNOutlineViewController;
 
 @class FMDatabase;
@@ -16,6 +17,7 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property (strong) IBOutlet NSOutlineView *outlineView;
+@property (strong) IBOutlet HNToolbarController *toolbarController;
 @property (strong) IBOutlet HNOutlineViewController *outlineViewController;
 @property (strong, nonatomic, readonly) NSString *dbFilename;
 
