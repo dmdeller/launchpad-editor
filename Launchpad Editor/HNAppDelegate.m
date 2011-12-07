@@ -179,16 +179,16 @@
             continue;
         }
         
-        NSDate *modDate = [attributes objectForKey:NSFileModificationDate];
+        NSDate *creationDate = [attributes objectForKey:NSFileCreationDate];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         
         NSString *nowDateString = [dateFormatter stringFromDate:[NSDate date]];
-        NSString *modDateString = [dateFormatter stringFromDate:modDate];
+        NSString *creationDateString = [dateFormatter stringFromDate:creationDate];
         
         // if the backup is from today, no need to make another one.
-        if ([nowDateString isEqualToString:modDateString])
+        if ([nowDateString isEqualToString:creationDateString])
         {
             return NO;
         }
@@ -227,6 +227,15 @@
     if (error)
     {
         [HNException raise:@"File creation error" format:@"Unable to copy file: %@ to location: %@\n\n%@", [self dbFilename], newDbFilename, [error localizedFailureReason]];
+    }
+    
+    // Set creation date to now, so we can later check when the backup was made
+    error = nil;
+    [[NSFileManager defaultManager] setAttributes:[NSDictionary dictionaryWithObject:[NSDate date] forKey:NSFileCreationDate] ofItemAtPath:newDbFilename error:&error];
+    
+    if (error)
+    {
+        [HNException raise:@"File attribute modification error" format:@"Unable to set attributes on file: %@\n\n%@", newDbFilename, [error localizedFailureReason]];
     }
 }
 
