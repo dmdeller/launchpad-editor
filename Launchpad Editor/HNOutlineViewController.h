@@ -1,5 +1,5 @@
 //
-//  HNLaunchpadController.h
+//  HNOutlineViewController.h
 //  Launchpad Editor
 //
 //  Created by David Deller on 12/2/11.
@@ -17,7 +17,7 @@
 
 @class FMDatabase;
 
-@interface HNLaunchpadController : NSObject <NSOutlineViewDataSource, NSOutlineViewDelegate>
+@interface HNOutlineViewController : NSObject <NSOutlineViewDataSource, NSOutlineViewDelegate>
 
 @property (weak) IBOutlet HNAppDelegate *appDelegate;
 @property (strong) HNLaunchpadDataSet *dataSet;

@@ -1319,7 +1319,7 @@
 					<int key="NSToolbarDisplayMode">3</int>
 					<int key="NSToolbarSizeMode">1</int>
 					<dictionary class="NSMutableDictionary" key="NSToolbarIBIdentifiedItems">
-						<object class="NSToolbarItem" key="0FB5C21A-B918-4DD8-B401-53C7E728A2CC" id="1061982323">
+						<object class="NSToolbarItem" key="0FB5C21A-B918-4DD8-B401-53C7E728A2CC" id="1007862457">
 							<object class="NSMutableString" key="NSToolbarItemIdentifier">
 								<characters key="NS.bytes">0FB5C21A-B918-4DD8-B401-53C7E728A2CC</characters>
 							</object>
@@ -1441,14 +1441,14 @@
 						</object>
 					</dictionary>
 					<array class="NSMutableArray" key="NSToolbarIBAllowedItems">
-						<reference ref="1061982323"/>
+						<reference ref="1007862457"/>
 						<reference ref="1062925920"/>
 						<reference ref="737919873"/>
 						<reference ref="64678531"/>
 						<reference ref="883317070"/>
 					</array>
 					<array key="NSToolbarIBDefaultItems">
-						<reference ref="1061982323"/>
+						<reference ref="1007862457"/>
 						<reference ref="737919873"/>
 					</array>
 					<array key="NSToolbarIBSelectableItems" id="0"/>
@@ -1674,9 +1674,9 @@
 				<string key="NSClassName">NSFontManager</string>
 			</object>
 			<object class="NSCustomObject" id="934697539">
-				<string key="NSClassName">HNLaunchpadController</string>
+				<string key="NSClassName">HNOutlineViewController</string>
 			</object>
-			<object class="NSCustomObject" id="195591774">
+			<object class="NSCustomObject" id="40712694">
 				<string key="NSClassName">HNToolbarController</string>
 			</object>
 		</array>
@@ -2380,11 +2380,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">controller</string>
+						<string key="label">outlineViewController</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="934697539"/>
 					</object>
-					<int key="connectionID">575</int>
+					<int key="connectionID">581</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2413,15 +2413,15 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">syncButton</string>
-						<reference key="source" ref="195591774"/>
-						<reference key="destination" ref="1061982323"/>
+						<reference key="source" ref="40712694"/>
+						<reference key="destination" ref="1007862457"/>
 					</object>
 					<int key="connectionID">579</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">appDelegate</string>
-						<reference key="source" ref="195591774"/>
+						<reference key="source" ref="40712694"/>
 						<reference key="destination" ref="976324537"/>
 					</object>
 					<int key="connectionID">580</int>
@@ -3484,7 +3484,7 @@
 							<reference ref="737919873"/>
 							<reference ref="64678531"/>
 							<reference ref="883317070"/>
-							<reference ref="1061982323"/>
+							<reference ref="1007862457"/>
 						</array>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -3515,12 +3515,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">577</int>
-						<reference key="object" ref="1061982323"/>
+						<reference key="object" ref="1007862457"/>
 						<reference key="parent" ref="657652678"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">578</int>
-						<reference key="object" ref="195591774"/>
+						<reference key="object" ref="40712694"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</array>
@@ -3703,7 +3703,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">580</int>
+			<int key="maxID">581</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3711,18 +3711,18 @@
 					<string key="className">HNAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="controller">HNLaunchpadController</string>
 						<string key="outlineView">NSOutlineView</string>
+						<string key="outlineViewController">HNOutlineViewController</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="controller">
-							<string key="name">controller</string>
-							<string key="candidateClassName">HNLaunchpadController</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="outlineView">
 							<string key="name">outlineView</string>
 							<string key="candidateClassName">NSOutlineView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="outlineViewController">
+							<string key="name">outlineViewController</string>
+							<string key="candidateClassName">HNOutlineViewController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="window">
 							<string key="name">window</string>
@@ -3735,7 +3735,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">HNLaunchpadController</string>
+					<string key="className">HNOutlineViewController</string>
 					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">appDelegate</string>
@@ -3750,7 +3750,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/HNLaunchpadController.h</string>
+						<string key="minorKey">./Classes/HNOutlineViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

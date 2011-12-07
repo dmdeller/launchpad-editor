@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class HNLaunchpadController;
+@class HNOutlineViewController;
 
 @class FMDatabase;
 
@@ -16,7 +16,7 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property (strong) IBOutlet NSOutlineView *outlineView;
-@property (strong) IBOutlet HNLaunchpadController *controller;
+@property (strong) IBOutlet HNOutlineViewController *outlineViewController;
 @property (strong, nonatomic, readonly) NSString *dbFilename;
 
 - (void)restartDockAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;

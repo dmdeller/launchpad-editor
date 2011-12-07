@@ -1,12 +1,12 @@
 //
-//  HNLaunchpadController.m
+//  HNOutlineViewController.m
 //  Launchpad Editor
 //
 //  Created by David Deller on 12/2/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "HNLaunchpadController.h"
+#import "HNOutlineViewController.h"
 
 #import "Constants.h"
 #import "HNException.h"
@@ -18,7 +18,7 @@
 
 #import "FMDatabase.h"
 
-@implementation HNLaunchpadController
+@implementation HNOutlineViewController
 
 @synthesize appDelegate;
 @synthesize dataSet;

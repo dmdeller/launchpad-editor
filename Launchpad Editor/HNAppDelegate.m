@@ -17,7 +17,7 @@
 
 @synthesize window = _window;
 @synthesize outlineView;
-@synthesize controller;
+@synthesize outlineViewController;
 @synthesize dbFilename;
 
 #pragma mark -
