@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
+   <channel>
+      <title>Launchpad Editor changelog</title>
+      <link>http://dmdeller.github.com/launchpad-editor/appcast.xml</link>
+      <description>Most recent changes with links to updates.</description>
+      <language>en</language>
+
+      <item>
+         <title>Version 0.1</title>
+          <sparkle:releaseNotesLink>
+            http://dmdeller.github.com/launchpad-editor/release-notes/0.1.html
+          </sparkle:releaseNotesLink>
+         <pubDate>Wed, 7 Dec 2011 14:47:00 -0500</pubDate>
+         <enclosure url="http://you.com/app/Your Great App 1.4.zip" sparkle:version="2" sparkle:shortVersionString="0.1" sparkle:dsaSignature="MC0CFBfeCa1JyW30nbkBwainOzrN6EQuAh=" length="1472349" type="application/octet-stream" />
+      </item>
+        
+   </channel>
+</rss>
