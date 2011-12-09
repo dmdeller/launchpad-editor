@@ -21,4 +21,10 @@ static int const HNLaunchpadHoldingPageId = 2;
 static int const HNLaunchpadPageMaxItems = 40;
 static int const HNLaunchpadGroupMaxItems = 32;
 
+// Default value for 'flags' column in items table; I have no idea what this means
+static int const HNLaunchpadDefaultFlags = 0;
+
+// Temporary value for 'ordering' column when creating a new object; this should be fixed with HNLaunchpadDataSet -saveContainerOrdering:inDb:
+static int const HNLaunchpadDefaultOrdering = -1;
+
 #endif

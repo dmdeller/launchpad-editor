@@ -232,6 +232,59 @@
 #pragma mark -
 #pragma mark Saving data
 
+/**
+ * Get the next usable ID in the items table
+ */
+- (NSNumber *)nextIdInDb:(FMDatabase *)db
+{
+    NSNumber *nextId;
+    
+    NSString *sql = @"SELECT max(id)"
+                        " FROM items";
+    
+    FMResultSet *results = [db executeQuery:sql];
+    
+    if (results == nil)
+    {
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        return nil;
+    }
+    
+    if ([results next])
+    {
+        nextId = [NSNumber numberWithInt:([results intForColumnIndex:0] + 1)];
+    }
+    else
+    {
+        [HNException raise:@"Database query failure" format:@"No results returned for SQL: %@", sql];
+        return nil;
+    }
+    
+    return nextId;
+}
+
+- (void)createGroup:(HNLaunchpadGroup *)group inDb:(FMDatabase *)db
+{
+    [db beginTransaction];
+    
+    NSString *sql = @"INSERT INTO items (rowid, uuid, flags, type, parent_id, ordering) VALUES (?, ?, ?, ?, ?, ?)";
+    
+    // create new UUID
+    CFUUIDRef uuidObj = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *uuid = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuidObj);
+    CFRelease(uuidObj);
+    
+    if (![db executeUpdate:sql, group.id, uuid, HNLaunchpadDefaultFlags, HNLaunchpadTypeGroup, group.parentId, HNLaunchpadDefaultOrdering])
+    {
+        [db rollback];
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [db close];
+        return;
+    }
+    
+    
+}
+
 - (void)saveGroup:(HNLaunchpadGroup *)group inDb:(FMDatabase *)db
 {
     NSString *sql = @"UPDATE groups"

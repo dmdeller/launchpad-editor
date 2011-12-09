@@ -49,6 +49,11 @@
     }
 }
 
+- (id)selectedItem
+{
+    return [self.appDelegate.outlineView itemAtRow:self.appDelegate.outlineView.selectedRow];
+}
+
 #pragma mark -
 #pragma mark NSOutlineViewDataSource
 
@@ -391,7 +396,7 @@
     }
 }
 
-- (void)outlineViewSelectionDidChange:(NSNotification *)aNotification
+/*- (void)outlineViewSelectionDidChange:(NSNotification *)aNotification
 {
     id <HNLaunchpadEntity> item = [self.appDelegate.outlineView itemAtRow:self.appDelegate.outlineView.selectedRow];
     
@@ -405,6 +410,6 @@
     {
         [self.appDelegate.toolbarController.addGroupButton setEnabled:NO];
     }
-}
+}*/
 
 @end

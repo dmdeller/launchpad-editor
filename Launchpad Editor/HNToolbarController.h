@@ -13,10 +13,14 @@
 @interface HNToolbarController : NSObject
 
 @property (weak) IBOutlet HNAppDelegate *appDelegate;
+@property (strong) IBOutlet NSToolbarItem *addPageButton;
 @property (strong) IBOutlet NSToolbarItem *addGroupButton;
+@property (strong) IBOutlet NSToolbarItem *deleteButton;
 @property (strong) IBOutlet NSToolbarItem *syncButton;
 
+- (void)addPage;
 - (void)addGroup;
+- (void)delete;
 - (void)confirmSync;
 
 @end

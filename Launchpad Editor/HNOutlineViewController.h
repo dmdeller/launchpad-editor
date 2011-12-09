@@ -22,4 +22,8 @@
 @property (weak) IBOutlet HNAppDelegate *appDelegate;
 @property (strong) HNLaunchpadDataSet *dataSet;
 
+- (id)selectedItem;
+
+- (BOOL)entity:(id <HNLaunchpadEntity>)entity canBeDroppedIntoContainer:(id <HNLaunchpadContainer>)container;
+
 @end

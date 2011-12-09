@@ -9,23 +9,96 @@
 #import "HNToolbarController.h"
 
 #import "HNAppDelegate.h"
+#import "HNOutlineViewController.h"
+#import "HNLaunchpadEntity.h"
+#import "HNLaunchpadContainer.h"
 
 @implementation HNToolbarController
 
 @synthesize appDelegate;
+@synthesize addPageButton;
 @synthesize addGroupButton;
+@synthesize deleteButton;
 @synthesize syncButton;
 
 #pragma mark -
 
 - (void)awakeFromNib
 {
+    [self.addPageButton setTarget:self];
+    [self.addPageButton setAction:@selector(addPage)];
+    
     [self.addGroupButton setTarget:self];
     [self.addGroupButton setAction:@selector(addGroup)];
-    [self.addGroupButton setEnabled:NO];
+    
+    [self.deleteButton setTarget:self];
+    [self.deleteButton setAction:@selector(delete)];
     
     [self.syncButton setTarget:self];
     [self.syncButton setAction:@selector(confirmSync)];
+}
+
+#pragma mark -
+#pragma mark NSToolbarItemValidation
+
+/**
+ * This is called 'on a regular basis', apparently!
+ */
+- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
+{
+    id <HNLaunchpadEntity> selectedItem = [self.appDelegate.outlineViewController selectedItem];
+    
+    if (theItem == self.addPageButton)
+    {
+        return YES;
+    }
+    else if (theItem == self.addGroupButton)
+    {
+        if (selectedItem != nil)
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    else if (theItem == self.deleteButton)
+    {
+        if ([selectedItem conformsToProtocol:@protocol(HNLaunchpadContainer)])
+        {
+            id <HNLaunchpadContainer> selectedContainer = (id)selectedItem;
+            
+            // can only delete a container if it's empty
+            if (selectedContainer.items == 0)
+            {
+                return YES;
+            }
+            else
+            {
+                return NO;
+            }
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    else if (theItem == self.syncButton)
+    {
+        return YES;
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+#pragma mark -
+#pragma mark Add Page button
+
+- (void)addPage
+{
 }
 
 #pragma mark -
@@ -34,6 +107,14 @@
 - (void)addGroup
 {
     
+}
+
+#pragma mark -
+#pragma mark Delete button
+
+- (void)delete
+{
+
 }
 
 #pragma mark -
