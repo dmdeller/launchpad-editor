@@ -31,6 +31,7 @@
 - (NSDictionary *)loadAppsFromDb:(FMDatabase *)db;
 - (void)collateApps:(NSDictionary *)apps andGroups:(NSDictionary *)groups intoPages:(MGOrderedDictionary *)pages fromDb:(FMDatabase *)db;
 
+- (void)createGroup:(HNLaunchpadGroup *)group inPage:(HNLaunchpadPage *)page atPosition:(NSUInteger)position inDb:(FMDatabase *)db;
 - (void)saveGroup:(HNLaunchpadGroup *)group inDb:(FMDatabase *)db;
 - (void)saveEntity:(id <HNLaunchpadEntity>)entity inDb:(FMDatabase *)db;
 - (void)saveContainerOrdering:(id <HNLaunchpadContainer>)container inDb:(FMDatabase *)db;

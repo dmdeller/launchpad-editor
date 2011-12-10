@@ -10,8 +10,13 @@
 
 #import "HNAppDelegate.h"
 #import "HNOutlineViewController.h"
+#import "HNLaunchpadDataSet.h"
 #import "HNLaunchpadEntity.h"
 #import "HNLaunchpadContainer.h"
+#import "HNLaunchpadPage.h"
+#import "HNLaunchpadGroup.h"
+
+#import "FMDatabase.h"
 
 @implementation HNToolbarController
 
@@ -106,7 +111,30 @@
 
 - (void)addGroup
 {
+    FMDatabase *db = [self.appDelegate openDb];
+    HNLaunchpadDataSet *dataSet = self.appDelegate.outlineViewController.dataSet;
+    id <HNLaunchpadEntity> selectedItem = [self.appDelegate.outlineViewController selectedItem];
     
+    HNLaunchpadPage *insertIntoPage;
+    NSUInteger insertPosition;
+    
+    if ([selectedItem isKindOfClass:[HNLaunchpadPage class]])
+    {
+        insertIntoPage = (HNLaunchpadPage *)selectedItem;
+        insertPosition = [insertIntoPage.items count];
+    }
+    else if ([selectedItem isKindOfClass:[HNLaunchpadGroup class]])
+    {
+        insertIntoPage = [dataSet.itemList objectForKey:selectedItem.parentId];
+        //insertPosition
+    }
+    
+    HNLaunchpadGroup *newGroup = [[HNLaunchpadGroup alloc] init];
+    newGroup.title = @"Untitled Group";
+    
+    //[dataSet createGroup:newGroup inPage:<#(id)#> atPosition:<#(NSUInteger)#> inDb:<#(FMDatabase *)#>];
+    
+    [db close];
 }
 
 #pragma mark -

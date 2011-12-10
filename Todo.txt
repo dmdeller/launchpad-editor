@@ -2,6 +2,7 @@ TODO
 - Create/delete groups
 - Default window size
 - Icon
+- Clean up automatic backups
 - Manual backup
 - Restore from backup
 - Reset Launchpad (drop database)

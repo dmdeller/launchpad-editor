@@ -263,9 +263,12 @@
     return nextId;
 }
 
-- (void)createGroup:(HNLaunchpadGroup *)group inDb:(FMDatabase *)db
+- (void)createGroup:(HNLaunchpadGroup *)group inPage:(HNLaunchpadPage *)page atPosition:(NSUInteger)position inDb:(FMDatabase *)db
 {
-    [db beginTransaction];
+    //[db beginTransaction];
+    
+    group.parentId = page.id;
+    [page.items insertObject:group forKey:group.id atIndex:position];
     
     NSString *sql = @"INSERT INTO items (rowid, uuid, flags, type, parent_id, ordering) VALUES (?, ?, ?, ?, ?, ?)";
     
@@ -274,13 +277,15 @@
     NSString *uuid = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuidObj);
     CFRelease(uuidObj);
     
-    if (![db executeUpdate:sql, group.id, uuid, HNLaunchpadDefaultFlags, HNLaunchpadTypeGroup, group.parentId, HNLaunchpadDefaultOrdering])
+    NSLog(@"uuid: %@", uuid);
+    
+    /*if (![db executeUpdate:sql, group.id, uuid, HNLaunchpadDefaultFlags, HNLaunchpadTypeGroup, group.parentId, HNLaunchpadDefaultOrdering])
     {
         [db rollback];
         [HNException raise:@"Database error" format:[db lastErrorMessage]];
         [db close];
         return;
-    }
+    }*/
     
     
 }
