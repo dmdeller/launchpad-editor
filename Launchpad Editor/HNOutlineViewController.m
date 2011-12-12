@@ -89,7 +89,7 @@
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
-    if ([self outlineView:outlineView numberOfChildrenOfItem:item] > 0)
+    if ([item conformsToProtocol:@protocol(HNLaunchpadContainer)])
     {
         return YES;
     }
