@@ -24,4 +24,9 @@
 - (id)keyAtIndex:(NSUInteger)anIndex;
 - (NSEnumerator *)reverseKeyEnumerator;
 
+/**
+ * Added by D.M.Deller
+ */
+- (NSUInteger)indexForKey:(id)key;
+
 @end

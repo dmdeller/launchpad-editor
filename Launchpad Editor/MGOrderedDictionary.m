@@ -105,7 +105,8 @@ NSString *DescriptionForObject(NSObject *object, id locale, NSUInteger indent)
 
 - (void)insertObject:(id)anObject forKey:(id)aKey atIndex:(NSUInteger)anIndex
 {
-	if (![dictionary objectForKey:aKey])
+    // change by D.M.Deller - reverse negation of if statement, correcting apparent bug
+	if ([dictionary objectForKey:aKey])
 	{
 		[self removeObjectForKey:aKey];
 	}
@@ -116,6 +117,14 @@ NSString *DescriptionForObject(NSObject *object, id locale, NSUInteger indent)
 - (id)keyAtIndex:(NSUInteger)anIndex
 {
 	return [array objectAtIndex:anIndex];
+}
+
+/**
+ * Added by D.M.Deller
+ */
+- (NSUInteger)indexForKey:(id)key
+{
+    return [array indexOfObject:key];
 }
 
 - (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level

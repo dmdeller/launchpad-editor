@@ -15,6 +15,8 @@
 #import "HNLaunchpadContainer.h"
 #import "HNLaunchpadPage.h"
 #import "HNLaunchpadGroup.h"
+#import "HNLaunchpadApp.h"
+#import "HNException.h"
 
 #import "FMDatabase.h"
 
@@ -51,6 +53,7 @@
  */
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {
+    HNLaunchpadDataSet *dataSet = self.appDelegate.outlineViewController.dataSet;
     id <HNLaunchpadEntity> selectedItem = [self.appDelegate.outlineViewController selectedItem];
     
     if (theItem == self.addPageButton)
@@ -61,7 +64,22 @@
     {
         if (selectedItem != nil)
         {
-            return YES;
+            if ([selectedItem isKindOfClass:[HNLaunchpadApp class]])
+            {
+                // only create groups when the selected app is a direct descendant of a page; don't want to encourage the impression that we can create groups inside of groups
+                if ([[dataSet parentForEntity:selectedItem] isKindOfClass:[HNLaunchpadPage class]])
+                {
+                    return YES;
+                }
+                else
+                {
+                    return NO;
+                }
+            }
+            else
+            {
+                return YES;
+            }
         }
         else
         {
@@ -121,20 +139,52 @@
     if ([selectedItem isKindOfClass:[HNLaunchpadPage class]])
     {
         insertIntoPage = (HNLaunchpadPage *)selectedItem;
+        
+        // insert into last position within selected page
         insertPosition = [insertIntoPage.items count];
     }
     else if ([selectedItem isKindOfClass:[HNLaunchpadGroup class]])
     {
-        insertIntoPage = [dataSet.itemList objectForKey:selectedItem.parentId];
-        //insertPosition
+        insertIntoPage = (HNLaunchpadPage *)[dataSet parentForEntity:selectedItem];
+        
+        // insert into position that the selected group occupies
+        insertPosition = [insertIntoPage.items indexForKey:selectedItem.id];
+    }
+    else if ([selectedItem isKindOfClass:[HNLaunchpadApp class]])
+    {
+        insertIntoPage = (HNLaunchpadPage *)[dataSet rootParentForEntity:selectedItem];
+        
+        id <HNLaunchpadEntity> parent = [dataSet parentForEntity:selectedItem];
+        
+        if ([parent isKindOfClass:[HNLaunchpadPage class]])
+        {
+            // insert into position that the selected app occupies
+            insertPosition = [insertIntoPage.items indexForKey:selectedItem.id];
+        }
+        else if ([parent isKindOfClass:[HNLaunchpadGroup class]])
+        {
+            // insert into position that the selected app's parent group occupies
+            insertPosition = [insertIntoPage.items indexForKey:parent.id];
+        }
+        else
+        {
+            [HNException raise:@"Unknown class" format:@"Unusable class: %@", [selectedItem class]];
+        }
+    }
+    else
+    {
+        [HNException raise:@"Unknown class" format:@"Unknown class: %@", [selectedItem class]];
     }
     
     HNLaunchpadGroup *newGroup = [[HNLaunchpadGroup alloc] init];
     newGroup.title = @"Untitled Group";
     
-    //[dataSet createGroup:newGroup inPage:<#(id)#> atPosition:<#(NSUInteger)#> inDb:<#(FMDatabase *)#>];
+    [dataSet createGroup:newGroup inPage:insertIntoPage atPosition:insertPosition inDb:db];
+    [dataSet saveContainerOrdering:insertIntoPage inDb:db];
     
     [db close];
+    
+    [self.appDelegate.outlineView reloadItem:insertIntoPage reloadChildren:YES];
 }
 
 #pragma mark -

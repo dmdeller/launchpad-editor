@@ -16,6 +16,7 @@
 @protocol HNLaunchpadItem;
 @protocol HNLaunchpadContainer;
 
+@class HNLaunchpadPage;
 @class HNLaunchpadGroup;
 @class HNLaunchpadApp;
 
@@ -30,6 +31,9 @@
 - (NSDictionary *)loadGroupsFromDb:(FMDatabase *)db;
 - (NSDictionary *)loadAppsFromDb:(FMDatabase *)db;
 - (void)collateApps:(NSDictionary *)apps andGroups:(NSDictionary *)groups intoPages:(MGOrderedDictionary *)pages fromDb:(FMDatabase *)db;
+
+- (id <HNLaunchpadEntity>)parentForEntity:(id <HNLaunchpadEntity>)entity;
+- (id <HNLaunchpadEntity>)rootParentForEntity:(id <HNLaunchpadEntity>)entity;
 
 - (void)createGroup:(HNLaunchpadGroup *)group inPage:(HNLaunchpadPage *)page atPosition:(NSUInteger)position inDb:(FMDatabase *)db;
 - (void)saveGroup:(HNLaunchpadGroup *)group inDb:(FMDatabase *)db;

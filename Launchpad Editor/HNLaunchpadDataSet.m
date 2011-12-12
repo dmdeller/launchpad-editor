@@ -230,6 +230,40 @@
 }
 
 #pragma mark -
+#pragma mark Querying loaded data
+
+- (id <HNLaunchpadEntity>)parentForEntity:(id <HNLaunchpadEntity>)entity
+{
+    return [self.itemList objectForKey:entity.parentId];
+}
+
+/**
+ * Finds the highest-level parent (should be a page, in this model)
+ */
+- (id <HNLaunchpadEntity>)rootParentForEntity:(id <HNLaunchpadEntity>)entity
+{
+    id <HNLaunchpadEntity> parent = [self parentForEntity:entity];
+    
+    if (parent != nil)
+    {
+        id <HNLaunchpadEntity> root = [self rootParentForEntity:parent];
+        
+        if (root != nil)
+        {
+            return root;
+        }
+        else
+        {
+            return parent;
+        }
+    }
+    else
+    {
+        return parent;
+    }
+}
+
+#pragma mark -
 #pragma mark Saving data
 
 /**
@@ -239,7 +273,7 @@
 {
     NSNumber *nextId;
     
-    NSString *sql = @"SELECT max(id)"
+    NSString *sql = @"SELECT max(rowid)"
                         " FROM items";
     
     FMResultSet *results = [db executeQuery:sql];
@@ -265,8 +299,9 @@
 
 - (void)createGroup:(HNLaunchpadGroup *)group inPage:(HNLaunchpadPage *)page atPosition:(NSUInteger)position inDb:(FMDatabase *)db
 {
-    //[db beginTransaction];
+    [db beginTransaction];
     
+    group.id = [self nextIdInDb:db];
     group.parentId = page.id;
     [page.items insertObject:group forKey:group.id atIndex:position];
     
@@ -277,17 +312,27 @@
     NSString *uuid = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuidObj);
     CFRelease(uuidObj);
     
-    NSLog(@"uuid: %@", uuid);
+    group.uuid = uuid;
     
-    /*if (![db executeUpdate:sql, group.id, uuid, HNLaunchpadDefaultFlags, HNLaunchpadTypeGroup, group.parentId, HNLaunchpadDefaultOrdering])
+    if (![db executeUpdate:sql, group.id, group.uuid, [NSNumber numberWithInt:HNLaunchpadDefaultFlags], [NSNumber numberWithInt:HNLaunchpadTypeGroup], group.parentId, [NSNumber numberWithInt:HNLaunchpadDefaultOrdering]])
     {
         [db rollback];
         [HNException raise:@"Database error" format:[db lastErrorMessage]];
         [db close];
         return;
-    }*/
+    }
     
+    sql = @"INSERT INTO groups (item_id, title) VALUES (?, ?)";
     
+    if (![db executeUpdate:sql, group.id, group.title])
+    {
+        [db rollback];
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [db close];
+        return;
+    }
+    
+    [db commit];
 }
 
 - (void)saveGroup:(HNLaunchpadGroup *)group inDb:(FMDatabase *)db
