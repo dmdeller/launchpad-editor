@@ -188,11 +188,6 @@
     id <HNLaunchpadEntity> item = [items objectAtIndex:0];
     NSString *itemId = [item.id stringValue];
     
-#ifdef DEBUG
-    //id <HNLaunchpadItem> debugItem = (id)item;
-    //NSLog(@"drag item title: %@, id: %@, ordering: %d", debugItem.title, debugItem.id, debugItem.ordering);
-#endif
-    
     [pboard setString:itemId forType:HNLaunchpadPasteboardType];
     
     return YES;
@@ -259,12 +254,6 @@
     NSNumber *sourceItemId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
     id <HNLaunchpadEntity> sourceItem = [self.appDelegate.dataSet.itemList objectForKey:sourceItemId];
     
-#ifdef DEBUG
-    //id <HNLaunchpadEntity> debugItem = (id)item;
-    //id <HNLaunchpadItem> debugSourceItem = (id)sourceItem;
-    //NSLog(@"validate drop item title: %@, id: %@, ordering: %d -- onto item id: %@, ordering: %d", debugSourceItem.title, debugSourceItem.id, debugSourceItem.ordering, debugItem.id, debugItem.ordering);
-#endif
-    
     if (
         // Item being dropped onto must be a container
         [item conformsToProtocol:@protocol(HNLaunchpadContainer)] &&
@@ -291,12 +280,6 @@
     id <HNLaunchpadEntity> child = [self.appDelegate.dataSet.itemList objectForKey:childId];
     id <HNLaunchpadContainer> oldParent = [self.appDelegate.dataSet.itemList objectForKey:child.parentId];
     id <HNLaunchpadContainer> newParent = item;
-    
-#ifdef DEBUG
-    //id <HNLaunchpadEntity> debugItem = (id)item;
-    //id <HNLaunchpadItem> debugSourceItem = (id)child;
-    //NSLog(@"accept drop item title: %@, id: %@, ordering: %d -- onto item id: %@, ordering: %d", debugSourceItem.title, debugSourceItem.id, debugSourceItem.ordering, debugItem.id, debugItem.ordering);
-#endif
     
     if (!(
           // Item being dropped onto must be a container
@@ -394,21 +377,5 @@
         return NO;
     }
 }
-
-/*- (void)outlineViewSelectionDidChange:(NSNotification *)aNotification
-{
-    id <HNLaunchpadEntity> item = [self.appDelegate.outlineView itemAtRow:self.appDelegate.outlineView.selectedRow];
-    
-    NSLog(@"selected: %@", item);
-    
-    if ([item isKindOfClass:[HNLaunchpadApp class]])
-    {
-        [self.appDelegate.toolbarController.addGroupButton setEnabled:YES];
-    }
-    else
-    {
-        [self.appDelegate.toolbarController.addGroupButton setEnabled:NO];
-    }
-}*/
 
 @end
