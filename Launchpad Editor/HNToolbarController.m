@@ -196,7 +196,25 @@
 
 - (void)delete
 {
-
+    FMDatabase *db = [self.appDelegate openDb];
+    HNLaunchpadDataSet *dataSet = self.appDelegate.outlineViewController.dataSet;
+    id <HNLaunchpadEntity> selectedItem = [self.appDelegate.outlineViewController selectedItem];
+    id <HNLaunchpadEntity> parentItem = [dataSet parentForEntity:selectedItem];
+    
+    if ([selectedItem isKindOfClass:[HNLaunchpadGroup class]] || [selectedItem isKindOfClass:[HNLaunchpadPage class]])
+    {
+        [dataSet deleteContainer:(id)selectedItem inDb:db];
+    }
+    else
+    {
+        [HNException raise:@"Unexpected class" format:@"Cannot use this class in this context: %@", [selectedItem class]];
+    }
+    
+    selectedItem = nil;
+    
+    [self.appDelegate.outlineView reloadItem:parentItem reloadChildren:YES];
+    
+    [db close];
 }
 
 #pragma mark -

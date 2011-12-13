@@ -39,6 +39,8 @@
 - (void)saveGroup:(HNLaunchpadGroup *)group inDb:(FMDatabase *)db;
 - (void)saveEntity:(id <HNLaunchpadEntity>)entity inDb:(FMDatabase *)db;
 - (void)saveContainerOrdering:(id <HNLaunchpadContainer>)container inDb:(FMDatabase *)db;
+- (int)numberOfItemsForContainer:(id <HNLaunchpadContainer>)container inDb:(FMDatabase *)db;
+- (void)deleteContainer:(id <HNLaunchpadContainer>)container inDb:(FMDatabase *)db;
 - (void)setTriggerDisabled:(BOOL)isDisabled inDb:(FMDatabase *)db;
 
 @end

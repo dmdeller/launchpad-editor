@@ -394,6 +394,90 @@
     [self setTriggerDisabled:NO inDb:db];
 }
 
+- (int)numberOfItemsForContainer:(id <HNLaunchpadContainer>)container inDb:(FMDatabase *)db
+{
+    NSString *sql = @"SELECT count(rowid)"
+                        " FROM items"
+                        " WHERE parent_id = ?";
+    
+    FMResultSet *results = [db executeQuery:sql, container.id];
+    
+    if (results == nil)
+    {
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        return 0;
+    }
+    
+    if ([results next])
+    {
+        return [results intForColumnIndex:0];
+    }
+    else
+    {
+        [HNException raise:@"Database query failure" format:@"No results returned for SQL: %@", sql];
+        return 0;
+    }
+}
+
+- (void)deleteContainer:(id <HNLaunchpadContainer>)container inDb:(FMDatabase *)db
+{
+    if ([self numberOfItemsForContainer:container inDb:db] != 0)
+    {
+        [HNException raise:@"Unexpected value" format:@"Cannot delete non-empty container"];
+    }
+    
+    NSNumber *containerId = container.id;
+    id <HNLaunchpadContainer> parentContainer = (id)[self parentForEntity:container];
+    
+    [db beginTransaction];
+    
+    NSString *sql = @"DELETE FROM items WHERE rowid = ?";
+    
+    if (![db executeUpdate:sql, container.id])
+    {
+        [db rollback];
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        return;
+    }
+    
+    if ([container isKindOfClass:[HNLaunchpadGroup class]])
+    {
+        sql = @"DELETE FROM groups WHERE item_id = ?";
+    }
+    else if ([container isKindOfClass:[HNLaunchpadPage class]])
+    {
+        sql = @"DELETE FROM pages WHERE item_id = ?";
+    }
+    else
+    {
+        [db rollback];
+        [HNException raise:@"Unusuable class" format:@"Unusable class: %@", [container class]];
+        return;
+    }
+    
+    if (![db executeUpdate:sql, container.id])
+    {
+        [db rollback];
+        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        return;
+    }
+    
+    [db commit];
+    
+    container = nil;
+    
+    if (parentContainer == nil)
+    {
+        [self.itemTree removeObjectForKey:containerId];
+    }
+    else
+    {
+        [parentContainer.items removeObjectForKey:containerId];
+    }
+    
+    [self.itemList removeObjectForKey:containerId];
+}
+
 /**
  * The database has a trigger called update_items_order - it's not clear what it's supposed to do, but it interferes with our adjustment of the ordering, so we need a way to temporarily disable it.
  */
