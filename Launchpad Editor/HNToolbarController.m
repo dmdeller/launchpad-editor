@@ -93,7 +93,7 @@
             id <HNLaunchpadContainer> selectedContainer = (id)selectedItem;
             
             // can only delete a container if it's empty
-            if (selectedContainer.items == 0)
+            if ([selectedContainer.items count] == 0)
             {
                 return YES;
             }
