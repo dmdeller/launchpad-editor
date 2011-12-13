@@ -56,7 +56,7 @@
     
     if (results == nil)
     {
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         return nil;
     }
     
@@ -100,7 +100,7 @@
     
     if (results == nil)
     {
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         return nil;
     }
     
@@ -134,7 +134,7 @@
     
     if (results == nil)
     {
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         return nil;
     }
     
@@ -199,7 +199,7 @@
                 else
                 {
                     // exception
-                    [HNException raise:@"Container not found" format:@"Could not find container object for app: %@, title: %@", app, app.title];
+                    [HNException raise:NSInternalInconsistencyException format:@"Could not find container object for app: %@, title: %@", app, app.title];
                     continue;
                 }
             }
@@ -216,14 +216,14 @@
             else
             {
                 // exception
-                [HNException raise:@"Container not found" format:@"Could not find container object for group: %@, title: %@", group, group.title];
+                [HNException raise:NSInternalInconsistencyException format:@"Could not find container object for group: %@, title: %@", group, group.title];
                 continue;
             }
         }
         else
         {
             //exception
-            [HNException raise:@"Unknown entity type" format:@"Unknown entity type: %i", [results intForColumn:@"type"]];
+            [HNException raise:HNInvalidClassException format:@"Unknown entity type: %i", [results intForColumn:@"type"]];
             continue;
         }
     }
@@ -280,7 +280,7 @@
     
     if (results == nil)
     {
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         return nil;
     }
     
@@ -290,7 +290,7 @@
     }
     else
     {
-        [HNException raise:@"Database query failure" format:@"No results returned for SQL: %@", sql];
+        [HNException raise:HNDatabaseException format:@"No results returned for SQL: %@", sql];
         return nil;
     }
     
@@ -317,7 +317,7 @@
     if (![db executeUpdate:sql, group.id, group.uuid, [NSNumber numberWithInt:HNLaunchpadDefaultFlags], [NSNumber numberWithInt:HNLaunchpadTypeGroup], group.parentId, [NSNumber numberWithInt:HNLaunchpadDefaultOrdering]])
     {
         [db rollback];
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         [db close];
         return;
     }
@@ -327,7 +327,7 @@
     if (![db executeUpdate:sql, group.id, group.title])
     {
         [db rollback];
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         [db close];
         return;
     }
@@ -343,7 +343,7 @@
     
     if (![db executeUpdate:sql, group.title, group.id])
     {
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         [db close];
         return;
     }
@@ -357,7 +357,7 @@
     
     if (![db executeUpdate:sql, entity.parentId, entity.id])
     {
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         [db close];
         return;
     }
@@ -382,7 +382,7 @@
         
         if (![db executeUpdate:sql, [NSNumber numberWithInt:item.ordering], item.id])
         {
-            [HNException raise:@"Database error" format:[db lastErrorMessage]];
+            [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
             [self setTriggerDisabled:NO inDb:db];
             [db close];
             return;
@@ -404,7 +404,7 @@
     
     if (results == nil)
     {
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         return 0;
     }
     
@@ -414,7 +414,7 @@
     }
     else
     {
-        [HNException raise:@"Database query failure" format:@"No results returned for SQL: %@", sql];
+        [HNException raise:HNDatabaseException format:@"No results returned for SQL: %@", sql];
         return 0;
     }
 }
@@ -423,7 +423,7 @@
 {
     if ([self numberOfItemsForContainer:container inDb:db] != 0)
     {
-        [HNException raise:@"Unexpected value" format:@"Cannot delete non-empty container"];
+        [HNException raise:NSInternalInconsistencyException format:@"Cannot delete non-empty container"];
     }
     
     NSNumber *containerId = container.id;
@@ -436,7 +436,7 @@
     if (![db executeUpdate:sql, container.id])
     {
         [db rollback];
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         return;
     }
     
@@ -451,14 +451,14 @@
     else
     {
         [db rollback];
-        [HNException raise:@"Unusuable class" format:@"Unusable class: %@", [container class]];
+        [HNException raise:HNInvalidClassException format:@"Unusable class: %@", [container class]];
         return;
     }
     
     if (![db executeUpdate:sql, container.id])
     {
         [db rollback];
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         return;
     }
     
@@ -489,7 +489,7 @@
     
     if (![db executeUpdate:sql, [NSNumber numberWithBool:isDisabled]])
     {
-        [HNException raise:@"Database error" format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
         return;
     }
 }

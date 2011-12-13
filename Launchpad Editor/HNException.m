@@ -10,4 +10,8 @@
 
 @implementation HNException
 
+NSString *const HNDatabaseException = @"HN database exception";
+NSString *const HNFilesystemException = @"HN filesystem exception";
+NSString *const HNInvalidClassException = @"HN invalid class exception";
+
 @end

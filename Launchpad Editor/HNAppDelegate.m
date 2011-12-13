@@ -89,7 +89,7 @@
     
     if (returnCode != 0)
     {
-        [HNException raise:@"Unable to kill process" format:@"Error killing Dock process. system() returned code: %i", returnCode];
+        [HNException raise:NSInternalInconsistencyException format:@"Error killing Dock process. system() returned code: %i", returnCode];
     }
 }
 
@@ -115,7 +115,7 @@
     
     if (error)
     {
-        [HNException raise:@"Directory read error" format:@"Unable to open location: %@\n\n%@", dir, [error localizedFailureReason]];
+        [HNException raise:HNFilesystemException format:@"Unable to open location: %@\n\n%@", dir, [error localizedFailureReason]];
     }
     
     NSString *matchFile;
@@ -130,7 +130,7 @@
     
     if (matchFile == nil)
     {
-        [HNException raise:@"File not found" format:@"No Launchpad database file could be found in directory: %@", dir];
+        [HNException raise:HNFilesystemException format:@"No Launchpad database file could be found in directory: %@", dir];
     }
     
     dbFilename = [NSString stringWithFormat:@"%@/%@", dir, matchFile];
@@ -159,7 +159,7 @@
     
     if (error)
     {
-        [HNException raise:@"Directory read error" format:@"Unable to open location: %@\n\n%@", dir, [error localizedFailureReason]];
+        [HNException raise:HNFilesystemException format:@"Unable to open location: %@\n\n%@", dir, [error localizedFailureReason]];
     }
     
     // loop through all existing backups and see if there is one from today.
@@ -176,7 +176,7 @@
         
         if (error)
         {
-            [HNException raise:@"File read error" format:@"Unable to read file attributes: %@/%@\n\n%@", dir, file, [error localizedFailureReason]];
+            [HNException raise:HNFilesystemException format:@"Unable to read file attributes: %@/%@\n\n%@", dir, file, [error localizedFailureReason]];
             continue;
         }
         
@@ -213,7 +213,7 @@
         
         if (error)
         {
-            [HNException raise:@"Directory creation error" format:@"Unable to create folder: %@\n\n", dir, [error localizedFailureReason]];
+            [HNException raise:HNFilesystemException format:@"Unable to create folder: %@\n\n", dir, [error localizedFailureReason]];
         }
     }
     
@@ -227,7 +227,7 @@
     
     if (error)
     {
-        [HNException raise:@"File creation error" format:@"Unable to copy file: %@ to location: %@\n\n%@", [self dbFilename], newDbFilename, [error localizedFailureReason]];
+        [HNException raise:HNFilesystemException format:@"Unable to copy file: %@ to location: %@\n\n%@", [self dbFilename], newDbFilename, [error localizedFailureReason]];
     }
     
     // Set creation date to now, so we can later check when the backup was made
@@ -236,7 +236,7 @@
     
     if (error)
     {
-        [HNException raise:@"File attribute modification error" format:@"Unable to set attributes on file: %@\n\n%@", newDbFilename, [error localizedFailureReason]];
+        [HNException raise:HNFilesystemException format:@"Unable to set attributes on file: %@\n\n%@", newDbFilename, [error localizedFailureReason]];
     }
 }
 
@@ -249,7 +249,7 @@
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:filename])
     {
-        [HNException raise:@"Database read error" format:@"Database at path: %@ does not exist", filename];
+        [HNException raise:HNDatabaseException format:@"Database at path: %@ does not exist", filename];
         return nil;
     }
     
@@ -257,7 +257,7 @@
     
     if (![db open])
     {
-        [HNException raise:@"Database open error" format:@"Could not open database: %@", filename];
+        [HNException raise:HNDatabaseException format:@"Could not open database: %@", filename];
         return nil;
     }
     

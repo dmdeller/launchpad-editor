@@ -93,8 +93,8 @@
 		C36B09A5148FD178004B6998 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		C371777B14897FEB00358BFA /* HNOutlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNOutlineViewController.h; sourceTree = "<group>"; };
 		C371777C14897FEB00358BFA /* HNOutlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HNOutlineViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		C3717781148E975600358BFA /* HNException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNException.h; sourceTree = "<group>"; };
-		C3717782148E975600358BFA /* HNException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNException.m; sourceTree = "<group>"; };
+		C3717781148E975600358BFA /* HNException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = HNException.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		C3717782148E975600358BFA /* HNException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HNException.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C39EA2D4146CB281001356F5 /* HNLaunchpadPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadPage.h; sourceTree = "<group>"; };
 		C39EA2D5146CB281001356F5 /* HNLaunchpadPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNLaunchpadPage.m; sourceTree = "<group>"; };
 		C39EA2D8146CB28D001356F5 /* HNLaunchpadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadGroup.h; sourceTree = "<group>"; };

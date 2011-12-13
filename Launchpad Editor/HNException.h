@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const HNDatabaseException;
+extern NSString *const HNFilesystemException;
+extern NSString *const HNInvalidClassException;
+
 @interface HNException : NSException
 
 @end

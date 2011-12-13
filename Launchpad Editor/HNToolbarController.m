@@ -168,12 +168,12 @@
         }
         else
         {
-            [HNException raise:@"Unknown class" format:@"Unusable class: %@", [selectedItem class]];
+            [HNException raise:HNInvalidClassException format:@"Unusable class: %@", [selectedItem class]];
         }
     }
     else
     {
-        [HNException raise:@"Unknown class" format:@"Unknown class: %@", [selectedItem class]];
+        [HNException raise:HNInvalidClassException format:@"Unknown class: %@", [selectedItem class]];
     }
     
     HNLaunchpadGroup *newGroup = [[HNLaunchpadGroup alloc] init];
@@ -207,7 +207,7 @@
     }
     else
     {
-        [HNException raise:@"Unexpected class" format:@"Cannot use this class in this context: %@", [selectedItem class]];
+        [HNException raise:HNInvalidClassException format:@"Cannot use this class in this context: %@", [selectedItem class]];
     }
     
     selectedItem = nil;

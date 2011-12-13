@@ -81,7 +81,7 @@
     }
     else
     {
-        [HNException raise:@"Unknown NSOutlineViewDatasource item" format:@"Unknown kind of item"];
+        [HNException raise:HNInvalidClassException format:@"Unknown kind of item"];
         return 0;
     }
 }
@@ -121,7 +121,7 @@
     }
     else
     {
-        [HNException raise:@"Unknown NSOutlineViewDataSource child" format:@"Item has no children"];
+        [HNException raise:NSInternalInconsistencyException format:@"Item has no children"];
         return nil;
     }
 }
@@ -149,7 +149,7 @@
     }
     else
     {
-        [HNException raise:@"Unknown NSOutlineViewDataSource item" format:@"Unknown kind of item"];
+        [HNException raise:NSInternalInconsistencyException format:@"Unknown kind of item"];
         return @"Unknown";
     }
 }
@@ -169,7 +169,7 @@
     }
     else
     {
-        [HNException raise:@"Cannot rename object" format:@"Only HNLaunchpadGroup objects can be renamed"];
+        [HNException raise:HNInvalidClassException format:@"Only HNLaunchpadGroup objects can be renamed"];
         return;
     }
 }
