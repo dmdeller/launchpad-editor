@@ -7,3 +7,4 @@ TODO
 - Restore from backup
 - Reset Launchpad (drop database)
 - Rearrange pages
+- Visual indication of when pages/groups are full
