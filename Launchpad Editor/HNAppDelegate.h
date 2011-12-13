@@ -10,6 +10,7 @@
 
 @class HNToolbarController;
 @class HNOutlineViewController;
+@class HNLaunchpadDataSet;
 
 @class FMDatabase;
 
@@ -20,6 +21,7 @@
 @property (strong) IBOutlet HNToolbarController *toolbarController;
 @property (strong) IBOutlet HNOutlineViewController *outlineViewController;
 @property (strong, nonatomic, readonly) NSString *dbFilename;
+@property (strong) HNLaunchpadDataSet *dataSet;
 
 - (void)restartDockAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 - (void)restartDock;

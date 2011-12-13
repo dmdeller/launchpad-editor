@@ -22,7 +22,6 @@
 @implementation HNOutlineViewController
 
 @synthesize appDelegate;
-@synthesize dataSet;
 
 #pragma mark -
 
@@ -33,8 +32,8 @@
     @try
     {
         FMDatabase *db = [self.appDelegate openDb];
-        self.dataSet = [[HNLaunchpadDataSet alloc] init];
-        [self.dataSet loadFromDb:db];
+        self.appDelegate.dataSet = [[HNLaunchpadDataSet alloc] init];
+        [self.appDelegate.dataSet loadFromDb:db];
         [db close];
     }
     @catch (HNException *e)
@@ -61,7 +60,7 @@
 {
     if (item == nil)
     {
-        return [self.dataSet.itemTree count];
+        return [self.appDelegate.dataSet.itemTree count];
     }
     else if ([item isKindOfClass:[HNLaunchpadPage class]])
     {
@@ -105,7 +104,7 @@
     
     if (item == nil)
     {
-        return [self.dataSet.itemTree objectForKey:[self.dataSet.itemTree keyAtIndex:index]];
+        return [self.appDelegate.dataSet.itemTree objectForKey:[self.appDelegate.dataSet.itemTree keyAtIndex:index]];
     }
     else if ([item isKindOfClass:[HNLaunchpadPage class]])
     {
@@ -164,7 +163,7 @@
         group.title = newTitle;
         
         FMDatabase *db = [self.appDelegate openDb];
-        [self.dataSet saveGroup:group inDb:db];
+        [self.appDelegate.dataSet saveGroup:group inDb:db];
         [db close];
     }
     else
@@ -258,7 +257,7 @@
 - (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)index
 {
     NSNumber *sourceItemId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
-    id <HNLaunchpadEntity> sourceItem = [self.dataSet.itemList objectForKey:sourceItemId];
+    id <HNLaunchpadEntity> sourceItem = [self.appDelegate.dataSet.itemList objectForKey:sourceItemId];
     
 #ifdef DEBUG
     //id <HNLaunchpadEntity> debugItem = (id)item;
@@ -289,8 +288,8 @@
 {
     NSNumber *childId = [NSNumber numberWithInteger:[[[info draggingPasteboard] stringForType:HNLaunchpadPasteboardType] integerValue]];
     
-    id <HNLaunchpadEntity> child = [self.dataSet.itemList objectForKey:childId];
-    id <HNLaunchpadContainer> oldParent = [self.dataSet.itemList objectForKey:child.parentId];
+    id <HNLaunchpadEntity> child = [self.appDelegate.dataSet.itemList objectForKey:childId];
+    id <HNLaunchpadContainer> oldParent = [self.appDelegate.dataSet.itemList objectForKey:child.parentId];
     id <HNLaunchpadContainer> newParent = item;
     
 #ifdef DEBUG
@@ -340,7 +339,7 @@
         [oldParent.items removeObjectForKey:child.id];
         
         child.parentId = newParent.id;
-        [self.dataSet saveEntity:child inDb:db];
+        [self.appDelegate.dataSet saveEntity:child inDb:db];
     }
     
     // add child in new placement
@@ -355,7 +354,7 @@
         [newParent.items insertObject:child forKey:child.id atIndex:index];
     }
     
-    [self.dataSet saveContainerOrdering:newParent inDb:db];
+    [self.appDelegate.dataSet saveContainerOrdering:newParent inDb:db];
     
     // reload view data 
     if (oldParent != newParent)

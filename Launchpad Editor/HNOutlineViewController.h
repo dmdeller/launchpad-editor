@@ -20,7 +20,6 @@
 @interface HNOutlineViewController : NSObject <NSOutlineViewDataSource, NSOutlineViewDelegate>
 
 @property (weak) IBOutlet HNAppDelegate *appDelegate;
-@property (strong) HNLaunchpadDataSet *dataSet;
 
 - (id)selectedItem;
 

@@ -53,7 +53,6 @@
  */
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {
-    HNLaunchpadDataSet *dataSet = self.appDelegate.outlineViewController.dataSet;
     id <HNLaunchpadEntity> selectedItem = [self.appDelegate.outlineViewController selectedItem];
     
     if (theItem == self.addPageButton)
@@ -67,7 +66,7 @@
             if ([selectedItem isKindOfClass:[HNLaunchpadApp class]])
             {
                 // only create groups when the selected app is a direct descendant of a page; don't want to encourage the impression that we can create groups inside of groups
-                if ([[dataSet parentForEntity:selectedItem] isKindOfClass:[HNLaunchpadPage class]])
+                if ([[self.appDelegate.dataSet parentForEntity:selectedItem] isKindOfClass:[HNLaunchpadPage class]])
                 {
                     return YES;
                 }
@@ -130,7 +129,6 @@
 - (void)addGroup
 {
     FMDatabase *db = [self.appDelegate openDb];
-    HNLaunchpadDataSet *dataSet = self.appDelegate.outlineViewController.dataSet;
     id <HNLaunchpadEntity> selectedItem = [self.appDelegate.outlineViewController selectedItem];
     
     HNLaunchpadPage *insertIntoPage;
@@ -145,16 +143,16 @@
     }
     else if ([selectedItem isKindOfClass:[HNLaunchpadGroup class]])
     {
-        insertIntoPage = (HNLaunchpadPage *)[dataSet parentForEntity:selectedItem];
+        insertIntoPage = (HNLaunchpadPage *)[self.appDelegate.dataSet parentForEntity:selectedItem];
         
         // insert into position that the selected group occupies
         insertPosition = [insertIntoPage.items indexForKey:selectedItem.id];
     }
     else if ([selectedItem isKindOfClass:[HNLaunchpadApp class]])
     {
-        insertIntoPage = (HNLaunchpadPage *)[dataSet rootParentForEntity:selectedItem];
+        insertIntoPage = (HNLaunchpadPage *)[self.appDelegate.dataSet rootParentForEntity:selectedItem];
         
-        id <HNLaunchpadEntity> parent = [dataSet parentForEntity:selectedItem];
+        id <HNLaunchpadEntity> parent = [self.appDelegate.dataSet parentForEntity:selectedItem];
         
         if ([parent isKindOfClass:[HNLaunchpadPage class]])
         {
@@ -179,8 +177,8 @@
     HNLaunchpadGroup *newGroup = [[HNLaunchpadGroup alloc] init];
     newGroup.title = @"Untitled Group";
     
-    [dataSet createGroup:newGroup inPage:insertIntoPage atPosition:insertPosition inDb:db];
-    [dataSet saveContainerOrdering:insertIntoPage inDb:db];
+    [self.appDelegate.dataSet createGroup:newGroup inPage:insertIntoPage atPosition:insertPosition inDb:db];
+    [self.appDelegate.dataSet saveContainerOrdering:insertIntoPage inDb:db];
     
     [db close];
     
@@ -197,13 +195,12 @@
 - (void)delete
 {
     FMDatabase *db = [self.appDelegate openDb];
-    HNLaunchpadDataSet *dataSet = self.appDelegate.outlineViewController.dataSet;
     id <HNLaunchpadEntity> selectedItem = [self.appDelegate.outlineViewController selectedItem];
-    id <HNLaunchpadEntity> parentItem = [dataSet parentForEntity:selectedItem];
+    id <HNLaunchpadEntity> parentItem = [self.appDelegate.dataSet parentForEntity:selectedItem];
     
     if ([selectedItem isKindOfClass:[HNLaunchpadGroup class]] || [selectedItem isKindOfClass:[HNLaunchpadPage class]])
     {
-        [dataSet deleteContainer:(id)selectedItem inDb:db];
+        [self.appDelegate.dataSet deleteContainer:(id)selectedItem inDb:db];
     }
     else
     {

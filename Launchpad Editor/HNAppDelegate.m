@@ -20,6 +20,7 @@
 @synthesize outlineView;
 @synthesize outlineViewController;
 @synthesize dbFilename;
+@synthesize dataSet;
 
 #pragma mark -
 #pragma mark Application delegate
