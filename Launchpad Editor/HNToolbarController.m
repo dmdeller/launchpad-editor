@@ -185,6 +185,10 @@
     [db close];
     
     [self.appDelegate.outlineView reloadItem:insertIntoPage reloadChildren:YES];
+    
+    // highlight new row for editing, to suggest that the user should rename it
+    [self.appDelegate.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(self.appDelegate.outlineView.selectedRow - 1)] byExtendingSelection:NO];
+    [self.appDelegate.outlineView editColumn:0 row:(self.appDelegate.outlineView.selectedRow) withEvent:nil select:YES];
 }
 
 #pragma mark -
