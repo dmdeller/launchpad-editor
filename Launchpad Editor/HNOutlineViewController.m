@@ -356,14 +356,7 @@
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
 {
-    if ([item isKindOfClass:[HNLaunchpadPage class]])
-    {
-        return NO;
-    }
-    else
-    {
-        return YES;
-    }
+    return YES;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
