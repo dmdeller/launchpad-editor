@@ -14,6 +14,4 @@
 
 @interface HNLaunchpadPage : NSObject <HNLaunchpadContainer>
 
-@property (assign) int pageNumber;
-
 @end

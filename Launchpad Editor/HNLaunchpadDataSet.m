@@ -60,8 +60,6 @@
         return nil;
     }
     
-    int pageNumber = 0;
-    
     while ([results next])
     {
         // FIXME: hacky
@@ -72,12 +70,9 @@
         
         HNLaunchpadPage *page = [[HNLaunchpadPage alloc] init];
         
-        pageNumber++;
-        
         page.uuid = [results stringForColumn:@"uuid"];
         page.id = [NSNumber numberWithInt:[results intForColumn:@"rowid"]];
         page.ordering = [results intForColumn:@"ordering"];
-        page.pageNumber = pageNumber;
         page.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
         [pages setObject:page forKey:page.id];
@@ -297,6 +292,46 @@
     return nextId;
 }
 
+- (void)createPage:(HNLaunchpadPage *)page atPosition:(NSUInteger)position inDb:(FMDatabase *)db
+{
+    [db beginTransaction];
+    
+    page.id = [self nextIdInDb:db];
+    page.parentId = [NSNumber numberWithInt:HNLaunchpadPageParentId];
+    
+    [self.itemTree insertObject:page forKey:page.id atIndex:position];
+    [self.itemList setObject:page forKey:page.id];
+    
+    NSString *sql = @"INSERT INTO items (rowid, uuid, flags, type, parent_id, ordering) VALUES (?, ?, ?, ?, ?, ?)";
+    
+    // create new UUID
+    CFUUIDRef uuidObj = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *uuid = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuidObj);
+    CFRelease(uuidObj);
+    
+    page.uuid = uuid;
+    
+    if (![db executeUpdate:sql, page.id, page.uuid, [NSNumber numberWithInt:HNLaunchpadDefaultFlags], [NSNumber numberWithInt:HNLaunchpadTypePage], page.parentId, [NSNumber numberWithInt:HNLaunchpadDefaultOrdering]])
+    {
+        [db rollback];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [db close];
+        return;
+    }
+    
+    sql = @"INSERT INTO groups (item_id) VALUES (?)";
+    
+    if (![db executeUpdate:sql, page.id])
+    {
+        [db rollback];
+        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [db close];
+        return;
+    }
+    
+    [db commit];
+}
+
 - (void)createGroup:(HNLaunchpadGroup *)group inPage:(HNLaunchpadPage *)page atPosition:(NSUInteger)position inDb:(FMDatabase *)db
 {
     [db beginTransaction];
@@ -304,6 +339,7 @@
     group.id = [self nextIdInDb:db];
     group.parentId = page.id;
     [page.items insertObject:group forKey:group.id atIndex:position];
+    [self.itemList setObject:group forKey:group.id];
     
     NSString *sql = @"INSERT INTO items (rowid, uuid, flags, type, parent_id, ordering) VALUES (?, ?, ?, ?, ?, ?)";
     
@@ -365,10 +401,23 @@
 
 /**
  * Loops through all of the items in a container, and makes the database ordering match the current MGOrderedDictionary ordering.
+ *
+ * If container is nil, loops through all of the pages at the root.
  */
 - (void)saveContainerOrdering:(id <HNLaunchpadContainer>)container inDb:(FMDatabase *)db
 {
     [self setTriggerDisabled:YES inDb:db];
+    
+    NSArray *items;
+    
+    if (container == nil)
+    {
+        items = [self.itemTree allValues];
+    }
+    else
+    {
+        items = [container.items allValues];
+    }
     
     int i = 0;
     
@@ -440,20 +489,7 @@
         return;
     }
     
-    if ([container isKindOfClass:[HNLaunchpadGroup class]])
-    {
-        sql = @"DELETE FROM groups WHERE item_id = ?";
-    }
-    else if ([container isKindOfClass:[HNLaunchpadPage class]])
-    {
-        sql = @"DELETE FROM pages WHERE item_id = ?";
-    }
-    else
-    {
-        [db rollback];
-        [HNException raise:HNInvalidClassException format:@"Unusable class: %@", [container class]];
-        return;
-    }
+    sql = @"DELETE FROM groups WHERE item_id = ?";
     
     if (![db executeUpdate:sql, container.id])
     {

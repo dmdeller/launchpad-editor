@@ -27,4 +27,7 @@ static int const HNLaunchpadDefaultFlags = 0;
 // Temporary value for 'ordering' column when creating a new object; this should be fixed with HNLaunchpadDataSet -saveContainerOrdering:inDb:
 static int const HNLaunchpadDefaultOrdering = -1;
 
+// Value to use as parent ID for Page Entities
+static int const HNLaunchpadPageParentId = 1;
+
 #endif

@@ -1,7 +1,6 @@
 TODO
-- Create/delete groups
 - Default window size
-- Icon
+- Icons
 - Clean up automatic backups
 - Manual backup
 - Restore from backup

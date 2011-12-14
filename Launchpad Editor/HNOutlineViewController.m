@@ -132,7 +132,8 @@
     {
         HNLaunchpadPage *page = (HNLaunchpadPage *)item;
         
-        return [NSString stringWithFormat:@"Page %i", page.pageNumber];
+        NSUInteger pageNumber = ([self.appDelegate.dataSet.itemTree indexForKey:page.id] + 1);
+        return [NSString stringWithFormat:@"Page %lu", pageNumber];
     }
     else if ([item isKindOfClass:[HNLaunchpadGroup class]])
     {

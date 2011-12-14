@@ -14,7 +14,6 @@
 @synthesize id;
 @synthesize parentId;
 @synthesize ordering;
-@synthesize pageNumber;
 @synthesize items;
 
 @end

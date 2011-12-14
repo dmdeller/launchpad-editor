@@ -35,6 +35,8 @@
 - (id <HNLaunchpadEntity>)parentForEntity:(id <HNLaunchpadEntity>)entity;
 - (id <HNLaunchpadEntity>)rootParentForEntity:(id <HNLaunchpadEntity>)entity;
 
+- (NSNumber *)nextIdInDb:(FMDatabase *)db;
+- (void)createPage:(HNLaunchpadPage *)page atPosition:(NSUInteger)position inDb:(FMDatabase *)db;
 - (void)createGroup:(HNLaunchpadGroup *)group inPage:(HNLaunchpadPage *)page atPosition:(NSUInteger)position inDb:(FMDatabase *)db;
 - (void)saveGroup:(HNLaunchpadGroup *)group inDb:(FMDatabase *)db;
 - (void)saveEntity:(id <HNLaunchpadEntity>)entity inDb:(FMDatabase *)db;

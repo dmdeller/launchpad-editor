@@ -121,6 +121,22 @@
 
 - (void)addPage
 {
+    FMDatabase *db = [self.appDelegate openDb];
+    
+    HNLaunchpadPage *newPage = [[HNLaunchpadPage alloc] init];
+    
+    NSUInteger insertPosition = [self.appDelegate.dataSet.itemTree count];
+    
+    [self.appDelegate.dataSet createPage:newPage atPosition:insertPosition inDb:db];
+    [self.appDelegate.dataSet saveContainerOrdering:nil inDb:db];
+    
+    [db close];
+    
+    [self.appDelegate.outlineView reloadData];
+    
+    // highlight new row
+    NSInteger row = [self.appDelegate.outlineView rowForItem:newPage];
+    [self.appDelegate.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 }
 
 #pragma mark -
@@ -210,7 +226,14 @@
     
     selectedItem = nil;
     
-    [self.appDelegate.outlineView reloadItem:parentItem reloadChildren:YES];
+    if (parentItem == nil)
+    {
+        [self.appDelegate.outlineView reloadData];
+    }
+    else
+    {
+        [self.appDelegate.outlineView reloadItem:parentItem reloadChildren:YES];
+    }
     
     [db close];
 }
