@@ -73,7 +73,6 @@
         page.uuid = [results stringForColumn:@"uuid"];
         page.id = [NSNumber numberWithInt:[results intForColumn:@"rowid"]];
         page.ordering = [results intForColumn:@"ordering"];
-        page.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
         [pages setObject:page forKey:page.id];
     }
@@ -108,7 +107,6 @@
         group.ordering = [results intForColumn:@"ordering"];
         group.parentId = [NSNumber numberWithInt:[results intForColumn:@"parent_id"]];
         group.title = [results stringForColumn:@"title"];
-        group.items = [MGOrderedDictionary dictionaryWithCapacity:40];
         
         [groups setObject:group forKey:group.id];
     }

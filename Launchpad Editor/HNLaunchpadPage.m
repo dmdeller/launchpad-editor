@@ -16,4 +16,14 @@
 @synthesize ordering;
 @synthesize items;
 
+- (id)init
+{
+    if ((self = [super init]))
+    {
+        self.items = [MGOrderedDictionary dictionaryWithCapacity:40];
+    }
+    
+    return self;
+}
+
 @end
