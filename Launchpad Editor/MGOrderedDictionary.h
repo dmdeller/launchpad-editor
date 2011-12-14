@@ -14,6 +14,8 @@
 //  http://cocoawithlove.com/2008/12/ordereddictionary-subclassing-cocoa.html
 //
 
+NSString *DescriptionForObject(NSObject *object, id locale, NSUInteger indent);
+
 @interface MGOrderedDictionary : NSMutableDictionary
 {
 	NSMutableDictionary *dictionary;

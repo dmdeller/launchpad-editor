@@ -21,7 +21,7 @@ NSString *DescriptionForObject(NSObject *object, id locale, NSUInteger indent)
 	NSString *objectString;
 	if ([object isKindOfClass:[NSString class]])
 	{
-		objectString = (NSString *)[[object retain] autorelease];
+		objectString = (NSString *)object;
 	}
 	else if ([object respondsToSelector:@selector(descriptionWithLocale:indent:)])
 	{
@@ -54,13 +54,6 @@ NSString *DescriptionForObject(NSObject *object, id locale, NSUInteger indent)
 		array = [[NSMutableArray alloc] initWithCapacity:capacity];
 	}
 	return self;
-}
-
-- (void)dealloc
-{
-	[dictionary release];
-	[array release];
-	[super dealloc];
 }
 
 - (id)copy
@@ -119,14 +112,6 @@ NSString *DescriptionForObject(NSObject *object, id locale, NSUInteger indent)
 	return [array objectAtIndex:anIndex];
 }
 
-/**
- * Added by D.M.Deller
- */
-- (NSUInteger)indexForKey:(id)key
-{
-    return [array indexOfObject:key];
-}
-
 - (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level
 {
 	NSMutableString *indentString = [NSMutableString string];
@@ -147,6 +132,39 @@ NSString *DescriptionForObject(NSObject *object, id locale, NSUInteger indent)
 	}
 	[description appendFormat:@"%@}\n", indentString];
 	return description;
+}
+
+
+
+#pragma mark -
+#pragma mark Added by D.M.Deller
+
+- (NSUInteger)indexForKey:(id)key
+{
+    return [array indexOfObject:key];
+}
+
+/**
+ * Return keys in proper order
+ */
+- (NSArray *)allKeys
+{
+    return array;
+}
+
+/**
+ * Return values in proper order
+ */
+- (NSArray *)allValues
+{
+    NSMutableArray *mutableValues = [NSMutableArray arrayWithCapacity:100];
+    
+    for (NSUInteger i = 0; i < [array count]; i++)
+    {
+        [mutableValues addObject:[dictionary objectForKey:[array objectAtIndex:i]]];
+    }
+    
+    return (NSArray *)mutableValues;
 }
 
 @end
