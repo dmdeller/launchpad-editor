@@ -30,4 +30,8 @@ static int const HNLaunchpadDefaultOrdering = -1;
 // Value to use as parent ID for Page Entities
 static int const HNLaunchpadPageParentId = 1;
 
+// Maximum number of automatic backups to keep before deleting.
+// The oldest automatic backup is always kept. Manual backups are always kept.
+static int const HNLaunchpadMaxNumAutoBackups = 10;
+
 #endif

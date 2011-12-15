@@ -26,10 +26,12 @@
 - (void)restartDockAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 - (void)restartDock;
 
-- (NSString *)backupsPath;
-- (BOOL)shouldMakeDailyBackup;
-- (void)makeBackup;
 - (FMDatabase *)openDb;
 
+- (NSString *)backupsPath;
+- (NSArray *)backupsIncludingManual:(BOOL)includeManualBackups;
+- (BOOL)shouldMakeDailyBackup;
+- (void)makeBackup;
+- (void)pruneOldBackups;
 
 @end

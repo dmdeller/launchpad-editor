@@ -31,6 +31,8 @@
     {
         [self makeBackup];
     }
+    
+    [self pruneOldBackups];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
@@ -139,9 +141,76 @@
     return dbFilename;
 }
 
+/**
+ * Opens a database connection and returns it. Don't forget to close it when you're done.
+ */
+- (FMDatabase *)openDb
+{
+    NSString *filename = [self dbFilename];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filename])
+    {
+        [HNException raise:HNDatabaseException format:@"Database at path: %@ does not exist", filename];
+        return nil;
+    }
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:filename];
+    
+    if (![db open])
+    {
+        [HNException raise:HNDatabaseException format:@"Could not open database: %@", filename];
+        return nil;
+    }
+    
+    return db;
+}
+
+#pragma mark -
+#pragma mark Backups
+
 - (NSString *)backupsPath
 {
     return [NSString stringWithFormat:@"%@/Library/Application Support/Dock/Launchpad Editor Backups", NSHomeDirectory()];
+}
+
+- (NSArray *)backupsIncludingManual:(BOOL)includeManualBackups
+{
+    NSString *dir = [self backupsPath];
+    NSError *error;
+    
+    // no backups folder?
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dir])
+    {
+        return [NSArray array];
+    }
+    
+    error = nil;
+    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dir error:&error];
+    
+    if (error)
+    {
+        [HNException raise:HNFilesystemException format:@"Unable to open location: %@\n\n%@", dir, [error localizedFailureReason]];
+    }
+    
+    // filter only backup files (e.g., exclude .DS_Store :E)
+    NSString *extension;
+    if (includeManualBackups)
+    {
+        extension = @".backup";
+    }
+    else
+    {
+        extension = @".auto.backup";
+    }
+    files = [files filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF ENDSWITH %@", extension]];
+    
+    // sort files alphabetically
+    files = [files sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
+    // reverse order
+    files = [[files reverseObjectEnumerator] allObjects];
+    
+    return files;
 }
 
 - (BOOL)shouldMakeDailyBackup
@@ -155,23 +224,12 @@
         return YES;
     }
     
-    error = nil;
-    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dir error:&error];
-    
-    if (error)
-    {
-        [HNException raise:HNFilesystemException format:@"Unable to open location: %@\n\n%@", dir, [error localizedFailureReason]];
-    }
+    NSArray *files = [self backupsIncludingManual:YES];
     
     // loop through all existing backups and see if there is one from today.
     // this is pretty inefficient and could probably be refactored.
     for (NSString *file in files)
     {
-        if (![[[file componentsSeparatedByString:@"."] lastObject] isEqualToString:@"backup"])
-        {
-            continue;
-        }
-        
         error = nil;
         NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@", dir, file] error:&error];
         
@@ -231,9 +289,11 @@
         [HNException raise:HNFilesystemException format:@"Unable to copy file: %@ to location: %@\n\n%@", [self dbFilename], newDbFilename, [error localizedFailureReason]];
     }
     
-    // Set creation date to now, so we can later check when the backup was made
+    // Set creation date to now, so we can later check when the backup was made.
+    // Also set modification date, so it looks nice in Finder.
     error = nil;
-    [[NSFileManager defaultManager] setAttributes:[NSDictionary dictionaryWithObject:[NSDate date] forKey:NSFileCreationDate] ofItemAtPath:newDbFilename error:&error];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], NSFileCreationDate, [NSDate date], NSFileModificationDate, nil];
+    [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:newDbFilename error:&error];
     
     if (error)
     {
@@ -241,28 +301,33 @@
     }
 }
 
-/**
- * Opens a database connection and returns it. Don't forget to close it when you're done.
- */
-- (FMDatabase *)openDb
+- (void)pruneOldBackups
 {
-    NSString *filename = [self dbFilename];
+    NSString *dir = [self backupsPath];
+    NSArray *files = [self backupsIncludingManual:NO];
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:filename])
+    NSUInteger numAutoBackups = 1;
+    NSMutableArray *recycleURLs = [NSMutableArray arrayWithCapacity:10];
+    
+    // loop through all existing backups and see if there is one from today.
+    // this is pretty inefficient and could probably be refactored.
+    for (NSString *file in files)
     {
-        [HNException raise:HNDatabaseException format:@"Database at path: %@ does not exist", filename];
-        return nil;
+        numAutoBackups++;
+        
+        // never prune the oldest backup
+        if ([file isEqualToString:[files lastObject]])
+        {
+            continue;
+        }
+        
+        if (numAutoBackups > HNLaunchpadMaxNumAutoBackups)
+        {
+            [recycleURLs addObject:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", dir, file] isDirectory:NO]];
+        }
     }
     
-    FMDatabase *db = [FMDatabase databaseWithPath:filename];
-    
-    if (![db open])
-    {
-        [HNException raise:HNDatabaseException format:@"Could not open database: %@", filename];
-        return nil;
-    }
-    
-    return db;
+    [[NSWorkspace sharedWorkspace] recycleURLs:recycleURLs completionHandler:nil];
 }
 
 @end
