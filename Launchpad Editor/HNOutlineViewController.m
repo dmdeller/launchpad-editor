@@ -17,6 +17,7 @@
 #import "HNLaunchpadApp.h"
 #import "HNToolbarController.h"
 
+#import "SCImageTextCell.h"
 #import "FMDatabase.h"
 
 @implementation HNOutlineViewController
@@ -28,6 +29,12 @@
 - (void)awakeFromNib
 {
     [self.appDelegate.outlineView registerForDraggedTypes:[NSArray arrayWithObject:HNLaunchpadPasteboardType]];
+    
+    // Set outline view to use our custom cells
+    NSTableColumn* tableColumn = [self.appDelegate.outlineView outlineTableColumn];
+    SCImageTextCell *imageTextCell = [[SCImageTextCell alloc] init];
+    [imageTextCell setEditable:YES];
+    [tableColumn setDataCell:imageTextCell];
     
     @try
     {
@@ -101,7 +108,6 @@
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
-    
     if (item == nil)
     {
         return [self.appDelegate.dataSet.itemTree objectForKey:[self.appDelegate.dataSet.itemTree keyAtIndex:index]];
@@ -369,6 +375,18 @@
     else
     {
         return NO;
+    }
+}
+
+- (void)outlineView:(NSOutlineView*)outlineView willDisplayCell:(NSCell *)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{    
+    NSImage *icon = [self.appDelegate.dataSet iconForEntity:item];
+    
+    cell = (SCImageTextCell *)cell;
+    
+	if (icon != nil)
+    {
+        [cell setImage:icon];
     }
 }
 

@@ -20,6 +20,9 @@
 		C30BFBE3146C36D100395658 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBDE146C36D100395658 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C30BFBE4146C36D100395658 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C30BFBE5146C36D100395658 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE2146C36D100395658 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C30CD24E149AAD8800C5286E /* SCImageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C30CD24D149AAD8800C5286E /* SCImageTextCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C30CD256149AB10000C5286E /* folderImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = C30CD254149AB10000C5286E /* folderImage.tiff */; };
+		C30CD257149AB10000C5286E /* leafImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = C30CD255149AB10000C5286E /* leafImage.tiff */; };
 		C36B099F148FC0D2004B6998 /* HNToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C36B099E148FC0D2004B6998 /* HNToolbarController.m */; };
 		C36B09A2148FCA50004B6998 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C36B09A1148FCA50004B6998 /* Sparkle.framework */; };
 		C36B09A4148FCAC4004B6998 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C36B09A1148FCA50004B6998 /* Sparkle.framework */; };
@@ -83,6 +86,10 @@
 		C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		C30BFBE1146C36D100395658 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		C30BFBE2146C36D100395658 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		C30CD24C149AAD8800C5286E /* SCImageTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCImageTextCell.h; sourceTree = "<group>"; };
+		C30CD24D149AAD8800C5286E /* SCImageTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCImageTextCell.m; sourceTree = "<group>"; };
+		C30CD254149AB10000C5286E /* folderImage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = folderImage.tiff; sourceTree = "<group>"; };
+		C30CD255149AB10000C5286E /* leafImage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = leafImage.tiff; sourceTree = "<group>"; };
 		C32BD1831490041500700E3C /* Todo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo.txt; sourceTree = "<group>"; };
 		C34FB528146CC77B00516C18 /* HNLaunchpadContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadContainer.h; sourceTree = "<group>"; };
 		C360686214854E8900B0FD54 /* HNLaunchpadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadEntity.h; sourceTree = "<group>"; };
@@ -205,6 +212,8 @@
 				C30BFBB7146C32AD00395658 /* Launchpad Editor-Prefix.pch */,
 				C30BFBB8146C32AE00395658 /* Credits.rtf */,
 				C36B09A5148FD178004B6998 /* dsa_pub.pem */,
+				C30CD254149AB10000C5286E /* folderImage.tiff */,
+				C30CD255149AB10000C5286E /* leafImage.tiff */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -246,6 +255,8 @@
 			children = (
 				C39EA2DF146CB5DD001356F5 /* MGOrderedDictionary.h */,
 				C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */,
+				C30CD24C149AAD8800C5286E /* SCImageTextCell.h */,
+				C30CD24D149AAD8800C5286E /* SCImageTextCell.m */,
 				C30BFBE6146C36D600395658 /* FMDB */,
 			);
 			name = Libraries;
@@ -343,6 +354,8 @@
 				C30BFBBA146C32AE00395658 /* Credits.rtf in Resources */,
 				C30BFBC0146C32AE00395658 /* MainMenu.xib in Resources */,
 				C36B09A6148FD178004B6998 /* dsa_pub.pem in Resources */,
+				C30CD256149AB10000C5286E /* folderImage.tiff in Resources */,
+				C30CD257149AB10000C5286E /* leafImage.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +403,7 @@
 				C371777D14897FEB00358BFA /* HNOutlineViewController.m in Sources */,
 				C3717783148E975700358BFA /* HNException.m in Sources */,
 				C36B099F148FC0D2004B6998 /* HNToolbarController.m in Sources */,
+				C30CD24E149AAD8800C5286E /* SCImageTextCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

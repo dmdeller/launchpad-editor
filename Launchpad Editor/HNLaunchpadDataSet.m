@@ -256,6 +256,11 @@
     }
 }
 
+- (NSImage *)iconForEntity:(id <HNLaunchpadEntity>)entity
+{
+    return [NSImage imageNamed:@"leafImage.tiff"];
+}
+
 #pragma mark -
 #pragma mark Saving data
 

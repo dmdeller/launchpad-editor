@@ -34,6 +34,7 @@
 
 - (id <HNLaunchpadEntity>)parentForEntity:(id <HNLaunchpadEntity>)entity;
 - (id <HNLaunchpadEntity>)rootParentForEntity:(id <HNLaunchpadEntity>)entity;
+- (NSImage *)iconForEntity:(id <HNLaunchpadEntity>)entity;
 
 - (NSNumber *)nextIdInDb:(FMDatabase *)db;
 - (void)createPage:(HNLaunchpadPage *)page atPosition:(NSUInteger)position inDb:(FMDatabase *)db;
