@@ -254,7 +254,7 @@
     [alert addButtonWithTitle:@"Sync & Relaunch Dock"];
     [alert addButtonWithTitle:@"Cancel"];
     [alert setMessageText:@"Dock needs to be relaunched"];
-    [alert setInformativeText:@"Syncing will cause changes you've made in either Launchpad Editor or Launchpad to show up in both places.\n\nTo do this, the Dock needs to be relaunched."];
+    [alert setInformativeText:@"Syncing will cause changes you've made in either Launchpad Editor or Launchpad to show up in both places.\n\nTo do this, the Dock needs to be relaunched.\n\nNote: it's not recommended to make changes directly in Launchpad while Launchpad Editor is open."];
     [alert setAlertStyle:NSWarningAlertStyle];
     
     [alert beginSheetModalForWindow:self.appDelegate.window modalDelegate:self didEndSelector:@selector(syncAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
