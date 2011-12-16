@@ -22,6 +22,8 @@
 
 @synthesize itemTree;
 @synthesize itemList;
+@synthesize appIcons;
+@synthesize appPaths;
 
 #pragma mark -
 #pragma mark Loading data
@@ -40,6 +42,8 @@
     [self.itemList addEntriesFromDictionary:pages];
     [self.itemList addEntriesFromDictionary:groups];
     [self.itemList addEntriesFromDictionary:apps];
+    
+    [self loadAppPaths];
 }
 
 - (MGOrderedDictionary *)loadPagesFromDb:(FMDatabase *)db
@@ -222,6 +226,37 @@
     }
 }
 
+- (void)loadAppPaths
+{
+    NSArray *dirs = [NSArray arrayWithObjects:@"/Applications", [NSHomeDirectory() stringByAppendingPathComponent:@"Applications"], @"/Developer", nil];
+    NSString *file;
+    NSDirectoryEnumerator *enumerator;
+    self.appPaths = [NSMutableDictionary dictionaryWithCapacity:1000];
+    
+    for (NSString *dir in dirs)
+    {
+        enumerator = [[NSFileManager defaultManager] enumeratorAtPath:dir];
+        while (file = [enumerator nextObject])
+        {
+            if ([[file pathExtension] isEqualToString:@"app"])
+            {
+                NSString *appName = [[[file pathComponents] lastObject] stringByDeletingPathExtension];
+                
+                if (![self.appPaths objectForKey:appName])
+                {
+                    [self.appPaths setObject:[dir stringByAppendingPathComponent:file] forKey:appName];
+                }
+                
+                [enumerator skipDescendants];
+            }
+            else if ([[file pathExtension] isEqualToString:@"framework"])
+            {
+                [enumerator skipDescendants];
+            }
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark Querying loaded data
 
@@ -258,7 +293,40 @@
 
 - (NSImage *)iconForEntity:(id <HNLaunchpadEntity>)entity
 {
-    return [NSImage imageNamed:@"leafImage.tiff"];
+    if ([entity conformsToProtocol:@protocol(HNLaunchpadContainer)])
+    {
+        return [NSImage imageNamed:@"folderImage.tiff"];
+    }
+    else if ([entity isKindOfClass:[HNLaunchpadApp class]])
+    {
+        HNLaunchpadApp *app = (HNLaunchpadApp *)entity;
+        NSImage *appIcon = [self.appIcons objectForKey:app.title];
+        
+        // cache icons in memory for fast retrieval later
+        if (appIcon == nil)
+        {
+            NSString *appPath;
+            
+            if ((appPath = [self.appPaths objectForKey:app.title]))
+            {
+                appIcon = [[NSWorkspace sharedWorkspace] iconForFile:appPath];
+                [appIcon setSize:NSMakeSize(16, 16)];
+            }
+            else
+            {
+                appIcon = [NSImage imageNamed:@"leafImage.tiff"];
+            }
+            
+            [self.appIcons setObject:appIcon forKey:app.title];
+        }
+        
+        return appIcon;
+    }
+    else
+    {
+        [HNException raise:HNInvalidClassException format:@"Unusable class: %@", [entity class]];
+        return nil;
+    }
 }
 
 #pragma mark -

@@ -24,6 +24,8 @@
 
 @property (strong) MGOrderedDictionary *itemTree;
 @property (strong) NSMutableDictionary *itemList;
+@property (strong) NSMutableDictionary *appPaths;
+@property (strong) NSMutableDictionary *appIcons;
 
 - (void)loadFromDb:(FMDatabase *)db;
 
@@ -31,6 +33,7 @@
 - (NSDictionary *)loadGroupsFromDb:(FMDatabase *)db;
 - (NSDictionary *)loadAppsFromDb:(FMDatabase *)db;
 - (void)collateApps:(NSDictionary *)apps andGroups:(NSDictionary *)groups intoPages:(MGOrderedDictionary *)pages fromDb:(FMDatabase *)db;
+- (void)loadAppPaths;
 
 - (id <HNLaunchpadEntity>)parentForEntity:(id <HNLaunchpadEntity>)entity;
 - (id <HNLaunchpadEntity>)rootParentForEntity:(id <HNLaunchpadEntity>)entity;
