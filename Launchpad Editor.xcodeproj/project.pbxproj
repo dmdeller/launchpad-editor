@@ -31,6 +31,9 @@
 		C39EA2DA146CB28D001356F5 /* HNLaunchpadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2D9146CB28D001356F5 /* HNLaunchpadGroup.m */; };
 		C39EA2DD146CB29A001356F5 /* HNLaunchpadApp.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2DC146CB29A001356F5 /* HNLaunchpadApp.m */; };
 		C39EA2E1146CB5DD001356F5 /* MGOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */; };
+		C3E13C72149BEF2600473F49 /* Tango-View-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E13C71149BEF2600473F49 /* Tango-View-refresh.png */; };
+		C3E13C74149BEFCE00473F49 /* Tango-Edit-delete.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E13C73149BEFCE00473F49 /* Tango-Edit-delete.png */; };
+		C3E13C76149BF00B00473F49 /* Tango_emblem_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E13C75149BF00B00473F49 /* Tango_emblem_plus.png */; };
 		C3E896C8146C472F0060AB93 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3E896C7146C472F0060AB93 /* libsqlite3.dylib */; };
 		C3E896CB146C48690060AB93 /* HNLaunchpadDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E896CA146C48690060AB93 /* HNLaunchpadDataSet.m */; };
 /* End PBXBuildFile section */
@@ -107,6 +110,9 @@
 		C39EA2DE146CB4FC001356F5 /* HNLaunchpadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadItem.h; sourceTree = "<group>"; };
 		C39EA2DF146CB5DD001356F5 /* MGOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGOrderedDictionary.h; sourceTree = "<group>"; };
 		C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGOrderedDictionary.m; sourceTree = "<group>"; };
+		C3E13C71149BEF2600473F49 /* Tango-View-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tango-View-refresh.png"; sourceTree = "<group>"; };
+		C3E13C73149BEFCE00473F49 /* Tango-Edit-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tango-Edit-delete.png"; sourceTree = "<group>"; };
+		C3E13C75149BF00B00473F49 /* Tango_emblem_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tango_emblem_plus.png; sourceTree = "<group>"; };
 		C3E896C7146C472F0060AB93 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		C3E896C9146C48690060AB93 /* HNLaunchpadDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadDataSet.h; sourceTree = "<group>"; };
 		C3E896CA146C48690060AB93 /* HNLaunchpadDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HNLaunchpadDataSet.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -208,6 +214,9 @@
 				C30BFBB7146C32AD00395658 /* Launchpad Editor-Prefix.pch */,
 				C30BFBB8146C32AE00395658 /* Credits.rtf */,
 				C36B09A5148FD178004B6998 /* dsa_pub.pem */,
+				C3E13C75149BF00B00473F49 /* Tango_emblem_plus.png */,
+				C3E13C71149BEF2600473F49 /* Tango-View-refresh.png */,
+				C3E13C73149BEFCE00473F49 /* Tango-Edit-delete.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -348,6 +357,9 @@
 				C30BFBBA146C32AE00395658 /* Credits.rtf in Resources */,
 				C30BFBC0146C32AE00395658 /* MainMenu.xib in Resources */,
 				C36B09A6148FD178004B6998 /* dsa_pub.pem in Resources */,
+				C3E13C72149BEF2600473F49 /* Tango-View-refresh.png in Resources */,
+				C3E13C74149BEFCE00473F49 /* Tango-Edit-delete.png in Resources */,
+				C3E13C76149BF00B00473F49 /* Tango_emblem_plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
