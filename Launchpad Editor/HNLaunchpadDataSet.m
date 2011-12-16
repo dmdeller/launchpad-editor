@@ -250,6 +250,14 @@
     NSImage *appIcon;
     self.appIcons = [NSMutableDictionary dictionaryWithCapacity:1000];
     
+    NSImage *genericApplicationIcon = [[NSImage alloc] initWithContentsOfFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/GenericApplicationIcon.icns"];
+    [genericApplicationIcon setSize:NSMakeSize(16, 16)];
+    [self.appIcons setObject:genericApplicationIcon forKey:@"GenericApplicationIcon"];
+    
+    NSImage *genericFolderIcon = [[NSImage alloc] initWithContentsOfFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/GenericFolderIcon.icns"];
+    [genericFolderIcon setSize:NSMakeSize(16, 16)];
+    [self.appIcons setObject:genericFolderIcon forKey:@"GenericFolderIcon"];
+    
     for (NSString *dir in dirs)
     {
         enumerator = [[NSFileManager defaultManager] enumeratorAtPath:dir];
@@ -318,7 +326,7 @@
 {
     if ([entity conformsToProtocol:@protocol(HNLaunchpadContainer)])
     {
-        return [NSImage imageNamed:@"folderImage.tiff"];
+        return [self.appIcons objectForKey:@"GenericFolderIcon"];
     }
     else if ([entity isKindOfClass:[HNLaunchpadApp class]])
     {
@@ -327,7 +335,7 @@
         
         if (appIcon == nil)
         {
-            appIcon = [NSImage imageNamed:@"leafImage.tiff"];
+            appIcon = [self.appIcons objectForKey:@"GenericApplicationIcon"];
             
             [self.appIcons setObject:appIcon forKey:app.title];
         }
