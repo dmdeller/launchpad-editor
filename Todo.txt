@@ -1,5 +1,4 @@
 TODO
-- Default window size
 - Manual backup
 - Restore from backup
 - Reset Launchpad (drop database)
