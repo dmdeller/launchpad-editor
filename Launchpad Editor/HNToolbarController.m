@@ -183,11 +183,13 @@
         else
         {
             [HNException raise:HNInvalidClassException format:@"Unusable class: %@", [selectedItem class]];
+            return;
         }
     }
     else
     {
         [HNException raise:HNInvalidClassException format:@"Unknown class: %@", [selectedItem class]];
+        return;
     }
     
     HNLaunchpadGroup *newGroup = [[HNLaunchpadGroup alloc] init];
