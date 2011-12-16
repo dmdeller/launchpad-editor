@@ -262,9 +262,14 @@
 
 - (void)syncAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
+    [[alert window] orderOut:self];
+    
     if (returnCode == NSAlertFirstButtonReturn)
     {
+        self.appDelegate.dataSet.isLoaded = NO;
         [self.appDelegate.outlineView reloadData];
+        [self.appDelegate beginStartupOperations];
+        
         [self.appDelegate restartDock];
     }
 }

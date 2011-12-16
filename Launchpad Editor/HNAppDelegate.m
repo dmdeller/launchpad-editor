@@ -30,6 +30,11 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [self beginStartupOperations];
+}
+
+- (void)beginStartupOperations
+{
     [[NSApplication sharedApplication] beginSheet:self.loadingSheet modalForWindow:self.window modalDelegate:self didEndSelector:@selector(closeLoadingSheet) contextInfo:nil];
     [self.loadingProgressIndicator startAnimation:self];
     
@@ -111,7 +116,9 @@
 
 - (void)closeLoadingSheet
 {
-    [self.loadingSheet close];
+    self.loadingText.title = @"";
+    [self.loadingProgressIndicator stopAnimation:self];
+    [self.loadingSheet orderOut:self];
 }
 
 #pragma mark -

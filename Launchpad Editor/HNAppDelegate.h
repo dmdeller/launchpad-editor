@@ -26,6 +26,7 @@
 @property (strong, nonatomic, readonly) NSString *dbFilename;
 @property (strong) HNLaunchpadDataSet *dataSet;
 
+- (void)beginStartupOperations;
 - (void)performStartupOperations;
 - (void)closeLoadingSheet;
 
