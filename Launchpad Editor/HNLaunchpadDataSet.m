@@ -23,7 +23,17 @@
 @synthesize itemTree;
 @synthesize itemList;
 @synthesize appIcons;
-@synthesize appPaths;
+@synthesize isLoaded;
+
+- (id)init
+{
+    if ((self = [super init]))
+    {
+        self.isLoaded = NO;
+    }
+    
+    return self;
+}
 
 #pragma mark -
 #pragma mark Loading data
@@ -43,7 +53,7 @@
     [self.itemList addEntriesFromDictionary:groups];
     [self.itemList addEntriesFromDictionary:apps];
     
-    [self loadAppPaths];
+    self.isLoaded = YES;
 }
 
 - (MGOrderedDictionary *)loadPagesFromDb:(FMDatabase *)db
@@ -226,12 +236,19 @@
     }
 }
 
-- (void)loadAppPaths
+/**
+ * This method is prone to miss some applications, because the only data we get from Launchpad to identify an app is its name...
+ * This doesn't account for multiple apps with the same name, apps outside of normal Application folders, etc.
+ * So we just do the best we can.
+ */
+- (void)loadAppIcons
 {
-    NSArray *dirs = [NSArray arrayWithObjects:@"/Applications", [NSHomeDirectory() stringByAppendingPathComponent:@"Applications"], @"/Developer", nil];
+    NSArray *dirs = [NSArray arrayWithObjects:@"/Applications", [NSHomeDirectory() stringByAppendingPathComponent:@"Applications"], @"/Developer/Applications", nil];
     NSString *file;
     NSDirectoryEnumerator *enumerator;
-    self.appPaths = [NSMutableDictionary dictionaryWithCapacity:1000];
+    NSString *appPath;
+    NSImage *appIcon;
+    self.appIcons = [NSMutableDictionary dictionaryWithCapacity:1000];
     
     for (NSString *dir in dirs)
     {
@@ -242,14 +259,20 @@
             {
                 NSString *appName = [[[file pathComponents] lastObject] stringByDeletingPathExtension];
                 
-                if (![self.appPaths objectForKey:appName])
+                if (![self.appIcons objectForKey:appName])
                 {
-                    [self.appPaths setObject:[dir stringByAppendingPathComponent:file] forKey:appName];
+                    appPath = [dir stringByAppendingPathComponent:file];
+                    
+                    appIcon = [[NSWorkspace sharedWorkspace] iconForFile:appPath];
+                    [appIcon setSize:NSMakeSize(16, 16)];
+                    
+                    [self.appIcons setObject:appIcon forKey:appName];
                 }
                 
                 [enumerator skipDescendants];
             }
-            else if ([[file pathExtension] isEqualToString:@"framework"])
+            else if ([[file pathExtension] isEqualToString:@"framework"] || [[file pathExtension] isEqualToString:@"platform"] || [[file pathExtension] isEqualToString:@"sdk"] ||
+                     [file isEqualToString:@"usr"] || [file isEqualToString:@"Library"])
             {
                 [enumerator skipDescendants];
             }
@@ -302,20 +325,9 @@
         HNLaunchpadApp *app = (HNLaunchpadApp *)entity;
         NSImage *appIcon = [self.appIcons objectForKey:app.title];
         
-        // cache icons in memory for fast retrieval later
         if (appIcon == nil)
         {
-            NSString *appPath;
-            
-            if ((appPath = [self.appPaths objectForKey:app.title]))
-            {
-                appIcon = [[NSWorkspace sharedWorkspace] iconForFile:appPath];
-                [appIcon setSize:NSMakeSize(16, 16)];
-            }
-            else
-            {
-                appIcon = [NSImage imageNamed:@"leafImage.tiff"];
-            }
+            appIcon = [NSImage imageNamed:@"leafImage.tiff"];
             
             [self.appIcons setObject:appIcon forKey:app.title];
         }

@@ -35,24 +35,6 @@
     SCImageTextCell *imageTextCell = [[SCImageTextCell alloc] init];
     [imageTextCell setEditable:YES];
     [tableColumn setDataCell:imageTextCell];
-    
-    @try
-    {
-        FMDatabase *db = [self.appDelegate openDb];
-        self.appDelegate.dataSet = [[HNLaunchpadDataSet alloc] init];
-        [self.appDelegate.dataSet loadFromDb:db];
-        [db close];
-    }
-    @catch (HNException *e)
-    {
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setMessageText:@"Error loading Launchpad database"];
-        [alert setInformativeText:[e reason]];
-        [alert setAlertStyle:NSCriticalAlertStyle];
-        
-        [alert beginSheetModalForWindow:self.appDelegate.window modalDelegate:nil didEndSelector:nil contextInfo:nil];
-    }
 }
 
 - (id)selectedItem
@@ -65,6 +47,11 @@
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
+    if (!self.appDelegate.dataSet.isLoaded)
+    {
+        return 0;
+    }
+    
     if (item == nil)
     {
         return [self.appDelegate.dataSet.itemTree count];

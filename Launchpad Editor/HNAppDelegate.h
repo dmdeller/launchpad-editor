@@ -17,11 +17,17 @@
 @interface HNAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (strong) IBOutlet NSWindow *loadingSheet;
+@property (strong) IBOutlet NSProgressIndicator *loadingProgressIndicator;
+@property (strong) IBOutlet NSTextFieldCell *loadingText;
 @property (strong) IBOutlet NSOutlineView *outlineView;
 @property (strong) IBOutlet HNToolbarController *toolbarController;
 @property (strong) IBOutlet HNOutlineViewController *outlineViewController;
 @property (strong, nonatomic, readonly) NSString *dbFilename;
 @property (strong) HNLaunchpadDataSet *dataSet;
+
+- (void)performStartupOperations;
+- (void)closeLoadingSheet;
 
 - (void)restartDockAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 - (void)restartDock;

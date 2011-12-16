@@ -53,6 +53,11 @@
  */
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {
+    if (!self.appDelegate.dataSet.isLoaded)
+    {
+        return NO;
+    }
+    
     id <HNLaunchpadEntity> selectedItem = [self.appDelegate.outlineViewController selectedItem];
     
     if (theItem == self.addPageButton)

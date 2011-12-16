@@ -16,6 +16,9 @@
 @implementation HNAppDelegate
 
 @synthesize window = _window;
+@synthesize loadingSheet;
+@synthesize loadingProgressIndicator;
+@synthesize loadingText;
 @synthesize toolbarController;
 @synthesize outlineView;
 @synthesize outlineViewController;
@@ -27,12 +30,52 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [[NSApplication sharedApplication] beginSheet:self.loadingSheet modalForWindow:self.window modalDelegate:self didEndSelector:@selector(closeLoadingSheet) contextInfo:nil];
+    [self.loadingProgressIndicator startAnimation:self];
+    
+    [self performSelectorInBackground:@selector(performStartupOperations) withObject:nil];
+}
+
+- (void)performStartupOperations
+{
+    self.loadingText.title = @"Backing up database...";
+    
     if ([self shouldMakeDailyBackup])
     {
         [self makeBackup];
     }
     
+    self.loadingText.title = @"Cleaning up old backups...";
+    
     [self pruneOldBackups];
+    
+    @try
+    {
+        self.loadingText.title = @"Loading applications...";
+        
+        FMDatabase *db = [self openDb];
+        self.dataSet = [[HNLaunchpadDataSet alloc] init];
+        [self.dataSet loadFromDb:db];
+        [db close];
+    }
+    @catch (HNException *e)
+    {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:@"Error loading Launchpad database"];
+        [alert setInformativeText:[e reason]];
+        [alert setAlertStyle:NSCriticalAlertStyle];
+        
+        [alert beginSheetModalForWindow:self.window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+    }
+    
+    self.loadingText.title = @"Loading icons...";
+    
+    [self.dataSet loadAppIcons];
+    
+    [self.outlineView reloadData];
+    
+    [[NSApplication sharedApplication] endSheet:self.loadingSheet];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
@@ -64,6 +107,11 @@
     [[NSApplication sharedApplication] terminate:sender];
     
     return NO;
+}
+
+- (void)closeLoadingSheet
+{
+    [self.loadingSheet close];
 }
 
 #pragma mark -
