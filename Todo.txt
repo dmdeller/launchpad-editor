@@ -1,6 +1,5 @@
 TODO
 - Default window size
-- Icons
 - Manual backup
 - Restore from backup
 - Reset Launchpad (drop database)
