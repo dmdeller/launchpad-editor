@@ -21,7 +21,8 @@
           url="https://github.com/downloads/dmdeller/launchpad-editor/Launchpad Editor 1.0.zip"
           sparkle:version="3"
           sparkle:shortVersionString="1.0"
-          sparkle:dsaSignature="MEYCIQColWH5A3rJJ9DVclmn45PhHxusUMzUusVmEMZIfnaBCQIhAIpHgtH3ZUQuTIDiVsVtme2zscniyZwADJnWAVGFEFrC"
+          sparkle:dsaSignature="MEQCIH3oKWpcZu/sLnmJM86xXjXng5bwH53yY3HkkdXuEGGFAiBzp6gf+diOgObG
+s7Vc8u/3qBmaVwAtczRH8t4PwvTitQ=="
           length="798668"
           type="application/octet-stream" />
       </item>
@@ -36,7 +37,8 @@
           url="https://github.com/downloads/dmdeller/launchpad-editor/Launchpad Editor 0.1.zip"
           sparkle:version="2"
           sparkle:shortVersionString="0.1"
-          sparkle:dsaSignature="MEYCIQDYCwLLXlx/O/L/oC3ku1bTPMmjlfC5GeenMXS/O5R+UgIhANn4kmYnZwNjAKoJ9pvjoaNenatkyXcOLafMBmVGzH3j"
+          sparkle:dsaSignature="MEUCIGpRfCaXaFUAsLAmuqzg9U3QrniMVvcp1fOMLYAV2NZfAiEAp5kxNcEmJzE6
+RVeGHPLISbUWeR5ZJpGEXVJGHWiU2lg="
           length="470381"
           type="application/octet-stream" />
       </item>
