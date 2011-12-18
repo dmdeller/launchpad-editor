@@ -19,15 +19,15 @@
          <pubDate>Wed, 18 Dec 2011 11:00:00 -0500</pubDate>
          <enclosure
           url="https://github.com/downloads/dmdeller/launchpad-editor/Launchpad Editor 1.0.zip"
-          sparkle:version="3"
+          sparkle:version="5"
           sparkle:shortVersionString="1.0"
-          sparkle:dsaSignature="MEQCIH3oKWpcZu/sLnmJM86xXjXng5bwH53yY3HkkdXuEGGFAiBzp6gf+diOgObG
-s7Vc8u/3qBmaVwAtczRH8t4PwvTitQ=="
-          length="798668"
+          sparkle:dsaSignature="MC4CFQDoOY6egX9wlq5cnNIfTMDOmZQOIQIVANUDAE44nN4XLBuWKuME0T0iD8r5"
+          length="798255"
           type="application/octet-stream" />
       </item>
 
       <item>
+        <!-- Note: signed with bad key; cannot auto-update to newer versions -->
          <title>Version 0.1</title>
           <sparkle:releaseNotesLink>
             http://dmdeller.github.com/launchpad-editor/release-notes/0.1.html
@@ -37,8 +37,7 @@ s7Vc8u/3qBmaVwAtczRH8t4PwvTitQ=="
           url="https://github.com/downloads/dmdeller/launchpad-editor/Launchpad Editor 0.1.zip"
           sparkle:version="2"
           sparkle:shortVersionString="0.1"
-          sparkle:dsaSignature="MEUCIGpRfCaXaFUAsLAmuqzg9U3QrniMVvcp1fOMLYAV2NZfAiEAp5kxNcEmJzE6
-RVeGHPLISbUWeR5ZJpGEXVJGHWiU2lg="
+          sparkle:dsaSignature="MEUCIQCLXx19Der7CFkuweWYg5V69Sg4TXg0Qa8O+niklWYiAQIgXqBL4YHj5XGgjlyZh+jakjZDvs0oK9uCmOdUZ3Yf120="
           length="470381"
           type="application/octet-stream" />
       </item>
