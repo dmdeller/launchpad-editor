@@ -5,6 +5,11 @@
       <link>http://dmdeller.github.com/launchpad-editor/appcast.xml</link>
       <description>Most recent changes with links to updates.</description>
       <language>en</language>
+      
+      <!--
+        Sparkle (incorrectly) performs %-escaping on attachment URLs.
+        http://stackoverflow.com/questions/4241312/using-sparkle-updater-with-download-hosted-on-github
+      -->
 
       <item>
          <title>Version 1.0</title>
@@ -13,7 +18,7 @@
           </sparkle:releaseNotesLink>
          <pubDate>Wed, 18 Dec 2011 11:00:00 -0500</pubDate>
          <enclosure
-          url="https://github.com/downloads/dmdeller/launchpad-editor/Launchpad%20Editor%201.0.zip"
+          url="https://github.com/downloads/dmdeller/launchpad-editor/Launchpad Editor 1.0.zip"
           sparkle:version="3"
           sparkle:shortVersionString="1.0"
           sparkle:dsaSignature="MEUCIQDQ3p6ZfncnWds/UaXbE4ik0ST/6a4DVs4Pt9PK/YDLXwIgIEXhkWPQv4LC9T3vh3FdE5OwqQDWQHi59jdovrZQW+U="
@@ -28,7 +33,7 @@
           </sparkle:releaseNotesLink>
          <pubDate>Wed, 7 Dec 2011 15:16:00 -0500</pubDate>
          <enclosure
-          url="https://github.com/downloads/dmdeller/launchpad-editor/Launchpad%20Editor%200.1.zip"
+          url="https://github.com/downloads/dmdeller/launchpad-editor/Launchpad Editor 0.1.zip"
           sparkle:version="2"
           sparkle:shortVersionString="0.1"
           sparkle:dsaSignature="MEUCIQCLXx19Der7CFkuweWYg5V69Sg4TXg0Qa8O+niklWYiAQIgXqBL4YHj5XGgjlyZh+jakjZDvs0oK9uCmOdUZ3Yf120="
