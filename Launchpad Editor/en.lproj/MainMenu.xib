@@ -1351,6 +1351,28 @@
 							<bool key="NSToolbarIsUserRemovable">YES</bool>
 							<int key="NSToolbarItemVisibilityPriority">0</int>
 						</object>
+						<object class="NSToolbarItem" key="142052D7-B0D3-4805-B43E-3D8ADFBE339A" id="428535838">
+							<object class="NSMutableString" key="NSToolbarItemIdentifier">
+								<characters key="NS.bytes">142052D7-B0D3-4805-B43E-3D8ADFBE339A</characters>
+							</object>
+							<string key="NSToolbarItemLabel">Reveal Data</string>
+							<string key="NSToolbarItemPaletteLabel">Reveal Data</string>
+							<string key="NSToolbarItemToolTip"/>
+							<nil key="NSToolbarItemView"/>
+							<object class="NSCustomResource" key="NSToolbarItemImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">FinderIcon</string>
+							</object>
+							<nil key="NSToolbarItemTarget"/>
+							<nil key="NSToolbarItemAction"/>
+							<string key="NSToolbarItemMinSize">{0, 0}</string>
+							<string key="NSToolbarItemMaxSize">{0, 0}</string>
+							<bool key="NSToolbarItemEnabled">YES</bool>
+							<bool key="NSToolbarItemAutovalidates">YES</bool>
+							<int key="NSToolbarItemTag">-1</int>
+							<bool key="NSToolbarIsUserRemovable">YES</bool>
+							<int key="NSToolbarItemVisibilityPriority">0</int>
+						</object>
 						<object class="NSToolbarItem" key="47C45431-ACB0-4FF6-B3A7-610753C5C388" id="497227848">
 							<object class="NSMutableString" key="NSToolbarItemIdentifier">
 								<characters key="NS.bytes">47C45431-ACB0-4FF6-B3A7-610753C5C388</characters>
@@ -1516,23 +1538,25 @@
 							</object>
 						</object>
 					</dictionary>
-					<array key="NSToolbarIBAllowedItems">
+					<array class="NSMutableArray" key="NSToolbarIBAllowedItems">
 						<reference ref="497227848"/>
 						<reference ref="677712519"/>
 						<reference ref="805644905"/>
 						<reference ref="706226365"/>
+						<reference ref="428535838"/>
 						<reference ref="1062925920"/>
 						<reference ref="737919873"/>
 						<reference ref="64678531"/>
 						<reference ref="883317070"/>
 					</array>
-					<array key="NSToolbarIBDefaultItems">
+					<array class="NSMutableArray" key="NSToolbarIBDefaultItems">
 						<reference ref="497227848"/>
 						<reference ref="677712519"/>
 						<reference ref="805644905"/>
 						<reference ref="1062925920"/>
 						<reference ref="706226365"/>
 						<reference ref="737919873"/>
+						<reference ref="428535838"/>
 					</array>
 					<array key="NSToolbarIBSelectableItems" id="0"/>
 				</object>
@@ -2630,6 +2654,14 @@
 					<int key="connectionID">591</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">revealDataButton</string>
+						<reference key="source" ref="945705784"/>
+						<reference key="destination" ref="428535838"/>
+					</object>
+					<int key="connectionID">602</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">checkForUpdates:</string>
 						<reference key="source" ref="169131242"/>
@@ -3700,6 +3732,7 @@
 							<reference ref="677712519"/>
 							<reference ref="497227848"/>
 							<reference ref="805644905"/>
+							<reference ref="428535838"/>
 						</array>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -3797,6 +3830,11 @@
 						<int key="objectID">597</int>
 						<reference key="object" ref="273684045"/>
 						<reference key="parent" ref="969176449"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">601</int>
+						<reference key="object" ref="428535838"/>
+						<reference key="parent" ref="657652678"/>
 					</object>
 				</array>
 			</object>
@@ -3973,6 +4011,7 @@
 				<string key="595.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="596.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="597.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="601.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3989,7 +4028,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">600</int>
+			<int key="maxID">602</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4067,6 +4106,7 @@
 						<string key="addPageButton">NSToolbarItem</string>
 						<string key="appDelegate">HNAppDelegate</string>
 						<string key="deleteButton">NSToolbarItem</string>
+						<string key="revealDataButton">NSToolbarItem</string>
 						<string key="syncButton">NSToolbarItem</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -4084,6 +4124,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="deleteButton">
 							<string key="name">deleteButton</string>
+							<string key="candidateClassName">NSToolbarItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="revealDataButton">
+							<string key="name">revealDataButton</string>
 							<string key="candidateClassName">NSToolbarItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="syncButton">
@@ -4174,6 +4218,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="FinderIcon">{512, 512}</string>
 			<string key="NSMenuCheckmark">{9, 8}</string>
 			<string key="NSMenuMixedState">{7, 2}</string>
 			<string key="NSToolbarCustomizeToolbarItemImage">{32, 32}</string>

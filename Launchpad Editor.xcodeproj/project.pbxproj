@@ -27,6 +27,7 @@
 		C36B09A4148FCAC4004B6998 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C36B09A1148FCA50004B6998 /* Sparkle.framework */; };
 		C371777D14897FEB00358BFA /* HNOutlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C371777C14897FEB00358BFA /* HNOutlineViewController.m */; };
 		C3717783148E975700358BFA /* HNException.m in Sources */ = {isa = PBXBuildFile; fileRef = C3717782148E975600358BFA /* HNException.m */; };
+		C381E53D14B39E5000C876E0 /* FinderIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = C381E53C14B39E5000C876E0 /* FinderIcon.icns */; };
 		C39EA2D6146CB281001356F5 /* HNLaunchpadPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2D5146CB281001356F5 /* HNLaunchpadPage.m */; };
 		C39EA2DA146CB28D001356F5 /* HNLaunchpadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2D9146CB28D001356F5 /* HNLaunchpadGroup.m */; };
 		C39EA2DD146CB29A001356F5 /* HNLaunchpadApp.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2DC146CB29A001356F5 /* HNLaunchpadApp.m */; };
@@ -102,6 +103,7 @@
 		C371777C14897FEB00358BFA /* HNOutlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HNOutlineViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C3717781148E975600358BFA /* HNException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = HNException.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C3717782148E975600358BFA /* HNException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HNException.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C381E53C14B39E5000C876E0 /* FinderIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = FinderIcon.icns; sourceTree = "<group>"; };
 		C39EA2D4146CB281001356F5 /* HNLaunchpadPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadPage.h; sourceTree = "<group>"; };
 		C39EA2D5146CB281001356F5 /* HNLaunchpadPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNLaunchpadPage.m; sourceTree = "<group>"; };
 		C39EA2D8146CB28D001356F5 /* HNLaunchpadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadGroup.h; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				C3E13C75149BF00B00473F49 /* Tango_emblem_plus.png */,
 				C3E13C71149BEF2600473F49 /* Tango-View-refresh.png */,
 				C3E13C73149BEFCE00473F49 /* Tango-Edit-delete.png */,
+				C381E53C14B39E5000C876E0 /* FinderIcon.icns */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				C3E13C76149BF00B00473F49 /* Tango_emblem_plus.png in Resources */,
 				C3E13C7A149BFEBB00473F49 /* Icon.icns in Resources */,
 				C36A0C76149E523600BD4039 /* dsa_pub.pem in Resources */,
+				C381E53D14B39E5000C876E0 /* FinderIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

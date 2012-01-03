@@ -27,6 +27,7 @@
 @synthesize addGroupButton;
 @synthesize deleteButton;
 @synthesize syncButton;
+@synthesize revealDataButton;
 
 #pragma mark -
 
@@ -43,6 +44,9 @@
     
     [self.syncButton setTarget:self];
     [self.syncButton setAction:@selector(confirmSync)];
+    
+    [self.revealDataButton setTarget:self];
+    [self.revealDataButton setAction:@selector(revealData)];
 }
 
 #pragma mark -
@@ -272,6 +276,18 @@
         
         [self.appDelegate restartDock];
     }
+}
+
+
+#pragma mark -
+#pragma mark Reveal Data button
+
+- (void)revealData
+{
+    NSMutableArray *pathComponents = [[[self.appDelegate dbFilename] pathComponents] mutableCopy];
+    [pathComponents removeLastObject];
+    
+    [[NSWorkspace sharedWorkspace] openFile:[NSString pathWithComponents:pathComponents]];
 }
 
 @end

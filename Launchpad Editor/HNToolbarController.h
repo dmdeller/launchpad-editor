@@ -17,10 +17,12 @@
 @property (strong) IBOutlet NSToolbarItem *addGroupButton;
 @property (strong) IBOutlet NSToolbarItem *deleteButton;
 @property (strong) IBOutlet NSToolbarItem *syncButton;
+@property (strong) IBOutlet NSToolbarItem *revealDataButton;
 
 - (void)addPage;
 - (void)addGroup;
 - (void)delete;
 - (void)confirmSync;
+- (void)revealData;
 
 @end
