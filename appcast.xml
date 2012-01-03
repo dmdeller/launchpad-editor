@@ -10,6 +10,21 @@
         Sparkle (incorrectly) performs %-escaping on attachment URLs.
         http://stackoverflow.com/questions/4241312/using-sparkle-updater-with-download-hosted-on-github
       -->
+      
+      <item>
+         <title>Version 1.0.1</title>
+          <sparkle:releaseNotesLink>
+            http://dmdeller.github.com/launchpad-editor/release-notes/1.0.1.html
+          </sparkle:releaseNotesLink>
+         <pubDate>Wed, 3 Jan 2011 16:00:00 -0500</pubDate>
+         <enclosure
+          url="https://github.com/downloads/dmdeller/launchpad-editor/Launchpad Editor 1.0.1.zip"
+          sparkle:version="6"
+          sparkle:shortVersionString="1.0.1"
+          sparkle:dsaSignature="MCwCFG4a+0B/ZoOtMELkfm6juy/U25AnAhQ84LMy+9T0Gw/lMzUCnFM1L2QSlA=="
+          length="961944"
+          type="application/octet-stream" />
+      </item>
 
       <item>
          <title>Version 1.0</title>
