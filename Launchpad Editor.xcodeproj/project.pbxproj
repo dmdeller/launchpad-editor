@@ -29,6 +29,7 @@
 		C39EA2DD146CB29A001356F5 /* HNLaunchpadApp.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2DC146CB29A001356F5 /* HNLaunchpadApp.m */; };
 		C39EA2E1146CB5DD001356F5 /* MGOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */; };
 		C3BA97F515AE39120083C4AD /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BA97F415AE39120083C4AD /* ImageAndTextCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C3BA980315AE3DAE0083C4AD /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BA980215AE3DAE0083C4AD /* libFMDB.a */; };
 		C3E13C72149BEF2600473F49 /* Tango-View-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E13C71149BEF2600473F49 /* Tango-View-refresh.png */; };
 		C3E13C74149BEFCE00473F49 /* Tango-Edit-delete.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E13C73149BEFCE00473F49 /* Tango-Edit-delete.png */; };
 		C3E13C76149BF00B00473F49 /* Tango_emblem_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E13C75149BF00B00473F49 /* Tango_emblem_plus.png */; };
@@ -104,6 +105,7 @@
 		C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGOrderedDictionary.m; sourceTree = "<group>"; };
 		C3BA97F315AE39120083C4AD /* ImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAndTextCell.h; sourceTree = "<group>"; };
 		C3BA97F415AE39120083C4AD /* ImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextCell.m; sourceTree = "<group>"; };
+		C3BA980215AE3DAE0083C4AD /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libFMDB.a; path = FMDB/build/Release/libFMDB.a; sourceTree = "<group>"; };
 		C3E13C71149BEF2600473F49 /* Tango-View-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tango-View-refresh.png"; sourceTree = "<group>"; };
 		C3E13C73149BEFCE00473F49 /* Tango-Edit-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tango-Edit-delete.png"; sourceTree = "<group>"; };
 		C3E13C75149BF00B00473F49 /* Tango_emblem_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tango_emblem_plus.png; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3BA980315AE3DAE0083C4AD /* libFMDB.a in Frameworks */,
 				C3E896C8146C472F0060AB93 /* libsqlite3.dylib in Frameworks */,
 				C30BFBAA146C32AD00395658 /* Cocoa.framework in Frameworks */,
 				C36B09A2148FCA50004B6998 /* Sparkle.framework in Frameworks */,
@@ -161,6 +164,7 @@
 		C30BFBA8146C32AD00395658 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3BA980215AE3DAE0083C4AD /* libFMDB.a */,
 				C36B09A1148FCA50004B6998 /* Sparkle.framework */,
 				C3E896C7146C472F0060AB93 /* libsqlite3.dylib */,
 				C30BFBA9146C32AD00395658 /* Cocoa.framework */,
@@ -508,6 +512,7 @@
 				GCC_PREFIX_HEADER = "Launchpad Editor/Launchpad Editor-Prefix.pch";
 				INFOPLIST_FILE = "Launchpad Editor/Launchpad Editor-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = FMDB/src;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -524,6 +529,7 @@
 				GCC_PREFIX_HEADER = "Launchpad Editor/Launchpad Editor-Prefix.pch";
 				INFOPLIST_FILE = "Launchpad Editor/Launchpad Editor-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = FMDB/src;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
