@@ -70,7 +70,7 @@
     
     if (results == nil)
     {
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         return nil;
     }
     
@@ -108,7 +108,7 @@
     
     if (results == nil)
     {
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         return nil;
     }
     
@@ -141,7 +141,7 @@
     
     if (results == nil)
     {
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         return nil;
     }
     
@@ -366,7 +366,7 @@
     
     if (results == nil)
     {
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         return nil;
     }
     
@@ -405,7 +405,7 @@
     if (![db executeUpdate:sql, page.id, page.uuid, [NSNumber numberWithInt:HNLaunchpadDefaultFlags], [NSNumber numberWithInt:HNLaunchpadTypePage], page.parentId, [NSNumber numberWithInt:HNLaunchpadDefaultOrdering]])
     {
         [db rollback];
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         [db close];
         return;
     }
@@ -415,7 +415,7 @@
     if (![db executeUpdate:sql, page.id])
     {
         [db rollback];
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         [db close];
         return;
     }
@@ -444,7 +444,7 @@
     if (![db executeUpdate:sql, group.id, group.uuid, [NSNumber numberWithInt:HNLaunchpadDefaultFlags], [NSNumber numberWithInt:HNLaunchpadTypeGroup], group.parentId, [NSNumber numberWithInt:HNLaunchpadDefaultOrdering]])
     {
         [db rollback];
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         [db close];
         return;
     }
@@ -454,7 +454,7 @@
     if (![db executeUpdate:sql, group.id, group.title])
     {
         [db rollback];
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         [db close];
         return;
     }
@@ -470,7 +470,7 @@
     
     if (![db executeUpdate:sql, group.title, group.id])
     {
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         [db close];
         return;
     }
@@ -484,7 +484,7 @@
     
     if (![db executeUpdate:sql, entity.parentId, entity.id])
     {
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         [db close];
         return;
     }
@@ -522,7 +522,7 @@
         
         if (![db executeUpdate:sql, [NSNumber numberWithInt:item.ordering], item.id])
         {
-            [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+            [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
             [self setTriggerDisabled:NO inDb:db];
             [db close];
             return;
@@ -544,7 +544,7 @@
     
     if (results == nil)
     {
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         return 0;
     }
     
@@ -576,7 +576,7 @@
     if (![db executeUpdate:sql, container.id])
     {
         [db rollback];
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         return;
     }
     
@@ -585,7 +585,7 @@
     if (![db executeUpdate:sql, container.id])
     {
         [db rollback];
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         return;
     }
     
@@ -616,7 +616,7 @@
     
     if (![db executeUpdate:sql, [NSNumber numberWithBool:isDisabled]])
     {
-        [HNException raise:HNDatabaseException format:[db lastErrorMessage]];
+        [HNException raise:HNDatabaseException format:@"%@", [db lastErrorMessage]];
         return;
     }
 }

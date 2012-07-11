@@ -327,7 +327,7 @@
         
         if (error)
         {
-            [HNException raise:HNFilesystemException format:@"Unable to create folder: %@\n\n", dir, [error localizedFailureReason]];
+            [HNException raise:HNFilesystemException format:@"Unable to create folder: %@, error: %@\n\n", dir, [error localizedFailureReason]];
         }
     }
     
