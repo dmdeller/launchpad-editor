@@ -321,7 +321,7 @@
     
     // add child in new placement
     // if item dropped on container with no specific position, then place at end
-    if (index == -1)
+    if (index < 0 || index > newParent.items.count)
     {
         [newParent.items setObject:child forKey:child.id];
     }
