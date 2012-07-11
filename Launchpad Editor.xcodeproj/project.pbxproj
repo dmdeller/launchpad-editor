@@ -511,6 +511,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Launchpad Editor/Launchpad Editor-Prefix.pch";
 				INFOPLIST_FILE = "Launchpad Editor/Launchpad Editor-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = FMDB/src;
 				WRAPPER_EXTENSION = app;
@@ -528,6 +529,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Launchpad Editor/Launchpad Editor-Prefix.pch";
 				INFOPLIST_FILE = "Launchpad Editor/Launchpad Editor-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = FMDB/src;
 				WRAPPER_EXTENSION = app;
