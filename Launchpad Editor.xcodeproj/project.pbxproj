@@ -20,7 +20,6 @@
 		C30BFBE3146C36D100395658 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBDE146C36D100395658 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C30BFBE4146C36D100395658 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C30BFBE5146C36D100395658 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBE2146C36D100395658 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C30CD24E149AAD8800C5286E /* SCImageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C30CD24D149AAD8800C5286E /* SCImageTextCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C36A0C76149E523600BD4039 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = C36A0C75149E523600BD4039 /* dsa_pub.pem */; };
 		C36B099F148FC0D2004B6998 /* HNToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C36B099E148FC0D2004B6998 /* HNToolbarController.m */; };
 		C36B09A2148FCA50004B6998 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C36B09A1148FCA50004B6998 /* Sparkle.framework */; };
@@ -32,6 +31,7 @@
 		C39EA2DA146CB28D001356F5 /* HNLaunchpadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2D9146CB28D001356F5 /* HNLaunchpadGroup.m */; };
 		C39EA2DD146CB29A001356F5 /* HNLaunchpadApp.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2DC146CB29A001356F5 /* HNLaunchpadApp.m */; };
 		C39EA2E1146CB5DD001356F5 /* MGOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */; };
+		C3BA97F515AE39120083C4AD /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BA97F415AE39120083C4AD /* ImageAndTextCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C3E13C72149BEF2600473F49 /* Tango-View-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E13C71149BEF2600473F49 /* Tango-View-refresh.png */; };
 		C3E13C74149BEFCE00473F49 /* Tango-Edit-delete.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E13C73149BEFCE00473F49 /* Tango-Edit-delete.png */; };
 		C3E13C76149BF00B00473F49 /* Tango_emblem_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E13C75149BF00B00473F49 /* Tango_emblem_plus.png */; };
@@ -89,8 +89,6 @@
 		C30BFBE0146C36D100395658 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		C30BFBE1146C36D100395658 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		C30BFBE2146C36D100395658 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		C30CD24C149AAD8800C5286E /* SCImageTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCImageTextCell.h; sourceTree = "<group>"; };
-		C30CD24D149AAD8800C5286E /* SCImageTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCImageTextCell.m; sourceTree = "<group>"; };
 		C32BD1831490041500700E3C /* Todo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo.txt; sourceTree = "<group>"; };
 		C34FB528146CC77B00516C18 /* HNLaunchpadContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadContainer.h; sourceTree = "<group>"; };
 		C360686214854E8900B0FD54 /* HNLaunchpadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadEntity.h; sourceTree = "<group>"; };
@@ -113,6 +111,8 @@
 		C39EA2DE146CB4FC001356F5 /* HNLaunchpadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadItem.h; sourceTree = "<group>"; };
 		C39EA2DF146CB5DD001356F5 /* MGOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGOrderedDictionary.h; sourceTree = "<group>"; };
 		C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGOrderedDictionary.m; sourceTree = "<group>"; };
+		C3BA97F315AE39120083C4AD /* ImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAndTextCell.h; sourceTree = "<group>"; };
+		C3BA97F415AE39120083C4AD /* ImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextCell.m; sourceTree = "<group>"; };
 		C3E13C71149BEF2600473F49 /* Tango-View-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tango-View-refresh.png"; sourceTree = "<group>"; };
 		C3E13C73149BEFCE00473F49 /* Tango-Edit-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tango-Edit-delete.png"; sourceTree = "<group>"; };
 		C3E13C75149BF00B00473F49 /* Tango_emblem_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tango_emblem_plus.png; sourceTree = "<group>"; };
@@ -264,8 +264,8 @@
 			children = (
 				C39EA2DF146CB5DD001356F5 /* MGOrderedDictionary.h */,
 				C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */,
-				C30CD24C149AAD8800C5286E /* SCImageTextCell.h */,
-				C30CD24D149AAD8800C5286E /* SCImageTextCell.m */,
+				C3BA97F315AE39120083C4AD /* ImageAndTextCell.h */,
+				C3BA97F415AE39120083C4AD /* ImageAndTextCell.m */,
 				C30BFBE6146C36D600395658 /* FMDB */,
 			);
 			name = Libraries;
@@ -415,7 +415,7 @@
 				C371777D14897FEB00358BFA /* HNOutlineViewController.m in Sources */,
 				C3717783148E975700358BFA /* HNException.m in Sources */,
 				C36B099F148FC0D2004B6998 /* HNToolbarController.m in Sources */,
-				C30CD24E149AAD8800C5286E /* SCImageTextCell.m in Sources */,
+				C3BA97F515AE39120083C4AD /* ImageAndTextCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

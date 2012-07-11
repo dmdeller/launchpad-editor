@@ -17,7 +17,7 @@
 #import "HNLaunchpadApp.h"
 #import "HNToolbarController.h"
 
-#import "SCImageTextCell.h"
+#import "ImageAndTextCell.h"
 #import "FMDatabase.h"
 
 @implementation HNOutlineViewController
@@ -32,7 +32,7 @@
     
     // Set outline view to use our custom cells
     NSTableColumn* tableColumn = [self.appDelegate.outlineView outlineTableColumn];
-    SCImageTextCell *imageTextCell = [[SCImageTextCell alloc] init];
+    ImageAndTextCell *imageTextCell = [[ImageAndTextCell alloc] init];
     [imageTextCell setEditable:YES];
     [tableColumn setDataCell:imageTextCell];
 }
@@ -369,7 +369,7 @@
 {    
     NSImage *icon = [self.appDelegate.dataSet iconForEntity:item];
     
-    cell = (SCImageTextCell *)cell;
+    cell = (ImageAndTextCell *)cell;
     
 	if (icon != nil)
     {
