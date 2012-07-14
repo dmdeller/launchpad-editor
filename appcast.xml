@@ -12,6 +12,21 @@
       -->
       
       <item>
+         <title>Version 1.0.2</title>
+          <sparkle:releaseNotesLink>
+            http://dmdeller.github.com/launchpad-editor/release-notes/1.0.2.html
+          </sparkle:releaseNotesLink>
+         <pubDate>Sat, 14 Jul 2012 17:00:00 -0400</pubDate>
+         <enclosure
+          url="https://github.com/downloads/dmdeller/launchpad-editor/Launchpad Editor 1.0.2.zip"
+          sparkle:version="6"
+          sparkle:shortVersionString="1.0.2"
+          sparkle:dsaSignature="MC4CFQCf6Au7Pg9OaZBLABeoieOwxmKFKAIVAIWFOJ/wf2ZPljmTFKPUNeutR9uB"
+          length="980427"
+          type="application/octet-stream" />
+      </item>
+      
+      <item>
          <title>Version 1.0.1</title>
           <sparkle:releaseNotesLink>
             http://dmdeller.github.com/launchpad-editor/release-notes/1.0.1.html
