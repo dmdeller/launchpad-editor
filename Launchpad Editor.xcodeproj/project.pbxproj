@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C55BB4876EE420B99A3D7A0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F8BA29B7460459BB879885D /* libPods.a */; };
 		C30BFBAA146C32AD00395658 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30BFBA9146C32AD00395658 /* Cocoa.framework */; };
 		C30BFBB4146C32AD00395658 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30BFBB2146C32AD00395658 /* InfoPlist.strings */; };
 		C30BFBB6146C32AD00395658 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C30BFBB5146C32AD00395658 /* main.m */; };
@@ -61,8 +62,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2F8BA29B7460459BB879885D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30BFBA5146C32AD00395658 /* Launchpad Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Launchpad Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C30BFBA9146C32AD00395658 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		C30BFBA9146C32AD00395658 /* Cocoa.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C30BFBAC146C32AD00395658 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		C30BFBAD146C32AD00395658 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C30BFBAE146C32AD00395658 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,7 +89,7 @@
 		C36A0C75149E523600BD4039 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		C36B099D148FC0D2004B6998 /* HNToolbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNToolbarController.h; sourceTree = "<group>"; };
 		C36B099E148FC0D2004B6998 /* HNToolbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNToolbarController.m; sourceTree = "<group>"; };
-		C36B09A1148FCA50004B6998 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		C36B09A1148FCA50004B6998 /* Sparkle.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		C371777B14897FEB00358BFA /* HNOutlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNOutlineViewController.h; sourceTree = "<group>"; };
 		C371777C14897FEB00358BFA /* HNOutlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HNOutlineViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C3717781148E975600358BFA /* HNException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = HNException.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -102,6 +104,7 @@
 		C39EA2DE146CB4FC001356F5 /* HNLaunchpadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadItem.h; sourceTree = "<group>"; };
 		C39EA2DF146CB5DD001356F5 /* MGOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGOrderedDictionary.h; sourceTree = "<group>"; };
 		C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGOrderedDictionary.m; sourceTree = "<group>"; };
+		C3B2910015B1FD79005DC810 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		C3BA97F315AE39120083C4AD /* ImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAndTextCell.h; sourceTree = "<group>"; };
 		C3BA97F415AE39120083C4AD /* ImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextCell.m; sourceTree = "<group>"; };
 		C3BA980215AE3DAE0083C4AD /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = FMDB/build/Release/libFMDB.a; sourceTree = "<group>"; };
@@ -109,9 +112,10 @@
 		C3E13C73149BEFCE00473F49 /* Tango-Edit-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tango-Edit-delete.png"; sourceTree = "<group>"; };
 		C3E13C75149BF00B00473F49 /* Tango_emblem_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tango_emblem_plus.png; sourceTree = "<group>"; };
 		C3E13C79149BFEBB00473F49 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
-		C3E896C7146C472F0060AB93 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		C3E896C7146C472F0060AB93 /* libsqlite3.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		C3E896C9146C48690060AB93 /* HNLaunchpadDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNLaunchpadDataSet.h; sourceTree = "<group>"; };
 		C3E896CA146C48690060AB93 /* HNLaunchpadDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HNLaunchpadDataSet.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		D12B7EAA5D1D4AE7BB429B7B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 				C3E896C8146C472F0060AB93 /* libsqlite3.dylib in Frameworks */,
 				C30BFBAA146C32AD00395658 /* Cocoa.framework in Frameworks */,
 				C36B09A2148FCA50004B6998 /* Sparkle.framework in Frameworks */,
+				6C55BB4876EE420B99A3D7A0 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +152,8 @@
 				C30BFBA8146C32AD00395658 /* Frameworks */,
 				C30BFBA6146C32AD00395658 /* Products */,
 				C32BD1831490041500700E3C /* Todo.txt */,
+				C3B2910015B1FD79005DC810 /* Podfile */,
+				D12B7EAA5D1D4AE7BB429B7B /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,6 +175,7 @@
 				C30BFBA9146C32AD00395658 /* Cocoa.framework */,
 				C30BFBC7146C32AE00395658 /* SenTestingKit.framework */,
 				C30BFBAB146C32AD00395658 /* Other Frameworks */,
+				2F8BA29B7460459BB879885D /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -278,6 +286,7 @@
 				C30BFBA2146C32AD00395658 /* Frameworks */,
 				C30BFBA3146C32AD00395658 /* Resources */,
 				C36B09A3148FCAAC004B6998 /* CopyFiles */,
+				46AA097096434E5A9ACE005E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -361,6 +370,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		46AA097096434E5A9ACE005E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
 		C30BFBC4146C32AE00395658 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -504,6 +527,7 @@
 		};
 		C30BFBD8146C32AE00395658 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D12B7EAA5D1D4AE7BB429B7B /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -522,6 +546,7 @@
 		};
 		C30BFBD9146C32AE00395658 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D12B7EAA5D1D4AE7BB429B7B /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
