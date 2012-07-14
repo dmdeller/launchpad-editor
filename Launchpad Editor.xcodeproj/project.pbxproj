@@ -105,7 +105,7 @@
 		C39EA2E0146CB5DD001356F5 /* MGOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGOrderedDictionary.m; sourceTree = "<group>"; };
 		C3BA97F315AE39120083C4AD /* ImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAndTextCell.h; sourceTree = "<group>"; };
 		C3BA97F415AE39120083C4AD /* ImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextCell.m; sourceTree = "<group>"; };
-		C3BA980215AE3DAE0083C4AD /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libFMDB.a; path = FMDB/build/Release/libFMDB.a; sourceTree = "<group>"; };
+		C3BA980215AE3DAE0083C4AD /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = FMDB/build/Release/libFMDB.a; sourceTree = "<group>"; };
 		C3E13C71149BEF2600473F49 /* Tango-View-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tango-View-refresh.png"; sourceTree = "<group>"; };
 		C3E13C73149BEFCE00473F49 /* Tango-Edit-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tango-Edit-delete.png"; sourceTree = "<group>"; };
 		C3E13C75149BF00B00473F49 /* Tango_emblem_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tango_emblem_plus.png; sourceTree = "<group>"; };
