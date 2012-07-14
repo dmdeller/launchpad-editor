@@ -64,9 +64,10 @@
                         " FROM items i"
                             " JOIN groups g ON i.rowid = g.item_id"
                         " WHERE i.type = ?"
+                            " AND i.parent_id = ?"
                         " ORDER BY i.ordering";
     
-    FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:HNLaunchpadTypePage]];
+    FMResultSet *results = [db executeQuery:sql, [NSNumber numberWithInt:HNLaunchpadTypePage], [NSNumber numberWithInt:HNLaunchpadPageParentId]];
     
     if (results == nil)
     {
@@ -74,18 +75,44 @@
         return nil;
     }
     
+    NSMutableSet *blacklist = NSMutableSet.set;
+    
     while ([results next])
     {
-        // FIXME: hacky
-        if ([[results stringForColumn:@"uuid"] isEqualToString:@"HOLDINGPAGE"])
+        NSString *uuid = [results stringForColumn:@"uuid"];
+        NSNumber *ID = [NSNumber numberWithInt:[results intForColumn:@"rowid"]];
+        NSNumber *parentID = [NSNumber numberWithInt:[results intForColumn:@"parent_id"]];
+        
+        // Valid pages have a 'uuid' column which contains an actual UUID (a long hexadecimal string separated by hyphens at certain points).
+        // There are also some 'holding' pages which are some kind of temporary storage that doesn't actually appear in Launchpad - so we don't want to show those.
+        // In 10.7, there was only one holding page, identified by the text 'HOLDINGPAGE' instead of a UUID.
+        // In 10.8, there are multiple holding pages with different names, and at least one of them might have a child that has a real UUID! We need to ignore these children as well.
+        // So, any page that doesn't have a proper UUID, or has an ancestor without a proper UUID, we ignore.
+        NSError *error = nil;
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}" options:NSRegularExpressionCaseInsensitive error:&error];
+        if (error != nil)
         {
+            NSLog(@"Error evaluating regex: %@", error.userInfo);
+        }
+        else if ([regex numberOfMatchesInString:uuid options:0 range:NSMakeRange(0, uuid.length)] == 0)
+        {
+            NSLog(@"Blacklisting page with ID: %@ because it has an invalid UUID: %@", ID, uuid);
+            
+            [blacklist addObject:ID];
+            continue;
+        }
+        else if ([blacklist containsObject:ID] || [blacklist containsObject:parentID])
+        {
+            NSLog(@"Blacklisting page with ID: %@ because it has a blacklisted ancestor with ID: %@", ID, parentID);
+            
+            [blacklist addObject:ID];
             continue;
         }
         
         HNLaunchpadPage *page = [[HNLaunchpadPage alloc] init];
         
-        page.uuid = [results stringForColumn:@"uuid"];
-        page.id = [NSNumber numberWithInt:[results intForColumn:@"rowid"]];
+        page.uuid = uuid;
+        page.id = ID;
         page.ordering = [results intForColumn:@"ordering"];
         
         [pages setObject:page forKey:page.id];
@@ -198,15 +225,9 @@
                 {
                     [containerGroup.items setObject:app forKey:app.id];
                 }
-                else if ([results intForColumn:@"parent_id"] == HNLaunchpadHoldingPageId)
-                {
-                    NSLog(@"App only exists in temporary holding page, unable to display app: %@, title: %@", app, app.title);
-                    continue;
-                }
                 else
                 {
-                    // exception
-                    [HNException raise:NSInternalInconsistencyException format:@"Could not find container object for app: %@, title: %@", app, app.title];
+                    NSLog(@"Could not find container object for app: %@, title: %@", app, app.title);
                     continue;
                 }
             }
@@ -222,15 +243,13 @@
             }
             else
             {
-                // exception
-                [HNException raise:NSInternalInconsistencyException format:@"Could not find container object for group: %@, title: %@", group, group.title];
+                NSLog(@"Could not find container object for group: %@, title: %@", group, group.title);
                 continue;
             }
         }
         else
         {
-            //exception
-            [HNException raise:HNInvalidClassException format:@"Unknown entity type: %i", [results intForColumn:@"type"]];
+            NSLog(@"Unknown entity type: %i", [results intForColumn:@"type"]);
             continue;
         }
     }
